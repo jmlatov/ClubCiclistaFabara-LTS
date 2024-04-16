@@ -1,0 +1,49 @@
+app-bienvenida {
+  position: sticky;
+  top: 0;
+  z-index: -1;
+  animation: blur linear both;
+  animation-timeline: scroll();
+  animation-range: 10% 100%;
+}
+
+@keyframes blur {
+  to {
+    filter: blur(20px);
+  }
+}
+
+.aviso {
+  color: black;
+  background-color: white;
+  box-shadow: 1px 2px 20px 6px rgba(0, 0, 0, 0.4);
+
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: fixed;
+  z-index: 99;
+  bottom: 1.5dvh;
+  left: 3.5vh;
+  display: flex;
+  gap: 1rem;
+  border-radius: 50px;
+}
+
+app-primary-btn {
+  margin-top: 0.2vh;
+}
+@media (max-width: 1200px) {
+  app-bienvenida {
+    display: block;
+    animation: noBlur;
+  }
+  .section {
+    background-color: white;
+  }
+  .aviso {
+    right: 3.5vh;
+    justify-content: center;
+    bottom: 3dvh;
+  }
+}

@@ -1,0 +1,6 @@
+<app-header-nav-black (selectedBanner)="getSelected($event)" />
+@if(selectedSection == 'segment'){
+<app-segments (selectedBanner)="getSelected($event)"></app-segments>
+}@if(selectedSection == 'main'){
+<app-main></app-main>
+}

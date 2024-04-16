@@ -1,0 +1,70 @@
+<div class="header">
+  <div class="content">
+    <div class="logo-section">
+      <img
+        class="logo"
+        src="../../../../assets/img/CC Fabara-Logo-(Transparent).webp"
+        alt="logo"
+      />
+      <div class="name">
+        <p class="nolink" (click)="scrollToTop()">Club Ciclista Fabara</p>
+      </div>
+    </div>
+    <div class="links">
+      <nav>
+        <div class="nav_links">
+          <a class="underline hideOnMobile" (click)="selectHome()">INICIO</a>
+          <a class="underline hideOnMobile" (click)="selectBtt()"
+            >BTT ALGARS 2024</a
+          >
+          <a
+            class="underline hideOnMobile"
+            style="display: none"
+            (click)="selectGaleria()"
+            >GALERIA</a
+          >
+          <a (click)="showSidebar()"
+            ><svg
+              class="menu-btn"
+              xmlns="http://www.w3.org/2000/svg"
+              height="30"
+              viewBox="0 -960 960 960"
+              width="30"
+            >
+              <path
+                d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
+              /></svg
+          ></a>
+        </div>
+        <div id="sidebar" class="sidebar">
+          <div class="nav_links">
+            <a
+              ><svg
+                (click)="hideSidebar()"
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                viewBox="0 -960 960 960"
+                width="24"
+              >
+                <path
+                  d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+                /></svg
+            ></a>
+            <a class="underline" (click)="selectHome(); hideSidebar()"
+              >INICIO</a
+            >
+            <a class="underline" (click)="selectBtt(); hideSidebar()"
+              >BTT ALGARS 2024</a
+            >
+            <a
+              class="underline"
+              (click)="selectGaleria(); hideSidebar()"
+              style="display: none"
+              >GALERIA</a
+            >
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>

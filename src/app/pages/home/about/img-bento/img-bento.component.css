@@ -1,0 +1,39 @@
+.bento {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: -5vh;
+}
+
+img {
+  width: auto;
+  height: 29vh;
+  border-radius: 20px;
+  box-shadow: 2px 2px 30px 2px rgba(0, 0, 0, 0.411);
+}
+
+.img:nth-child(2) {
+  grid-row: span 2;
+  height: max-content;
+}
+
+.vertical {
+  width: 21.5vw;
+  height: 71vh;
+  overflow: hidden;
+  filter: brightness(1.2);
+  filter: contrast(1.1);
+}
+
+.horizontal {
+  margin-left: -7vw;
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.ciclista {
+  filter: brightness(1);
+  filter: contrast(1.2);
+  height: 40vh;
+  margin-left: -2vw;
+}

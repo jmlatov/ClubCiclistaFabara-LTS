@@ -1,0 +1,145 @@
+.section {
+  width: 100dvw;
+  height: 100%;
+  background-color: white;
+  color: black;
+  display: flex;
+}
+.text {
+  margin-top: 3vh;
+}
+.content {
+  max-width: 70%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem;
+  margin-top: 10vh;
+}
+h1 {
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 3rem;
+}
+h3 {
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 1.5rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+.masinfo {
+  padding: 1rem;
+}
+.btn {
+  justify-self: self-start;
+  padding-top: 1.5rem;
+}
+.ruta {
+  padding-top: 1.5rem;
+}
+p {
+  font-size: 1rem;
+}
+.links {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.411);
+}
+ul {
+  list-style: square;
+}
+li a {
+  font-size: 1rem;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+  text-decoration: none;
+  margin-top: 2rem;
+}
+li a:hover {
+  transform: scale(0.9);
+  color: rgb(80, 147, 59);
+  text-decoration: underline;
+}
+
+.lowsection {
+  max-width: 25vw;
+}
+
+.aviso {
+  display: flex;
+  gap: 1rem;
+}
+
+h4 {
+  font-family: Oswald, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+}
+app-countdown-inscripcion {
+  font-size: 1.2rem;
+}
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: 1fr; /* Cambiar a una sola columna en pantallas más pequeñas */
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .links {
+    margin-left: -2dvw;
+  }
+}
+@media (max-width: 710px) {
+  .section {
+    justify-content: center;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    margin-left: -4dvw;
+    padding-top: 0;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .text {
+    margin-left: -4dvw;
+  }
+  .maplinks {
+    max-width: 80dvw;
+    position: relative;
+  }
+  .masinfo {
+    margin-left: -4dvw;
+  }
+  iframe {
+    max-width: 80dvw;
+    overflow: visible;
+  }
+  .logos {
+    margin-top: 1.5rem;
+    justify-self: flex-start;
+  }
+  .btn a {
+    justify-self: center;
+  }
+  .patrocinadores {
+    display: flex;
+    justify-items: center;
+    margin-right: 12px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .content {
+    max-width: 48%;
+  }
+}

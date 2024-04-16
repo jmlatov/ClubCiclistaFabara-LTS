@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+.section {
+  background-image: url("/assets/img/background.JPG");
+  backdrop-filter: blur(50px);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: auto;
+  height: 100vh;
+  z-index: 3;
+}
+.dark-layer {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo {
+  color: aliceblue;
+  height: 50vh;
+  max-width: 60%;
+  margin: 0 auto;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(243, 243, 243, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 2px 2px 5px 5px rgba(38, 38, 38, 0.2);
+}
+
+h1 {
+  font-size: 3.125rem;
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 100;
+  letter-spacing: 0.2rem;
+}
+
+.text {
+  padding-top: 30px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fabara img {
+  max-width: 80px;
+  max-height: 80px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+}
+
+.scroll {
+  position: absolute;
+  bottom: 0;
+  margin-top: -25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.arrow-down {
+  margin-top: -2dvh;
+  width: 50px;
+  height: auto;
+  color: white;
+  padding-top: 2vh;
+  animation: jump 1.5s ease infinite;
+}
+
+@keyframes jump {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .arrow-down {
+    margin-top: -10dvh;
+  }
+  .fabara img {
+    bottom: 4dvh;
+  }
+}
+
+@media (max-width: 860px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .section {
+    padding-bottom: 2rem;
+  }
+  .fabara img {
+    bottom: 2dvh;
+    display: none;
+  }
+}
+
+@media (max-height: 500px) {
+  h1 {
+    font-size: 2rem;
+    margin-top: -2rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .section {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+  }
+  .fabara img {
+    bottom: 2dvh;
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  h3 {
+    font-size: 1rem;
+    text-align: left;
+  }
+}

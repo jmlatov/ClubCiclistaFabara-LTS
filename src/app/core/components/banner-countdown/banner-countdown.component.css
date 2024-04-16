@@ -1,0 +1,21 @@
+.banner {
+  width: 100vw;
+  background-color: #fc4c02;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+.interactivo {
+  background-color: black;
+  padding-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 500px) {
+  .interactivo {
+    font-size: 0.5rem;
+  }
+}

@@ -1,0 +1,29 @@
+.banner {
+  width: 100vw;
+  height: 100%;
+  background-color: rgb(73, 132, 77);
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+.interactivo {
+  padding-top: 0.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.interactivo:hover {
+  color: black;
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: white;
+  transition: transform 0.2s ease-in-out;
+}
+a:hover {
+  color: Black;
+  transform: scale(0.9);
+}

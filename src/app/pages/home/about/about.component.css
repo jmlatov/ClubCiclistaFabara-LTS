@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+h1 {
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+section {
+  width: 100vw;
+  background-image: linear-gradient(to bottom, rgba(255, 254, 254, 0), rgba(255, 254, 254, 0.1));
+  padding-bottom: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenido {
+  margin-left: 7vw;
+  z-index: 9;
+  max-height: 80vh;
+  max-width: fit-content;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 80px;
+}
+
+.limite {
+  max-width: 75%;
+}
+
+.contenido div:first-child {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+.contenido div:nth-child(2) {
+  color: black;
+  box-sizing: border-box;
+  grid-column: span 2;
+  grid-row: span 4;
+  margin-top: 5vh;
+  max-height: 71vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 2px 2px 30px 2px rgba(0, 0, 0, 0.411);
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  margin-left: 1.5vw;
+}
+
+img {
+  width: auto;
+  height: 55vh;
+  border-radius: 10px;
+}
+
+.texto {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+h1 {
+  font-size: 54px;
+  line-height: 3.5rem;
+  letter-spacing: 0.1rem;
+  margin: 30px;
+}
+
+p {
+  font-size: large;
+  margin: 10px;
+  margin-left: 20px;
+}
+
+.btn {
+  justify-self: center;
+  margin: 30px;
+}
+
+.galeria {
+  padding-top: 10vh;
+}
+
+.img:first-child {
+  grid-row: span 2;
+}
+
+@media (max-width: 1400px) {
+  section {
+    background-color: white;
+    height: auto;
+    padding-bottom: 0;
+  }
+  .contenido {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .contenido div:nth-child(2) {
+    order: 1;
+    box-shadow: none;
+    padding: 0;
+  }
+  .galeria {
+    display: none;
+  }
+}
+
+@media (max-width: 710px) {
+  section {
+    width: 100vw;
+    padding: 0;
+  }
+  .contenido {
+    box-sizing: border-box;
+    grid-template-columns: 1fr;
+    margin-left: 1rem;
+  }
+  h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+  .texto {
+    width: fit-content;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  p {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+  h1 {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}

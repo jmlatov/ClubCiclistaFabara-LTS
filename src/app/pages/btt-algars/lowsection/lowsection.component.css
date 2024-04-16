@@ -1,0 +1,37 @@
+.lowsection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.logos {
+  display: flex;
+  gap: 1rem;
+}
+.logo-fabara img {
+  height: 50px;
+}
+.logo-federacion img {
+  width: 6rem;
+}
+.logo-comarca img {
+  width: 6rem;
+  margin-top: 1rem;
+}
+.btn {
+  margin-top: 1rem;
+}
+
+@media (max-width: 300px) {
+  .logos {
+    margin-left: -4dvw;
+  }
+}
+
+@media (max-width: 1600px) {
+  .lowsection {
+    grid-template-columns: 1fr;
+  }
+
+  .logos {
+    margin-top: 1rem;
+  }
+}
