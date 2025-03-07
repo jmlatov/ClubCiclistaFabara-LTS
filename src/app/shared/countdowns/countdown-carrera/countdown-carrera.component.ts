@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
 })
 export class CountdownCarreraComponent {
   ngOnInit() {}
-  countDownDate = new Date('March 17, 2024 09:00:00').getTime();
+  countDownDate = new Date('April 27, 2025 09:00:00').getTime();
   constructor() {}
   timer: any;
   x = setInterval(() => {
