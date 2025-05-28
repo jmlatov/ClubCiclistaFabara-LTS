@@ -10,7 +10,7 @@ app/**/*.js
 app/**/*.js.map
 
 # dependencies
-node_modules/
+node_modules
 bower_components/
 
 # IDEs and editors
@@ -32,6 +32,7 @@ e2e/*.map
 
 # System Files
 .DS_Store/
+.DS_Store
 
 ### VisualStudioCode ###
 .vscode/*
