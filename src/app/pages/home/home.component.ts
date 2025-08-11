@@ -13,14 +13,11 @@ import { PrimaryBtnComponent } from '../../shared/ui/buttons/primary-btn/primary
   selector: 'app-home',
   standalone: true,
   imports: [
-    InfoCarreraComponent,
+    HeaderNavComponent,
     BienvenidaComponent,
     LocationComponent,
-    AboutComponent,
-    HeaderNavComponent,
-    CountdownInscripcionComponent,
-    PrimaryBtnComponent,
-  ],
+    AboutComponent
+],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

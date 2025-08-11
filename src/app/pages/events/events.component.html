@@ -1,0 +1,66 @@
+<app-header-nav-black></app-header-nav-black>
+
+<section class="events">
+  <div class="header">
+    <h1>Eventos</h1>
+    <div class="controls">
+      <label>Filtro</label>
+      <select [(ngModel)]="filter">
+        <option value="todas">Todas</option>
+        <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
+      </select>
+      <button class="primary" (click)="toggleForm()">
+        {{ showForm ? 'Cancelar' : 'Crear evento' }}
+      </button>
+    </div>
+  </div>
+
+  <form class="form" [formGroup]="form" *ngIf="showForm" (ngSubmit)="create()">
+    <div class="row">
+      <label>Tipo</label>
+      <select formControlName="type">
+        <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label>Título</label>
+      <input type="text" formControlName="title" placeholder="Nombre del evento" />
+    </div>
+
+    <div class="row">
+      <label>Fecha</label>
+      <input type="date" formControlName="date" />
+    </div>
+
+    <div class="row">
+      <label>Descripción</label>
+      <textarea rows="3" formControlName="description" placeholder="Detalles, hora, lugar..."></textarea>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="primary" [disabled]="form.invalid">Guardar</button>
+      <button type="button" (click)="toggleForm()">Cancelar</button>
+    </div>
+  </form>
+
+  <div class="list" *ngIf="(events$ | async) as events">
+    <p class="empty" *ngIf="events.length === 0">Aún no hay eventos.</p>
+
+    <div
+      class="card"
+      *ngFor="let e of events; trackBy: trackById"
+      [style.display]="matchesFilter(e) ? '' : 'none'"
+    >
+      <div class="chip">{{ e.type | titlecase }}</div>
+      <h3>{{ e.title }}</h3>
+      <p class="date">{{ e.date }}</p>
+      <p class="desc" *ngIf="e.description">{{ e.description }}</p>
+      <div class="card-actions">
+        <button class="danger" (click)="delete(e.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+

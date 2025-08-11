@@ -5,7 +5,6 @@ import { HeaderNavComponent } from './core/components/header-nav/header-nav.comp
 import { HomeComponent } from './pages/home/home.component';
 import { FooterComponent } from './core/components/footer/footer.component';
 import { BttAlgarsComponent } from './pages/btt-algars/btt-algars.component';
-import { HeaderNavBlackComponent } from './core/components/header-nav-black/header-nav-black.component';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +12,8 @@ import { HeaderNavBlackComponent } from './core/components/header-nav-black/head
   imports: [
     CommonModule,
     RouterOutlet,
-    HeaderNavComponent,
-    HomeComponent,
-    FooterComponent,
-    BttAlgarsComponent,
-    HeaderNavBlackComponent,
-  ],
+    FooterComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

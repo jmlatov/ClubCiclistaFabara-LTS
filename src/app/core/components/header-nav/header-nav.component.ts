@@ -1,16 +1,18 @@
-import { Component, NgModule, Output, EventEmitter } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
+import { BannerBttComponent } from '../banner-btt/banner-btt.component';
+import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
 
 @Component({
   selector: 'app-header-nav',
   standalone: true,
-  imports: [CommonModule, NgFor, RouterModule],
+  imports: [RouterModule],
   templateUrl: './header-nav.component.html',
-  styleUrl: './header-nav.component.css',
+  styleUrls: ['./header-nav.component.css'],
 })
 export class HeaderNavComponent {
   @Output() selected = new EventEmitter<string>();
+  @Output() selectedBanner = new EventEmitter<string>();
 
   constructor(private router: Router) {}
 
@@ -25,9 +27,15 @@ export class HeaderNavComponent {
   }
 
   selectGaleria() {
-    this.router.navigate(['galeria']);
+    this.router.navigate(['']);
     this.selected.emit('about');
   }
+
+  selectEventos() {
+    this.router.navigate(['eventos']);
+    this.selected.emit('events');
+  }
+
   showSidebar() {
     const sidebar: HTMLElement | null = document.getElementById('sidebar');
     if (sidebar) {
@@ -48,7 +56,7 @@ export class HeaderNavComponent {
     }
   }
 
-  scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  getSelected(selected: string) {
+    this.selectedBanner.emit(selected);
   }
 }

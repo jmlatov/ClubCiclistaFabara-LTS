@@ -10,12 +10,10 @@ import { SegmentsComponent } from './segments/segments.component';
   selector: 'app-btt-algars',
   standalone: true,
   imports: [
-    PrimaryBtnComponent,
     HeaderNavBlackComponent,
-    GridPatrocinadoresComponent,
     MainComponent,
-    SegmentsComponent,
-  ],
+    SegmentsComponent
+],
   templateUrl: './btt-algars.component.html',
   styleUrl: './btt-algars.component.css',
 })

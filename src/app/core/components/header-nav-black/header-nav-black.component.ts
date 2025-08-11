@@ -6,7 +6,7 @@ import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.c
 @Component({
   selector: 'app-header-nav-black',
   standalone: true,
-  imports: [RouterModule, BannerBttComponent, BannerCountdownComponent],
+  imports: [RouterModule, BannerBttComponent],
   templateUrl: './header-nav-black.component.html',
   styleUrl: './header-nav-black.component.css',
 })
@@ -29,6 +29,11 @@ export class HeaderNavBlackComponent {
   selectGaleria() {
     this.router.navigate(['']);
     this.selected.emit('about');
+  }
+
+  selectEventos() {
+    this.router.navigate(['eventos']);
+    this.selected.emit('events');
   }
 
   showSidebar() {

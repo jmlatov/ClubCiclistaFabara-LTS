@@ -14,27 +14,20 @@
       <nav>
         <div class="nav_links">
           <a class="underline hideOnMobile" (click)="selectHome()">INICIO</a>
-          <a class="underline hideOnMobile" (click)="selectBtt()"
-            >BTT ALGARS 2025</a
-          >
-          <a
-            class="underline hideOnMobile"
-            (click)="selectGaleria()"
-            style="display: none"
-            >GALERIA</a
-          >
-          <a onclick="showSidebar()" (click)="showSidebar()"
-            ><svg
+          <a class="underline hideOnMobile" (click)="selectBtt()">BTT ALGARS 2025</a>
+          <a class="underline hideOnMobile" (click)="selectEventos()">EVENTOS</a>
+          <a class="underline hideOnMobile" (click)="selectGaleria()" style="display: none">GALERIA</a>
+          <a onclick="showSidebar()" (click)="showSidebar()">
+            <svg
               class="menu-btn"
               xmlns="http://www.w3.org/2000/svg"
               height="30"
               viewBox="0 -960 960 960"
               width="30"
             >
-              <path
-                d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"
-              /></svg
-          ></a>
+              <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+            </svg>
+          </a>
         </div>
         <div id="sidebar" class="sidebar">
           <div class="nav_links">
@@ -53,9 +46,8 @@
             <a class="underline" (click)="selectHome(); hideSidebar()"
               >INICIO</a
             >
-            <a class="underline" (click)="selectBtt(); hideSidebar()"
-              >BTT ALGARS 2025</a
-            >
+            <a class="underline" (click)="selectBtt(); hideSidebar()">BTT ALGARS 2025</a>
+            <a class="underline" (click)="selectEventos(); hideSidebar()">EVENTOS</a>
             <a
               class="underline"
               (click)="selectGaleria(); hideSidebar()"
