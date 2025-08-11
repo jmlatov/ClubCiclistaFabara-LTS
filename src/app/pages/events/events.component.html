@@ -1,4 +1,4 @@
-<app-header-nav-black></app-header-nav-black>
+<app-header-nav-black [showBanner]="false"></app-header-nav-black>
 
 <section class="events">
   <div class="header">
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <form class="form" [formGroup]="form" *ngIf="showForm" (ngSubmit)="create()">
+  <form class="form" [formGroup]="form" *ngIf="showForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <label>Tipo</label>
       <select formControlName="type">
@@ -39,7 +39,7 @@
     </div>
 
     <div class="actions">
-      <button type="submit" class="primary" [disabled]="form.invalid">Guardar</button>
+      <button type="submit" class="primary" [disabled]="form.invalid">{{ editingId ? 'Actualizar' : 'Guardar' }}</button>
       <button type="button" (click)="toggleForm()">Cancelar</button>
     </div>
   </form>
@@ -57,6 +57,7 @@
       <p class="date">{{ e.date }}</p>
       <p class="desc" *ngIf="e.description">{{ e.description }}</p>
       <div class="card-actions">
+        <button (click)="startEdit(e)">Editar</button>
         <button class="danger" (click)="delete(e.id)">Eliminar</button>
       </div>
     </div>

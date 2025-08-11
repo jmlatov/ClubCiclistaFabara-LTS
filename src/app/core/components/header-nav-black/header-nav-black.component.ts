@@ -1,16 +1,18 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { BannerBttComponent } from '../banner-btt/banner-btt.component';
 import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
 
 @Component({
   selector: 'app-header-nav-black',
   standalone: true,
-  imports: [RouterModule, BannerBttComponent],
+  imports: [CommonModule, RouterModule, BannerBttComponent],
   templateUrl: './header-nav-black.component.html',
   styleUrl: './header-nav-black.component.css',
 })
 export class HeaderNavBlackComponent {
+  @Input() showBanner: boolean = true;
   @Output() selected = new EventEmitter<string>();
   @Output() selectedBanner = new EventEmitter<string>();
 

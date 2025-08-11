@@ -59,7 +59,7 @@
       </nav>
     </div>
   </div>
-  <div class="banner">
+  <div class="banner" *ngIf="showBanner">
     <div class="btt">
       <app-banner-btt (selected)="getSelected($event)"></app-banner-btt>
     </div>

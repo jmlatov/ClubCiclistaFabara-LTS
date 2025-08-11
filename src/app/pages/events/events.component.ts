@@ -14,6 +14,7 @@ import { EventItem, EventType, EventsService } from '../../services/events.servi
 })
 export class EventsComponent {
   showForm = false;
+  editingId: string | null = null;
   filter: EventType | 'todas' = 'todas';
   types: { value: EventType; label: string }[] = [
     { value: 'ruta', label: 'Ruta' },
@@ -35,23 +36,46 @@ export class EventsComponent {
 
   toggleForm() {
     this.showForm = !this.showForm;
+    if (!this.showForm) {
+      this.editingId = null;
+      this.form.reset({ type: 'ruta', title: '', date: '', description: '' });
+    }
   }
 
-  create() {
+  onSubmit() {
     if (this.form.invalid) return;
     const { type, title, date, description } = this.form.value;
-    this.eventsService.addEvent({
+    const payload = {
       type: type as EventType,
       title: title!.trim(),
       date: date!,
       description: (description || '').trim(),
-    });
+    };
+
+    if (this.editingId) {
+      this.eventsService.updateEvent(this.editingId, payload);
+    } else {
+      this.eventsService.addEvent(payload);
+    }
+
+    this.editingId = null;
     this.form.reset({ type: 'ruta', title: '', date: '', description: '' });
     this.showForm = false;
   }
 
   delete(id: string) {
     this.eventsService.deleteEvent(id);
+  }
+
+  startEdit(event: EventItem) {
+    this.editingId = event.id;
+    this.form.setValue({
+      type: event.type,
+      title: event.title,
+      date: event.date,
+      description: event.description || '',
+    });
+    this.showForm = true;
   }
 
   matchesFilter(e: EventItem): boolean {
