@@ -28,6 +28,7 @@ export class EventsComponent {
     title: ['', [Validators.required, Validators.minLength(3)]],
     date: ['', Validators.required],
     description: [''],
+    url: ['', []],
   });
 
   events$ = this.eventsService.events$;
@@ -44,12 +45,13 @@ export class EventsComponent {
 
   onSubmit() {
     if (this.form.invalid) return;
-    const { type, title, date, description } = this.form.value;
+    const { type, title, date, description, url } = this.form.value;
     const payload = {
       type: type as EventType,
       title: title!.trim(),
       date: date!,
       description: (description || '').trim(),
+      url: (url || '').trim() || undefined,
     };
 
     if (this.editingId) {
@@ -59,7 +61,7 @@ export class EventsComponent {
     }
 
     this.editingId = null;
-    this.form.reset({ type: 'ruta', title: '', date: '', description: '' });
+    this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '' });
     this.showForm = false;
   }
 
@@ -74,6 +76,7 @@ export class EventsComponent {
       title: event.title,
       date: event.date,
       description: event.description || '',
+      url: event.url || '',
     });
     this.showForm = true;
   }

@@ -63,6 +63,10 @@
 .desc {
   margin: 0 0 8px;
 }
+.link a {
+  color: #2a6ef1;
+  text-decoration: underline;
+}
 .card-actions {
   display: flex;
   gap: 8px;

@@ -9,6 +9,7 @@ export interface EventItem {
   date: string; // ISO: yyyy-MM-dd
   type: EventType;
   description?: string;
+  url?: string; // enlace externo opcional
 }
 
 @Injectable({ providedIn: 'root' })

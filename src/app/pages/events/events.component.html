@@ -38,6 +38,11 @@
       <textarea rows="3" formControlName="description" placeholder="Detalles, hora, lugar..."></textarea>
     </div>
 
+    <div class="row">
+      <label>URL externa (opcional)</label>
+      <input type="url" formControlName="url" placeholder="https://..." />
+    </div>
+
     <div class="actions">
       <button type="submit" class="primary" [disabled]="form.invalid">{{ editingId ? 'Actualizar' : 'Guardar' }}</button>
       <button type="button" (click)="toggleForm()">Cancelar</button>
@@ -56,6 +61,9 @@
       <h3>{{ e.title }}</h3>
       <p class="date">{{ e.date }}</p>
       <p class="desc" *ngIf="e.description">{{ e.description }}</p>
+      <p class="link" *ngIf="e.url">
+        <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>
+      </p>
       <div class="card-actions">
         <button (click)="startEdit(e)">Editar</button>
         <button class="danger" (click)="delete(e.id)">Eliminar</button>
