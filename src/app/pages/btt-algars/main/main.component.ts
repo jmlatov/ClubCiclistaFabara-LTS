@@ -11,9 +11,9 @@ import { CountdownInscripcionComponent } from '../../../shared/countdowns/countd
   imports: [
     LowsectionComponent,
     GridPatrocinadoresComponent,
-    CountdownCarreraComponent,
-    PrimaryBtnComponent,
-    CountdownInscripcionComponent,
+    // CountdownCarreraComponent,
+    // PrimaryBtnComponent,
+    // CountdownInscripcionComponent,
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',

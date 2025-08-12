@@ -78,4 +78,27 @@
   </div>
 </section>
 
+<!-- Modal de login -->
+<div class="modal-backdrop" *ngIf="showLogin">
+  <div class="modal">
+    <h3>Acceso requerido</h3>
+    <form [formGroup]="loginForm" (ngSubmit)="attemptLogin()">
+      <div class="row">
+        <label>Usuario</label>
+        <input type="text" formControlName="username" autocomplete="username" />
+      </div>
+      <div class="row">
+        <label>Contraseña</label>
+        <input type="password" formControlName="password" autocomplete="current-password" />
+      </div>
+      <div class="actions">
+        <button type="submit" class="primary">Entrar</button>
+        <button type="button" (click)="showLogin = false">Cancelar</button>
+      </div>
+      <p class="error" *ngIf="loginError">{{ loginError }}</p>
+    </form>
+  </div>
+  
+</div>
+
 

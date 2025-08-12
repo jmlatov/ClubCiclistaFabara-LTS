@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HeaderNavBlackComponent } from '../../core/components/header-nav-black/header-nav-black.component';
 import { EventItem, EventType, EventsService } from '../../services/events.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-events',
@@ -33,9 +34,17 @@ export class EventsComponent {
 
   events$ = this.eventsService.events$;
 
-  constructor(private fb: FormBuilder, private eventsService: EventsService) {}
+  showLogin = false;
+  loginError: string | null = null;
+  loginForm = this.fb.group({ username: [''], password: [''] });
+
+  constructor(private fb: FormBuilder, private eventsService: EventsService, private auth: AuthService) {}
 
   toggleForm() {
+    if (!this.auth.isLoggedIn) {
+      this.showLogin = true;
+      return;
+    }
     this.showForm = !this.showForm;
     if (!this.showForm) {
       this.editingId = null;
@@ -66,10 +75,18 @@ export class EventsComponent {
   }
 
   delete(id: string) {
+    if (!this.auth.isLoggedIn) {
+      this.showLogin = true;
+      return;
+    }
     this.eventsService.deleteEvent(id);
   }
 
   startEdit(event: EventItem) {
+    if (!this.auth.isLoggedIn) {
+      this.showLogin = true;
+      return;
+    }
     this.editingId = event.id;
     this.form.setValue({
       type: event.type,
@@ -87,6 +104,23 @@ export class EventsComponent {
 
   trackById(_: number, e: EventItem) {
     return e.id;
+  }
+
+  attemptLogin() {
+    const { username, password } = this.loginForm.value;
+    const ok = this.auth.login((username || '').trim(), (password || '').trim());
+    if (ok) {
+      this.showLogin = false;
+      this.loginError = null;
+      this.loginForm.reset();
+      this.toggleForm();
+    } else {
+      this.loginError = 'Credenciales inválidas';
+    }
+  }
+
+  logout() {
+    this.auth.logout();
   }
 }
 
