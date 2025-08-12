@@ -1,13 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
 .events {
   max-width: 960px;
   margin: 24px auto;
-  padding: 160px 16px 0; /* deja espacio bajo el header fijo + banner */
+  padding: 100px 16px 0; /* deja espacio bajo el header fijo + banner */
+}
+/* Tipografía y tamaños como en btt-algars */
+.events h1 {
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 3rem;
+}
+.events h3 {
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 1.5rem;
+}
+.events h4 {
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  font-size: 1.2rem;
+  margin-top: 0.3rem;
+}
+.events p {
+  font-size: 1rem;
+}
+.events ul {
+  list-style: square;
 }
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  margin-bottom: 16px;
+}
+.title-row-page {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.title-row-page h1 {
+  margin: 0 12px 0 0;
+}
+.filter label {
+  margin-right: 6px;
+  color: #444;
+}
+.filter select {
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 .controls {
   display: flex;
@@ -45,6 +91,7 @@
   border-radius: 10px;
   padding: 12px;
   background: #fff;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.411);
 }
 .chip {
   display: inline-block;
@@ -53,31 +100,60 @@
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 12px;
-  margin-bottom: 8px;
+  margin: 0 8px 0 0;
 }
 .date {
-  font-size: 13px;
+  font-size: 1rem;
   color: #666;
+  font-style: italic;
   margin: 0 0 6px;
 }
 .desc {
   margin: 0 0 8px;
+  white-space: pre-wrap;
 }
 .link a {
-  color: #2a6ef1;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.link a:hover {
+  transform: scale(0.9);
+  color: rgb(80, 147, 59);
   text-decoration: underline;
+}
+.link {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.5rem;
+  box-shadow: 2px 2px 10px 2px rgba(0, 0, 0, 0.411);
+}
+.event-title {
+  font-weight: 700;
+  color: #0f9d58;
+  margin: 6px 0;
+}
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 .card-actions {
   display: flex;
   gap: 8px;
 }
 .primary {
-  background: #2a6ef1;
+  background: rgb(80, 147, 59);
   color: #fff;
   border: none;
   padding: 8px 12px;
   border-radius: 8px;
   cursor: pointer;
+}
+.primary:hover {
+  background: #3a7d2f;
 }
 .danger {
   background: #d93025;
@@ -89,6 +165,12 @@
 }
 .empty {
   color: #666;
+}
+
+@media (max-width: 1200px) {
+  .events h1 {
+    font-size: 2rem;
+  }
 }
 
 

@@ -2,13 +2,17 @@
 
 <section class="events">
   <div class="header">
-    <h1>Eventos</h1>
+    <div class="title-row-page">
+      <h1>Eventos</h1>
+      <div class="filter">
+        <label for="filterType">Seleccionar tipo:</label>
+        <select id="filterType" [(ngModel)]="filter">
+          <option value="todas">Todos</option>
+          <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
+        </select>
+      </div>
+    </div>
     <div class="controls">
-      <label>Filtro</label>
-      <select [(ngModel)]="filter">
-        <option value="todas">Todas</option>
-        <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
-      </select>
       <button class="primary" (click)="toggleForm()">
         {{ showForm ? 'Cancelar' : 'Crear evento' }}
       </button>
@@ -57,10 +61,12 @@
       *ngFor="let e of events; trackBy: trackById"
       [style.display]="matchesFilter(e) ? '' : 'none'"
     >
-      <div class="chip">{{ e.type | titlecase }}</div>
-      <h3>{{ e.title }}</h3>
-      <p class="date">{{ e.date }}</p>
-      <p class="desc" *ngIf="e.description">{{ e.description }}</p>
+      <div class="title-row">
+        <div class="chip">{{ e.type | titlecase }}</div>
+        <h3 class="event-title">{{ e.title }}</h3>
+      </div>
+      <p class="date">{{ e.date | date: 'fullDate' }}</p>
+      <div class="desc" *ngIf="e.description" [innerHTML]="e.description"></div>
       <p class="link" *ngIf="e.url">
         <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>
       </p>
