@@ -37,6 +37,7 @@ export class EventsComponent {
   showLogin = false;
   loginError: string | null = null;
   loginForm = this.fb.group({ username: [''], password: [''] });
+  isLoggedIn$ = this.auth.isLoggedIn$;
 
   constructor(private fb: FormBuilder, private eventsService: EventsService, private auth: AuthService) {}
 

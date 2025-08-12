@@ -13,9 +13,15 @@
       </div>
     </div>
     <div class="controls">
-      <button class="primary" (click)="toggleForm()">
+      <button
+        *ngIf="(isLoggedIn$ | async)"
+        class="primary"
+        (click)="toggleForm()"
+      >
         {{ showForm ? 'Cancelar' : 'Crear evento' }}
       </button>
+      <button *ngIf="!(isLoggedIn$ | async)" class="primary" (click)="showLogin = true">Iniciar sesión</button>
+      <button *ngIf="(isLoggedIn$ | async)" class="danger" (click)="logout()">Cerrar sesión</button>
     </div>
   </div>
 
@@ -70,7 +76,7 @@
       <p class="link" *ngIf="e.url">
         <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>
       </p>
-      <div class="card-actions">
+      <div class="card-actions" *ngIf="(isLoggedIn$ | async)">
         <button (click)="startEdit(e)">Editar</button>
         <button class="danger" (click)="delete(e.id)">Eliminar</button>
       </div>
