@@ -16,10 +16,12 @@ export class HeaderNavBlackComponent {
   @Output() selected = new EventEmitter<string>();
   @Output() selectedBanner = new EventEmitter<string>();
   isBttMenuOpen = false;
+  private closeTimer: any = null;
 
   constructor(private router: Router, private el: ElementRef) {}
 
   selectBtt() {
+    this.clearCloseTimer();
     this.isBttMenuOpen = false;
     this.router.navigate(['btt-algars']);
     this.selected.emit('btt');
@@ -31,6 +33,7 @@ export class HeaderNavBlackComponent {
   }
 
   selectGaleria() {
+    this.clearCloseTimer();
     this.isBttMenuOpen = false;
     this.router.navigate(['gallery']);
     this.selected.emit('gallery');
@@ -66,6 +69,7 @@ export class HeaderNavBlackComponent {
   }
 
   openBttMenu() {
+    this.clearCloseTimer();
     this.isBttMenuOpen = true;
   }
 
@@ -73,15 +77,32 @@ export class HeaderNavBlackComponent {
     this.isBttMenuOpen = false;
   }
 
+  closeBttMenuDelayed() {
+    this.clearCloseTimer();
+    this.closeTimer = setTimeout(() => {
+      this.isBttMenuOpen = false;
+      this.closeTimer = null;
+    }, 1000);
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent) {
     if (!this.el.nativeElement.contains(event.target)) {
+      this.clearCloseTimer();
       this.isBttMenuOpen = false;
     }
   }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
+    this.clearCloseTimer();
     this.isBttMenuOpen = false;
+  }
+
+  private clearCloseTimer() {
+    if (this.closeTimer) {
+      clearTimeout(this.closeTimer);
+      this.closeTimer = null;
+    }
   }
 }
