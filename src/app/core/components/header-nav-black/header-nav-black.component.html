@@ -13,11 +13,16 @@
     <div class="links">
       <nav>
         <div class="nav_links">
-          <a class="underline hideOnMobile" (click)="selectHome()">INICIO</a>
-          <a class="underline hideOnMobile" (click)="selectBtt()">BTT ALGARS 2025</a>
-          <a class="underline hideOnMobile" (click)="selectEventos()">EVENTOS</a>
+          <a class="underline hideOnMobile" (mouseenter)="closeBttMenu()" (click)="selectHome()">INICIO</a>
+          <div class="nav-item hideOnMobile" [class.open]="isBttMenuOpen" (mouseenter)="openBttMenu()">
+            <a class="underline" (click)="selectBtt()">BTT ALGARS 2025</a>
+            <div class="submenu" (click)="$event.stopPropagation()">
+              <a (click)="selectGaleria()">Galería</a>
+            </div>
+          </div>
+          <a class="underline hideOnMobile" (mouseenter)="closeBttMenu()" (click)="selectEventos()">EVENTOS</a>
           <a class="underline hideOnMobile" (click)="selectGaleria()" style="display: none">GALERIA</a>
-          <a onclick="showSidebar()" (click)="showSidebar()">
+          <a onclick="showSidebar()" (mouseenter)="closeBttMenu()" (click)="showSidebar()">
             <svg
               class="menu-btn"
               xmlns="http://www.w3.org/2000/svg"
@@ -47,6 +52,7 @@
               >INICIO</a
             >
             <a class="underline" (click)="selectBtt(); hideSidebar()">BTT ALGARS 2025</a>
+            <a class="underline" style="margin-left: 16px" (click)="selectGaleria(); hideSidebar()">└ Galería</a>
             <a class="underline" (click)="selectEventos(); hideSidebar()">EVENTOS</a>
             <a
               class="underline"

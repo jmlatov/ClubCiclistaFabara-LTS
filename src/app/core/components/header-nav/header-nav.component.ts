@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { BannerBttComponent } from '../banner-btt/banner-btt.component';
 import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
@@ -13,10 +13,12 @@ import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.c
 export class HeaderNavComponent {
   @Output() selected = new EventEmitter<string>();
   @Output() selectedBanner = new EventEmitter<string>();
+  isBttMenuOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private el: ElementRef) {}
 
   selectBtt() {
+    this.isBttMenuOpen = false;
     this.router.navigate(['btt-algars']);
     this.selected.emit('btt');
   }
@@ -27,8 +29,9 @@ export class HeaderNavComponent {
   }
 
   selectGaleria() {
-    this.router.navigate(['']);
-    this.selected.emit('about');
+    this.isBttMenuOpen = false;
+    this.router.navigate(['gallery']);
+    this.selected.emit('gallery');
   }
 
   selectEventos() {
@@ -58,5 +61,25 @@ export class HeaderNavComponent {
 
   getSelected(selected: string) {
     this.selectedBanner.emit(selected);
+  }
+
+  openBttMenu() {
+    this.isBttMenuOpen = true;
+  }
+
+  closeBttMenu() {
+    this.isBttMenuOpen = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.el.nativeElement.contains(event.target)) {
+      this.isBttMenuOpen = false;
+    }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isBttMenuOpen = false;
   }
 }
