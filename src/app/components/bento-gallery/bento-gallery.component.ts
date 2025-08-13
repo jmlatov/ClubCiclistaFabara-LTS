@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImageService, ImageItem } from '../../services/image.service';
+import { HeaderNavBlackComponent } from '../../core/components/header-nav-black/header-nav-black.component';
 
 @Component({
   selector: 'app-bento-gallery',
-  standalone: true, // Componente standalone
-  imports: [CommonModule], // Importamos CommonModule para directivas como *ngIf, *ngFor
+  standalone: true,
+  imports: [CommonModule, HeaderNavBlackComponent],
   templateUrl: './bento-gallery.component.html',
-  styleUrls: ['./bento-gallery.component.scss']
+  styleUrl: './bento-gallery.component.css'
 })
 export class BentoGalleryComponent implements OnInit {
   images: ImageItem[] = [];
