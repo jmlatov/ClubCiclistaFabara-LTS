@@ -45,6 +45,22 @@ h3 {
 p {
   font-size: 1rem;
 }
+
+.mapa-interactivo {
+  color: rgb(73, 132, 77);
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s ease-in-out;
+  font-size: 1.5rem;
+  font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+.mapa-interactivo:hover {
+  color: rgb(50, 90, 53);
+  text-decoration: underline;
+}
 .links {
   color: white;
   background-color: rgba(0, 0, 0, 0.9);
