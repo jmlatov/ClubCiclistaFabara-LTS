@@ -15,7 +15,7 @@
     <div class="controls">
       <button
         *ngIf="(isLoggedIn$ | async)"
-        class="primary"
+        [ngClass]="showForm ? 'danger' : 'primary'"
         (click)="toggleForm()"
       >
         {{ showForm ? 'Cancelar' : 'Crear evento' }}
@@ -55,7 +55,7 @@
 
     <div class="actions">
       <button type="submit" class="primary" [disabled]="form.invalid">{{ editingId ? 'Actualizar' : 'Guardar' }}</button>
-      <button type="button" (click)="toggleForm()">Cancelar</button>
+      <button type="button" class="danger" (click)="toggleForm()">Cancelar</button>
     </div>
   </form>
 
@@ -77,7 +77,7 @@
         <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>
       </p>
       <div class="card-actions" *ngIf="(isLoggedIn$ | async)">
-        <button (click)="startEdit(e)">Editar</button>
+        <button class="primary" (click)="startEdit(e)">Editar</button>
         <button class="danger" (click)="delete(e.id)">Eliminar</button>
       </div>
     </div>
@@ -99,7 +99,7 @@
       </div>
       <div class="actions">
         <button type="submit" class="primary">Entrar</button>
-        <button type="button" (click)="showLogin = false">Cancelar</button>
+        <button type="button" class="danger" (click)="showLogin = false">Cancelar</button>
       </div>
       <p class="error" *ngIf="loginError">{{ loginError }}</p>
     </form>
