@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HeaderNavBlackComponent } from '../../core/components/header-nav-black/header-nav-black.component';
 import { EventItem, EventType, EventsService } from '../../services/events.service';
 import { AuthService } from '../../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-events',
@@ -13,9 +14,10 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './events.component.html',
   styleUrl: './events.component.css',
 })
-export class EventsComponent {
+export class EventsComponent implements OnInit, OnDestroy {
   showForm = false;
   editingId: string | null = null;
+  private authSubscription?: Subscription;
   filter: EventType | 'todas' = 'todas';
   types: { value: EventType; label: string }[] = [
     { value: 'ruta', label: 'Ruta' },
@@ -40,6 +42,20 @@ export class EventsComponent {
   isLoggedIn$ = this.auth.isLoggedIn$;
 
   constructor(private fb: FormBuilder, private eventsService: EventsService, private auth: AuthService) {}
+
+  ngOnInit() {
+    this.authSubscription = this.auth.isLoggedIn$.subscribe(isLoggedIn => {
+      if (!isLoggedIn) {
+        this.showForm = false;
+        this.editingId = null;
+        this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '' });
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.authSubscription?.unsubscribe();
+  }
 
   toggleForm() {
     if (!this.auth.isLoggedIn) {
