@@ -49,6 +49,11 @@
     </div>
 
     <div class="row">
+      <label>URL de imagen/cartel (opcional)</label>
+      <input type="url" formControlName="imageUrl" placeholder="https://... (cartel del evento)" />
+    </div>
+
+    <div class="row">
       <label>URL externa (opcional)</label>
       <input type="url" formControlName="url" placeholder="https://..." />
     </div>
@@ -72,7 +77,12 @@
         <h3 class="event-title">{{ e.title }}</h3>
       </div>
       <p class="date">{{ e.date | date: 'fullDate' }}</p>
-      <div class="desc" *ngIf="e.description" [innerHTML]="e.description"></div>
+      <div class="content-row" *ngIf="e.imageUrl || e.description">
+        <div class="poster" *ngIf="e.imageUrl">
+          <img [src]="e.imageUrl" alt="Cartel del evento {{ e.title }}" />
+        </div>
+        <div class="desc" *ngIf="e.description" [innerHTML]="e.description"></div>
+      </div>
       <p class="link" *ngIf="e.url">
         <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>
       </p>

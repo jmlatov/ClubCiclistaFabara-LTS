@@ -32,6 +32,7 @@ export class EventsComponent implements OnInit, OnDestroy {
     date: ['', Validators.required],
     description: [''],
     url: ['', []],
+    imageUrl: ['', []],
   });
 
   events$ = this.eventsService.events$;
@@ -48,7 +49,7 @@ export class EventsComponent implements OnInit, OnDestroy {
       if (!isLoggedIn) {
         this.showForm = false;
         this.editingId = null;
-        this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '' });
+        this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '', imageUrl: '' });
       }
     });
   }
@@ -65,19 +66,20 @@ export class EventsComponent implements OnInit, OnDestroy {
     this.showForm = !this.showForm;
     if (!this.showForm) {
       this.editingId = null;
-      this.form.reset({ type: 'ruta', title: '', date: '', description: '' });
+      this.form.reset({ type: 'ruta', title: '', date: '', description: '', imageUrl: '' });
     }
   }
 
   onSubmit() {
     if (this.form.invalid) return;
-    const { type, title, date, description, url } = this.form.value;
+    const { type, title, date, description, url, imageUrl } = this.form.value;
     const payload = {
       type: type as EventType,
       title: title!.trim(),
       date: date!,
       description: (description || '').trim(),
       url: (url || '').trim() || undefined,
+      imageUrl: (imageUrl || '').trim() || undefined,
     };
 
     if (this.editingId) {
@@ -87,7 +89,7 @@ export class EventsComponent implements OnInit, OnDestroy {
     }
 
     this.editingId = null;
-    this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '' });
+    this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '', imageUrl: '' });
     this.showForm = false;
   }
 
@@ -111,6 +113,7 @@ export class EventsComponent implements OnInit, OnDestroy {
       date: event.date,
       description: event.description || '',
       url: event.url || '',
+      imageUrl: event.imageUrl || '',
     });
     this.showForm = true;
   }

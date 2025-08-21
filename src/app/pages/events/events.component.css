@@ -108,10 +108,28 @@
   font-style: italic;
   margin: 0 0 6px;
 }
-.desc {
-  margin: 0 0 8px;
-  white-space: pre-wrap;
-}
+ .content-row {
+   display: flex;
+   gap: 16px;
+   margin: 8px 0 10px;
+   align-items: flex-start;
+ }
+ .poster {
+   flex-shrink: 0;
+   width: 200px;
+ }
+ .poster img {
+   width: 100%;
+   max-height: 250px;
+   object-fit: contain;
+   border-radius: 8px;
+   box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+ }
+ .desc {
+   flex: 1;
+   margin: 0 0 8px;
+   white-space: pre-wrap;
+ }
 .link a {
   color: white;
   text-decoration: none;

@@ -10,12 +10,13 @@ export interface EventItem {
   type: EventType;
   description?: string;
   url?: string; // enlace externo opcional
+  imageUrl?: string; // cartel/imagen del evento opcional
 }
 
 @Injectable({ providedIn: 'root' })
 export class EventsService {
   private readonly storageKey = 'ccf_events';
-  private readonly eventsSubject = new BehaviorSubject<EventItem[]>(this.load());
+  private readonly eventsSubject = new BehaviorSubject<EventItem[]>(this.load().sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
   readonly events$ = this.eventsSubject.asObservable();
 
   getEvents(): EventItem[] {
@@ -24,7 +25,7 @@ export class EventsService {
 
   addEvent(input: Omit<EventItem, 'id'>) {
     const id = this.generateId();
-    const next = [...this.getEvents(), { ...input, id }];
+    const next = [...this.getEvents(), { ...input, id }].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     this.set(next);
   }
 
@@ -34,7 +35,7 @@ export class EventsService {
   }
 
   updateEvent(id: string, update: Partial<Omit<EventItem, 'id'>>) {
-    const next = this.getEvents().map((e) => (e.id === id ? { ...e, ...update } : e));
+    const next = this.getEvents().map((e) => (e.id === id ? { ...e, ...update } : e)).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     this.set(next);
   }
 
