@@ -73,10 +73,12 @@
       [style.display]="matchesFilter(e) ? '' : 'none'"
     >
       <div class="title-row">
-        <div class="chip">{{ e.type | titlecase }}</div>
-        <h3 class="event-title">{{ e.title }}</h3>
+        <div class="title-content">
+          <div class="chip">{{ e.type | titlecase }}</div>
+          <h3 class="event-title">{{ e.title }}</h3>
+        </div>
+        <span class="event-date-inline">{{ e.date | date: 'fullDate' }}</span>
       </div>
-      <p class="date">{{ e.date | date: 'fullDate' }}</p>
       <div class="content-row" *ngIf="e.imageUrl || e.description">
         <div class="poster" *ngIf="e.imageUrl">
           <img [src]="e.imageUrl" alt="Cartel del evento {{ e.title }}" />
