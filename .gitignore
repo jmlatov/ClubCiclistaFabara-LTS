@@ -31,6 +31,8 @@ e2e/*.js
 e2e/*.map
 
 # System Files
+src/.DS_Store
+src/assets/.DS_Store
 .DS_Store/
 .DS_Store
 
