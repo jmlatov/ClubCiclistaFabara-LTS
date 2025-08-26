@@ -16,7 +16,7 @@ export interface EventItem {
 
 @Injectable({ providedIn: 'root' })
 export class EventsService {
-  private readonly apiUrl = 'https://tu-dominio.com/api/events'; // Cambia por tu dominio
+  private readonly apiUrl = 'https://www.articsmusic.com/api/events'; // Cambia por tu dominio
   private readonly eventsSubject = new BehaviorSubject<EventItem[]>([]);
   readonly events$ = this.eventsSubject.asObservable();
 
