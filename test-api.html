@@ -32,6 +32,7 @@
         <h3>3. Test PUT (Actualizar evento)</h3>
         <input type="text" id="putId" placeholder="ID del evento a actualizar" style="width: 200px;">
         <button onclick="testPut()">Probar PUT</button>
+        <button onclick="testPutDebug()">Probar PUT (Debug)</button>
         <div id="putResult"></div>
     </div>
 
@@ -50,6 +51,7 @@
 
     <script>
         const API_URL = 'https://www.articsmusic.com/api/events';
+        const DEBUG_URL = 'https://www.articsmusic.com/api/debug-put.php';
 
         function showResult(elementId, success, data) {
             const element = document.getElementById(elementId);
@@ -117,6 +119,40 @@
                 };
 
                 const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testUpdate)
+                });
+
+                const data = await response.json();
+                showResult('putResult', response.ok, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    data: data
+                });
+            } catch (error) {
+                showResult('putResult', false, {
+                    error: error.message
+                });
+            }
+        }
+
+        async function testPutDebug() {
+            try {
+                const id = document.getElementById('putId').value;
+                if (!id) {
+                    showResult('putResult', false, { error: 'Por favor ingresa un ID' });
+                    return;
+                }
+
+                const testUpdate = {
+                    title: 'Evento actualizado (debug)',
+                    description: 'Descripción actualizada (debug)'
+                };
+
+                const response = await fetch(`${DEBUG_URL}/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'

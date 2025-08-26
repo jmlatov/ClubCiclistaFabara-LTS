@@ -57,28 +57,40 @@ export class EventsService {
   async deleteEvent(id: string): Promise<void> {
     try {
       await this.http.delete(`${this.apiUrl}/${id}`).toPromise();
-      const currentEvents = this.getEvents();
-      const updatedEvents = currentEvents.filter(e => e.id !== id);
-      this.eventsSubject.next(updatedEvents);
-    } catch (error) {
-      console.error('Error deleting event:', error);
-      throw error;
+    } catch (error: any) {
+      // Fallback si Nginx/hosting bloquea DELETE (405)
+      if (error?.status === 405) {
+        await this.http.post(`${this.apiUrl}/${id}?_method=DELETE`, {}).toPromise();
+      } else {
+        console.error('Error deleting event:', error);
+        throw error;
+      }
     }
+    const currentEvents = this.getEvents();
+    const updatedEvents = currentEvents.filter(e => e.id !== id);
+    this.eventsSubject.next(updatedEvents);
   }
 
   async updateEvent(id: string, update: Partial<Omit<EventItem, 'id'>>): Promise<void> {
+    let updatedEvent: EventItem | undefined;
     try {
-      const updatedEvent = await this.http.put<EventItem>(`${this.apiUrl}/${id}`, update).toPromise();
-      if (updatedEvent) {
-        const currentEvents = this.getEvents();
-        const updatedEvents = currentEvents.map(e => 
-          e.id === id ? updatedEvent : e
-        ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-        this.eventsSubject.next(updatedEvents);
+      updatedEvent = await this.http.put<EventItem>(`${this.apiUrl}/${id}`, update).toPromise() as EventItem;
+    } catch (error: any) {
+      // Fallback si Nginx/hosting bloquea PUT (405)
+      if (error?.status === 405) {
+        updatedEvent = await this.http.post<EventItem>(`${this.apiUrl}/${id}?_method=PUT`, update).toPromise() as EventItem;
+      } else {
+        console.error('Error updating event:', error);
+        throw error;
       }
-    } catch (error) {
-      console.error('Error updating event:', error);
-      throw error;
+    }
+
+    if (updatedEvent) {
+      const currentEvents = this.getEvents();
+      const updatedEvents = currentEvents
+        .map(e => (e.id === id ? updatedEvent as EventItem : e))
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      this.eventsSubject.next(updatedEvents);
     }
   }
 
@@ -86,7 +98,15 @@ export class EventsService {
     try {
       const currentEvents = this.getEvents();
       for (const event of currentEvents) {
-        await this.http.delete(`${this.apiUrl}/${event.id}`).toPromise();
+        try {
+          await this.http.delete(`${this.apiUrl}/${event.id}`).toPromise();
+        } catch (error: any) {
+          if (error?.status === 405) {
+            await this.http.post(`${this.apiUrl}/${event.id}?_method=DELETE`, {}).toPromise();
+          } else {
+            throw error;
+          }
+        }
       }
       this.eventsSubject.next([]);
     } catch (error) {
