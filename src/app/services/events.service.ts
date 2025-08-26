@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 export type EventType = 'ruta' | 'prueba' | 'noticia' | 'otro';
 
@@ -15,52 +16,83 @@ export interface EventItem {
 
 @Injectable({ providedIn: 'root' })
 export class EventsService {
-  private readonly storageKey = 'ccf_events';
-  private readonly eventsSubject = new BehaviorSubject<EventItem[]>(this.load().sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()));
+  private readonly apiUrl = 'https://tu-dominio.com/api/events'; // Cambia por tu dominio
+  private readonly eventsSubject = new BehaviorSubject<EventItem[]>([]);
   readonly events$ = this.eventsSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    this.loadEvents();
+  }
 
   getEvents(): EventItem[] {
     return this.eventsSubject.value;
   }
 
-  addEvent(input: Omit<EventItem, 'id'>) {
-    const id = this.generateId();
-    const next = [...this.getEvents(), { ...input, id }].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    this.set(next);
-  }
-
-  deleteEvent(id: string) {
-    const next = this.getEvents().filter((e) => e.id !== id);
-    this.set(next);
-  }
-
-  updateEvent(id: string, update: Partial<Omit<EventItem, 'id'>>) {
-    const next = this.getEvents().map((e) => (e.id === id ? { ...e, ...update } : e)).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    this.set(next);
-  }
-
-  clearAll() {
-    this.set([]);
-  }
-
-  private set(arr: EventItem[]) {
-    this.eventsSubject.next(arr);
+  async loadEvents(): Promise<void> {
     try {
-      localStorage.setItem(this.storageKey, JSON.stringify(arr));
-    } catch {}
-  }
-
-  private load(): EventItem[] {
-    try {
-      const raw = localStorage.getItem(this.storageKey);
-      return raw ? (JSON.parse(raw) as EventItem[]) : [];
-    } catch {
-      return [];
+      const events = await this.http.get<EventItem[]>(this.apiUrl).toPromise();
+      this.eventsSubject.next(events || []);
+    } catch (error) {
+      console.error('Error loading events:', error);
+      this.eventsSubject.next([]);
     }
   }
 
-  private generateId(): string {
-    return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+  async addEvent(input: Omit<EventItem, 'id'>): Promise<void> {
+    try {
+      const newEvent = await this.http.post<EventItem>(this.apiUrl, input).toPromise();
+      if (newEvent) {
+        const currentEvents = this.getEvents();
+        const updatedEvents = [...currentEvents, newEvent].sort(
+          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+        );
+        this.eventsSubject.next(updatedEvents);
+      }
+    } catch (error) {
+      console.error('Error adding event:', error);
+      throw error;
+    }
+  }
+
+  async deleteEvent(id: string): Promise<void> {
+    try {
+      await this.http.delete(`${this.apiUrl}/${id}`).toPromise();
+      const currentEvents = this.getEvents();
+      const updatedEvents = currentEvents.filter(e => e.id !== id);
+      this.eventsSubject.next(updatedEvents);
+    } catch (error) {
+      console.error('Error deleting event:', error);
+      throw error;
+    }
+  }
+
+  async updateEvent(id: string, update: Partial<Omit<EventItem, 'id'>>): Promise<void> {
+    try {
+      const updatedEvent = await this.http.put<EventItem>(`${this.apiUrl}/${id}`, update).toPromise();
+      if (updatedEvent) {
+        const currentEvents = this.getEvents();
+        const updatedEvents = currentEvents.map(e => 
+          e.id === id ? updatedEvent : e
+        ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        this.eventsSubject.next(updatedEvents);
+      }
+    } catch (error) {
+      console.error('Error updating event:', error);
+      throw error;
+    }
+  }
+
+  async clearAll(): Promise<void> {
+    try {
+      const currentEvents = this.getEvents();
+      for (const event of currentEvents) {
+        await this.http.delete(`${this.apiUrl}/${event.id}`).toPromise();
+      }
+      this.eventsSubject.next([]);
+    } catch (error) {
+      console.error('Error clearing events:', error);
+      throw error;
+    }
   }
 }
 
