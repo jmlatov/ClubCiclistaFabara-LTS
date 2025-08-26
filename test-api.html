@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Events</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test { margin: 20px 0; padding: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Test API Events</h1>
+    
+    <div class="test">
+        <h3>1. Test GET (Obtener eventos)</h3>
+        <button onclick="testGet()">Probar GET</button>
+        <div id="getResult"></div>
+    </div>
+
+    <div class="test">
+        <h3>2. Test POST (Crear evento)</h3>
+        <button onclick="testPost()">Probar POST</button>
+        <div id="postResult"></div>
+    </div>
+
+    <div class="test">
+        <h3>3. Test PUT (Actualizar evento)</h3>
+        <input type="text" id="putId" placeholder="ID del evento a actualizar" style="width: 200px;">
+        <button onclick="testPut()">Probar PUT</button>
+        <div id="putResult"></div>
+    </div>
+
+    <div class="test">
+        <h3>4. Test DELETE (Eliminar evento)</h3>
+        <input type="text" id="deleteId" placeholder="ID del evento a eliminar" style="width: 200px;">
+        <button onclick="testDelete()">Probar DELETE</button>
+        <div id="deleteResult"></div>
+    </div>
+
+    <div class="test">
+        <h3>5. Test OPTIONS (CORS)</h3>
+        <button onclick="testOptions()">Probar OPTIONS</button>
+        <div id="optionsResult"></div>
+    </div>
+
+    <script>
+        const API_URL = 'https://www.articsmusic.com/api/events';
+
+        function showResult(elementId, success, data) {
+            const element = document.getElementById(elementId);
+            element.className = success ? 'success' : 'error';
+            element.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+        }
+
+        async function testGet() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                showResult('getResult', response.ok, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    data: data
+                });
+            } catch (error) {
+                showResult('getResult', false, {
+                    error: error.message
+                });
+            }
+        }
+
+        async function testPost() {
+            try {
+                const testEvent = {
+                    title: 'Evento de prueba',
+                    date: '2025-01-15',
+                    type: 'ruta',
+                    description: 'Descripción de prueba'
+                };
+
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testEvent)
+                });
+
+                const data = await response.json();
+                showResult('postResult', response.ok, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    data: data
+                });
+            } catch (error) {
+                showResult('postResult', false, {
+                    error: error.message
+                });
+            }
+        }
+
+        async function testPut() {
+            try {
+                const id = document.getElementById('putId').value;
+                if (!id) {
+                    showResult('putResult', false, { error: 'Por favor ingresa un ID' });
+                    return;
+                }
+
+                const testUpdate = {
+                    title: 'Evento actualizado',
+                    description: 'Descripción actualizada'
+                };
+
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testUpdate)
+                });
+
+                const data = await response.json();
+                showResult('putResult', response.ok, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    data: data
+                });
+            } catch (error) {
+                showResult('putResult', false, {
+                    error: error.message
+                });
+            }
+        }
+
+        async function testDelete() {
+            try {
+                const id = document.getElementById('deleteId').value;
+                if (!id) {
+                    showResult('deleteResult', false, { error: 'Por favor ingresa un ID' });
+                    return;
+                }
+
+                const response = await fetch(`${API_URL}/${id}`, {
+                    method: 'DELETE'
+                });
+
+                showResult('deleteResult', response.ok, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    data: response.status === 204 ? 'Evento eliminado correctamente' : await response.text()
+                });
+            } catch (error) {
+                showResult('deleteResult', false, {
+                    error: error.message
+                });
+            }
+        }
+
+        async function testOptions() {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'OPTIONS'
+                });
+
+                showResult('optionsResult', response.ok, {
+                    status: response.status,
+                    statusText: response.statusText,
+                    headers: {
+                        'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                        'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods'),
+                        'Access-Control-Allow-Headers': response.headers.get('Access-Control-Allow-Headers')
+                    }
+                });
+            } catch (error) {
+                showResult('optionsResult', false, {
+                    error: error.message
+                });
+            }
+        }
+    </script>
+</body>
+</html>

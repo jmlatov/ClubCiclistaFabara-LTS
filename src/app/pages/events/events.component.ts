@@ -70,7 +70,7 @@ export class EventsComponent implements OnInit, OnDestroy {
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.form.invalid) return;
     const { type, title, date, description, url, imageUrl } = this.form.value;
     const payload = {
@@ -82,23 +82,34 @@ export class EventsComponent implements OnInit, OnDestroy {
       imageUrl: (imageUrl || '').trim() || undefined,
     };
 
-    if (this.editingId) {
-      this.eventsService.updateEvent(this.editingId, payload);
-    } else {
-      this.eventsService.addEvent(payload);
-    }
+    try {
+      if (this.editingId) {
+        await this.eventsService.updateEvent(this.editingId, payload);
+      } else {
+        await this.eventsService.addEvent(payload);
+      }
 
-    this.editingId = null;
-    this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '', imageUrl: '' });
-    this.showForm = false;
+      this.editingId = null;
+      this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '', imageUrl: '' });
+      this.showForm = false;
+    } catch (error) {
+      console.error('Error saving event:', error);
+      // Aquí podrías mostrar un mensaje de error al usuario
+    }
   }
 
-  delete(id: string) {
+  async delete(id: string) {
     if (!this.auth.isLoggedIn) {
       this.showLogin = true;
       return;
     }
-    this.eventsService.deleteEvent(id);
+    
+    try {
+      await this.eventsService.deleteEvent(id);
+    } catch (error) {
+      console.error('Error deleting event:', error);
+      // Aquí podrías mostrar un mensaje de error al usuario
+    }
   }
 
   startEdit(event: EventItem) {
