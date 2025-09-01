@@ -18,6 +18,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 export class EventsComponent implements OnInit, OnDestroy {
   showForm = false;
   editingId: string | null = null;
+  editingEvent: EventItem | null = null;
   private authSubscription?: Subscription;
   filter: EventType | 'todas' = 'todas';
   types: { value: EventType; label: string }[] = [
@@ -67,6 +68,7 @@ export class EventsComponent implements OnInit, OnDestroy {
     this.showForm = !this.showForm;
     if (!this.showForm) {
       this.editingId = null;
+      this.editingEvent = null;
       this.form.reset({ type: 'ruta', title: '', date: '', description: '', imageUrl: '' });
     }
   }
@@ -118,6 +120,7 @@ export class EventsComponent implements OnInit, OnDestroy {
       return;
     }
     this.editingId = event.id;
+    this.editingEvent = event;
     this.form.setValue({
       type: event.type,
       title: event.title,

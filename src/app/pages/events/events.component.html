@@ -67,10 +67,22 @@
   <div class="list" *ngIf="(events$ | async) as events">
     <p class="empty" *ngIf="events.length === 0">Aún no hay eventos.</p>
 
+    <!-- Vista de edición -->
+    <div class="card" *ngIf="editingEvent && showForm">
+      <div class="title-row">
+        <div class="title-content">
+          <div class="chip">{{ editingEvent.type | titlecase }}</div>
+          <h3 class="event-title">{{ editingEvent.title }}</h3>
+        </div>
+        <span class="event-date-inline">{{ editingEvent.date | date: 'fullDate' }}</span>
+      </div>
+    </div>
+
+    <!-- Lista normal de eventos -->
     <div
       class="card"
       *ngFor="let e of events; trackBy: trackById"
-      [style.display]="matchesFilter(e) ? '' : 'none'"
+      [style.display]="(!editingEvent && matchesFilter(e)) ? '' : 'none'"
     >
       <div class="title-row">
         <div class="title-content">
