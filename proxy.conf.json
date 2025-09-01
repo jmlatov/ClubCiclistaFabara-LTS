@@ -1,0 +1,8 @@
+{
+  "/api/*": {
+    "target": "https://www.ccfabara.es",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

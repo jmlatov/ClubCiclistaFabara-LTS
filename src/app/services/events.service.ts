@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 export type EventType = 'ruta' | 'prueba' | 'noticia' | 'otro';
@@ -16,12 +16,24 @@ export interface EventItem {
 
 @Injectable({ providedIn: 'root' })
 export class EventsService {
-  private readonly apiUrl = 'https://www.ccfabara.es/api/events'; // Cambia por tu dominio
+  private readonly apiUrl = 'https://www.ccfabara.es/api/events'; // URL directa
   private readonly eventsSubject = new BehaviorSubject<EventItem[]>([]);
   readonly events$ = this.eventsSubject.asObservable();
 
   constructor(private http: HttpClient) {
     this.loadEvents();
+    this.testApiConnection();
+  }
+
+  async testApiConnection(): Promise<void> {
+    try {
+      await firstValueFrom(this.http.get<any>(this.apiUrl, {
+        observe: 'response'
+      }));
+    } catch (error: any) {
+      // Si hay error, lo propagamos
+      throw error;
+    }
   }
 
   getEvents(): EventItem[] {
@@ -30,17 +42,19 @@ export class EventsService {
 
   async loadEvents(): Promise<void> {
     try {
-      const events = await this.http.get<EventItem[]>(this.apiUrl).toPromise();
-      this.eventsSubject.next(events || []);
-    } catch (error) {
-      console.error('Error loading events:', error);
+      const response = await firstValueFrom(this.http.get<any>(this.apiUrl, {
+        observe: 'response'
+      }));
+      this.eventsSubject.next(response.body || []);
+    } catch (error: any) {
       this.eventsSubject.next([]);
+      throw error;
     }
   }
 
   async addEvent(input: Omit<EventItem, 'id'>): Promise<void> {
     try {
-      const newEvent = await this.http.post<EventItem>(this.apiUrl, input).toPromise();
+      const newEvent = await firstValueFrom(this.http.post<EventItem>(this.apiUrl, input));
       if (newEvent) {
         const currentEvents = this.getEvents();
         const updatedEvents = [...currentEvents, newEvent].sort(
@@ -49,20 +63,18 @@ export class EventsService {
         this.eventsSubject.next(updatedEvents);
       }
     } catch (error) {
-      console.error('Error adding event:', error);
       throw error;
     }
   }
 
   async deleteEvent(id: string): Promise<void> {
     try {
-      await this.http.delete(`${this.apiUrl}/${id}`).toPromise();
+      await firstValueFrom(this.http.delete(`${this.apiUrl}/${id}`));
     } catch (error: any) {
       // Fallback si Nginx/hosting bloquea DELETE (405)
       if (error?.status === 405) {
-        await this.http.post(`${this.apiUrl}/${id}?_method=DELETE`, {}).toPromise();
+        await firstValueFrom(this.http.post(`${this.apiUrl}/${id}?_method=DELETE`, {}));
       } else {
-        console.error('Error deleting event:', error);
         throw error;
       }
     }
@@ -74,13 +86,19 @@ export class EventsService {
   async updateEvent(id: string, update: Partial<Omit<EventItem, 'id'>>): Promise<void> {
     let updatedEvent: EventItem | undefined;
     try {
-      updatedEvent = await this.http.put<EventItem>(`${this.apiUrl}/${id}`, update).toPromise() as EventItem;
+      const response = await firstValueFrom(this.http.put<any>(`${this.apiUrl}/${id}`, update, {
+        observe: 'response'
+      }));
+      
+      updatedEvent = response.body;
     } catch (error: any) {
       // Fallback si Nginx/hosting bloquea PUT (405)
       if (error?.status === 405) {
-        updatedEvent = await this.http.post<EventItem>(`${this.apiUrl}/${id}?_method=PUT`, update).toPromise() as EventItem;
+        const response = await firstValueFrom(this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, update, {
+          observe: 'response'
+        }));
+        updatedEvent = response.body;
       } else {
-        console.error('Error updating event:', error);
         throw error;
       }
     }
@@ -99,10 +117,10 @@ export class EventsService {
       const currentEvents = this.getEvents();
       for (const event of currentEvents) {
         try {
-          await this.http.delete(`${this.apiUrl}/${event.id}`).toPromise();
+          await firstValueFrom(this.http.delete(`${this.apiUrl}/${event.id}`));
         } catch (error: any) {
           if (error?.status === 405) {
-            await this.http.post(`${this.apiUrl}/${event.id}?_method=DELETE`, {}).toPromise();
+            await firstValueFrom(this.http.post(`${this.apiUrl}/${event.id}?_method=DELETE`, {}));
           } else {
             throw error;
           }
@@ -110,7 +128,6 @@ export class EventsService {
       }
       this.eventsSubject.next([]);
     } catch (error) {
-      console.error('Error clearing events:', error);
       throw error;
     }
   }

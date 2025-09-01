@@ -83,7 +83,7 @@
         <div class="poster" *ngIf="e.imageUrl">
           <img [src]="e.imageUrl" alt="Cartel del evento {{ e.title }}" />
         </div>
-        <div class="desc" *ngIf="e.description" [innerHTML]="e.description"></div>
+        <div class="desc" *ngIf="e.description"><markdown>{{ e.description }}</markdown></div>
       </div>
       <p class="link" *ngIf="e.url">
         <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>

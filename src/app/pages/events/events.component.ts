@@ -6,11 +6,12 @@ import { HeaderNavBlackComponent } from '../../core/components/header-nav-black/
 import { EventItem, EventType, EventsService } from '../../services/events.service';
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, HeaderNavBlackComponent],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, HeaderNavBlackComponent, MarkdownComponent],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css',
 })
@@ -93,8 +94,8 @@ export class EventsComponent implements OnInit, OnDestroy {
       this.form.reset({ type: 'ruta', title: '', date: '', description: '', url: '', imageUrl: '' });
       this.showForm = false;
     } catch (error) {
-      console.error('Error saving event:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
+      // Propagamos el error para que pueda ser manejado por el componente padre
+      throw error;
     }
   }
 
@@ -107,8 +108,7 @@ export class EventsComponent implements OnInit, OnDestroy {
     try {
       await this.eventsService.deleteEvent(id);
     } catch (error) {
-      console.error('Error deleting event:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
+      throw error;
     }
   }
 
