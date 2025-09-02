@@ -1,12 +1,12 @@
 import { Component, Output, EventEmitter, Input, HostListener, ElementRef } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+
 import { BannerBttComponent } from '../banner-btt/banner-btt.component';
 import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
 
 @Component({
     selector: 'app-header-nav-black',
-    imports: [CommonModule, RouterModule, BannerBttComponent],
+    imports: [RouterModule, BannerBttComponent],
     templateUrl: './header-nav-black.component.html',
     styleUrl: './header-nav-black.component.css'
 })

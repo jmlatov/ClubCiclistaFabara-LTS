@@ -1,11 +1,11 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ImageService, ImageItem } from '../../services/image.service';
 import { HeaderNavBlackComponent } from '../../core/components/header-nav-black/header-nav-black.component';
 
 @Component({
     selector: 'app-bento-gallery',
-    imports: [CommonModule, HeaderNavBlackComponent],
+    imports: [HeaderNavBlackComponent],
     templateUrl: './bento-gallery.component.html',
     styleUrl: './bento-gallery.component.css'
 })
