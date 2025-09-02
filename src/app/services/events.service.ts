@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, firstValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, firstValueFrom, shareReplay, switchMap } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export type EventType = 'ruta' | 'prueba' | 'noticia' | 'otro';
 
@@ -16,13 +16,46 @@ export interface EventItem {
 
 @Injectable({ providedIn: 'root' })
 export class EventsService {
-  private readonly apiUrl = 'https://www.ccfabara.es/api/events'; // URL directa
-  private readonly eventsSubject = new BehaviorSubject<EventItem[]>([]);
-  readonly events$ = this.eventsSubject.asObservable();
+  private readonly apiUrl = 'https://www.ccfabara.es/api/events';
+  private refreshTrigger = new BehaviorSubject<number>(0);
+  
+  readonly events$ = this.refreshTrigger.pipe(
+    switchMap(() => this.fetchEvents()),
+    shareReplay(1)
+  );
+
+  private getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Cache-Control': 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+        'Pragma': 'no-cache',
+        'Expires': '0',
+        'If-Modified-Since': '0'
+      })
+    };
+  }
 
   constructor(private http: HttpClient) {
     this.loadEvents();
     this.testApiConnection();
+  }
+
+  private async fetchEvents(): Promise<EventItem[]> {
+    const timestamp = new Date().getTime();
+    const url = `${this.apiUrl}?_t=${timestamp}`;
+    
+    try {
+      return await firstValueFrom(
+        this.http.get<EventItem[]>(url, this.getHttpOptions())
+      );
+    } catch (error) {
+      console.error('Error fetching events:', error);
+      return [];
+    }
+  }
+
+  private forceRefresh(): void {
+    this.refreshTrigger.next(Date.now());
   }
 
   async testApiConnection(): Promise<void> {
@@ -36,86 +69,54 @@ export class EventsService {
     }
   }
 
-  getEvents(): EventItem[] {
-    return this.eventsSubject.value;
-  }
 
   async loadEvents(): Promise<void> {
-    try {
-      const response = await firstValueFrom(this.http.get<any>(this.apiUrl, {
-        observe: 'response'
-      }));
-      this.eventsSubject.next(response.body || []);
-    } catch (error: any) {
-      this.eventsSubject.next([]);
-      throw error;
-    }
+    this.forceRefresh();
   }
 
   async addEvent(input: Omit<EventItem, 'id'>): Promise<void> {
     try {
-      await firstValueFrom(this.http.post<EventItem>(this.apiUrl, input));
-      // Recargar todos los eventos después de añadir uno nuevo
-      await this.loadEvents();
+      await firstValueFrom(this.http.post<EventItem>(this.apiUrl, input, this.getHttpOptions()));
+      this.forceRefresh();
     } catch (error) {
+      console.error('Error adding event:', error);
       throw error;
     }
   }
 
   async deleteEvent(id: string): Promise<void> {
     try {
-      await firstValueFrom(this.http.delete(`${this.apiUrl}/${id}`));
+      await firstValueFrom(this.http.delete(`${this.apiUrl}/${id}`, this.getHttpOptions()));
+      this.forceRefresh();
     } catch (error: any) {
       // Fallback si Nginx/hosting bloquea DELETE (405)
       if (error?.status === 405) {
-        await firstValueFrom(this.http.post(`${this.apiUrl}/${id}?_method=DELETE`, {}));
-      } else {
-        throw error;
+        await firstValueFrom(
+          this.http.post(`${this.apiUrl}/${id}?_method=DELETE`, {}, this.getHttpOptions())
+        );
       }
+      this.forceRefresh();
     }
-    // Recargar todos los eventos después de eliminar
-    await this.loadEvents();
   }
 
   async updateEvent(id: string, update: Partial<Omit<EventItem, 'id'>>): Promise<void> {
     try {
-      await firstValueFrom(this.http.put<any>(`${this.apiUrl}/${id}`, update, {
-        observe: 'response'
-      }));
+      await firstValueFrom(this.http.put<any>(`${this.apiUrl}/${id}`, update, this.getHttpOptions()));
+      this.forceRefresh();
     } catch (error: any) {
       // Fallback si Nginx/hosting bloquea PUT (405)
       if (error?.status === 405) {
-        await firstValueFrom(this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, update, {
-          observe: 'response'
-        }));
+        await firstValueFrom(
+          this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, update, this.getHttpOptions())
+        );
+        this.forceRefresh();
       } else {
         throw error;
       }
     }
-    
-    // Recargar todos los eventos después de actualizar
-    await this.loadEvents();
   }
 
-  async clearAll(): Promise<void> {
-    try {
-      const currentEvents = this.getEvents();
-      for (const event of currentEvents) {
-        try {
-          await firstValueFrom(this.http.delete(`${this.apiUrl}/${event.id}`));
-        } catch (error: any) {
-          if (error?.status === 405) {
-            await firstValueFrom(this.http.post(`${this.apiUrl}/${event.id}?_method=DELETE`, {}));
-          } else {
-            throw error;
-          }
-        }
-      }
-      this.eventsSubject.next([]);
-    } catch (error) {
-      throw error;
-    }
-  }
+
 }
 
 
