@@ -54,14 +54,9 @@ export class EventsService {
 
   async addEvent(input: Omit<EventItem, 'id'>): Promise<void> {
     try {
-      const newEvent = await firstValueFrom(this.http.post<EventItem>(this.apiUrl, input));
-      if (newEvent) {
-        const currentEvents = this.getEvents();
-        const updatedEvents = [...currentEvents, newEvent].sort(
-          (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-        );
-        this.eventsSubject.next(updatedEvents);
-      }
+      await firstValueFrom(this.http.post<EventItem>(this.apiUrl, input));
+      // Recargar todos los eventos después de añadir uno nuevo
+      await this.loadEvents();
     } catch (error) {
       throw error;
     }
@@ -78,38 +73,28 @@ export class EventsService {
         throw error;
       }
     }
-    const currentEvents = this.getEvents();
-    const updatedEvents = currentEvents.filter(e => e.id !== id);
-    this.eventsSubject.next(updatedEvents);
+    // Recargar todos los eventos después de eliminar
+    await this.loadEvents();
   }
 
   async updateEvent(id: string, update: Partial<Omit<EventItem, 'id'>>): Promise<void> {
-    let updatedEvent: EventItem | undefined;
     try {
-      const response = await firstValueFrom(this.http.put<any>(`${this.apiUrl}/${id}`, update, {
+      await firstValueFrom(this.http.put<any>(`${this.apiUrl}/${id}`, update, {
         observe: 'response'
       }));
-      
-      updatedEvent = response.body;
     } catch (error: any) {
       // Fallback si Nginx/hosting bloquea PUT (405)
       if (error?.status === 405) {
-        const response = await firstValueFrom(this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, update, {
+        await firstValueFrom(this.http.post<any>(`${this.apiUrl}/${id}?_method=PUT`, update, {
           observe: 'response'
         }));
-        updatedEvent = response.body;
       } else {
         throw error;
       }
     }
-
-    if (updatedEvent) {
-      const currentEvents = this.getEvents();
-      const updatedEvents = currentEvents
-        .map(e => (e.id === id ? updatedEvent as EventItem : e))
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-      this.eventsSubject.next(updatedEvents);
-    }
+    
+    // Recargar todos los eventos después de actualizar
+    await this.loadEvents();
   }
 
   async clearAll(): Promise<void> {

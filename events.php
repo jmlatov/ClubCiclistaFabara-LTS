@@ -11,18 +11,31 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Access-Control-Max-Age: 86400'); // 24 horas
 
+$method = $_SERVER['REQUEST_METHOD'];
+if ($method === 'POST' && isset($_GET['_method'])) {
+  $override = strtoupper($_GET['_method']);
+  if (in_array($override, ['PUT', 'DELETE'])) {
+    $method = $override;
+  }
+}
+
 // Manejar preflight OPTIONS
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    http_response_code(204);
-    exit();
+//if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+//    http_response_code(204);
+//    exit();
+//}
+
+if ($method === 'OPTIONS') {
+  http_response_code(204);
+  exit;
 }
 
 // Configuración de la base de datos
-$host = 'localhost'; // Cambia por el host que te da Hostalia
+$host = 'PPSQL100.dns-servicio.com';
 $port = '5432';
-$dbname = 'ccf_events'; // Cambia por tu nombre de BD
-$user = 'ccf_user'; // Cambia por tu usuario
-$password = 'tu_contraseña'; // Cambia por tu contraseña
+$dbname = '7784568_ccf_events';
+$user = 'ccf_user';
+$password = 'Y*031ekb7';
 
 // Intentar conexión a la base de datos
 try {
@@ -42,7 +55,7 @@ try {
 }
 
 // Obtener método HTTP y path
-$method = $_SERVER['REQUEST_METHOD'];
+//$method = $_SERVER['REQUEST_METHOD'];
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $pathParts = explode('/', trim($path, '/'));
 
