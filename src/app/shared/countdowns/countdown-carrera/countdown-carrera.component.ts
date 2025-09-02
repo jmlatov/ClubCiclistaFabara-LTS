@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-countdown-carrera',
-  standalone: true,
-  imports: [],
-  templateUrl: './countdown-carrera.component.html',
-  styleUrl: './countdown-carrera.component.css',
+    selector: 'app-countdown-carrera',
+    imports: [],
+    templateUrl: './countdown-carrera.component.html',
+    styleUrl: './countdown-carrera.component.css'
 })
 
 export class CountdownCarreraComponent implements OnInit, OnDestroy {

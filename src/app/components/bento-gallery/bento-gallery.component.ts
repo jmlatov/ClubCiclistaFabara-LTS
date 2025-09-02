@@ -4,11 +4,10 @@ import { ImageService, ImageItem } from '../../services/image.service';
 import { HeaderNavBlackComponent } from '../../core/components/header-nav-black/header-nav-black.component';
 
 @Component({
-  selector: 'app-bento-gallery',
-  standalone: true,
-  imports: [CommonModule, HeaderNavBlackComponent],
-  templateUrl: './bento-gallery.component.html',
-  styleUrl: './bento-gallery.component.css'
+    selector: 'app-bento-gallery',
+    imports: [CommonModule, HeaderNavBlackComponent],
+    templateUrl: './bento-gallery.component.html',
+    styleUrl: './bento-gallery.component.css'
 })
 export class BentoGalleryComponent implements OnInit {
   images: ImageItem[] = [];

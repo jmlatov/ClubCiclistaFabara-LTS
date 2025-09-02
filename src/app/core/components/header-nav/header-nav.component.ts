@@ -4,11 +4,10 @@ import { BannerBttComponent } from '../banner-btt/banner-btt.component';
 import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
 
 @Component({
-  selector: 'app-header-nav',
-  standalone: true,
-  imports: [RouterModule],
-  templateUrl: './header-nav.component.html',
-  styleUrls: ['./header-nav.component.css'],
+    selector: 'app-header-nav',
+    imports: [RouterModule],
+    templateUrl: './header-nav.component.html',
+    styleUrls: ['./header-nav.component.css']
 })
 export class HeaderNavComponent {
   @Output() selected = new EventEmitter<string>();

@@ -6,16 +6,15 @@ import { CountdownCarreraComponent } from '../../../shared/countdowns/countdown-
 import { CountdownInscripcionComponent } from '../../../shared/countdowns/countdown-inscripcion/countdown-inscripcion.component';
 
 @Component({
-  selector: 'app-main',
-  standalone: true,
-  imports: [
-    LowsectionComponent,
-    GridPatrocinadoresComponent,
-    // CountdownCarreraComponent,
-    // PrimaryBtnComponent,
-    // CountdownInscripcionComponent,
-  ],
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.css',
+    selector: 'app-main',
+    imports: [
+        LowsectionComponent,
+        GridPatrocinadoresComponent,
+        // CountdownCarreraComponent,
+        // PrimaryBtnComponent,
+        // CountdownInscripcionComponent,
+    ],
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.css'
 })
 export class MainComponent {}

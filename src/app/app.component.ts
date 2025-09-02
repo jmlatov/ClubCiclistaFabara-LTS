@@ -7,15 +7,14 @@ import { FooterComponent } from './core/components/footer/footer.component';
 import { BttAlgarsComponent } from './pages/btt-algars/btt-algars.component';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    FooterComponent
-],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+    selector: 'app-root',
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        FooterComponent
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'ccf-Angular17';

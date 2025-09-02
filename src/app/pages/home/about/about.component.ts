@@ -4,10 +4,9 @@ import { ImgBentoComponent } from './img-bento/img-bento.component';
 import { ObjetivosComponent } from './objetivos/objetivos.component';
 
 @Component({
-  selector: 'app-about',
-  standalone: true,
-  imports: [SecondaryBtnComponent, ImgBentoComponent, ObjetivosComponent],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.css',
+    selector: 'app-about',
+    imports: [SecondaryBtnComponent, ImgBentoComponent, ObjetivosComponent],
+    templateUrl: './about.component.html',
+    styleUrl: './about.component.css'
 })
 export class AboutComponent {}

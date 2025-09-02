@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-countdown-inscripcion',
-  standalone: true,
-  imports: [],
-  templateUrl: './countdown-inscripcion.component.html',
-  styleUrl: './countdown-inscripcion.component.css',
+    selector: 'app-countdown-inscripcion',
+    imports: [],
+    templateUrl: './countdown-inscripcion.component.html',
+    styleUrl: './countdown-inscripcion.component.css'
 })
 export class CountdownInscripcionComponent implements OnInit, OnDestroy {
   countDownDate = new Date('April 24, 2025 23:59:59').getTime();

@@ -4,11 +4,10 @@ import { SecondaryBtnComponent } from '../../../shared/ui/buttons/secondary-btn/
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-info-carrera',
-  standalone: true,
-  imports: [PrimaryBtnComponent, SecondaryBtnComponent],
-  templateUrl: './info-carrera.component.html',
-  styleUrl: './info-carrera.component.css',
+    selector: 'app-info-carrera',
+    imports: [PrimaryBtnComponent, SecondaryBtnComponent],
+    templateUrl: './info-carrera.component.html',
+    styleUrl: './info-carrera.component.css'
 })
 export class InfoCarreraComponent {
   @Output() selected = new EventEmitter<string>();

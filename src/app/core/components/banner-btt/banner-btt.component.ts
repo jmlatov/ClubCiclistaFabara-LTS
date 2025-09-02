@@ -1,11 +1,10 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-banner-btt',
-  standalone: true,
-  imports: [],
-  templateUrl: './banner-btt.component.html',
-  styleUrl: './banner-btt.component.css',
+    selector: 'app-banner-btt',
+    imports: [],
+    templateUrl: './banner-btt.component.html',
+    styleUrl: './banner-btt.component.css'
 })
 export class BannerBttComponent {
   isStravaExpanded = false;

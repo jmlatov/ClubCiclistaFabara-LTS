@@ -5,11 +5,10 @@ import { BannerBttComponent } from '../banner-btt/banner-btt.component';
 import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
 
 @Component({
-  selector: 'app-header-nav-black',
-  standalone: true,
-  imports: [CommonModule, RouterModule, BannerBttComponent],
-  templateUrl: './header-nav-black.component.html',
-  styleUrl: './header-nav-black.component.css',
+    selector: 'app-header-nav-black',
+    imports: [CommonModule, RouterModule, BannerBttComponent],
+    templateUrl: './header-nav-black.component.html',
+    styleUrl: './header-nav-black.component.css'
 })
 export class HeaderNavBlackComponent {
   @Input() showBanner: boolean = true;
