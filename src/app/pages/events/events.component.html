@@ -8,127 +8,150 @@
         <label for="filterType">Seleccionar tipo:</label>
         <select id="filterType" [(ngModel)]="filter">
           <option value="todas">Todos</option>
-          <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
+          @for (t of types; track t) {
+            <option [value]="t.value">{{ t.label }}</option>
+          }
         </select>
       </div>
     </div>
     <div class="controls">
-      <button
-        *ngIf="(isLoggedIn$ | async)"
-        [ngClass]="showForm ? 'danger' : 'primary'"
-        (click)="toggleForm()"
-      >
-        {{ showForm ? 'Cancelar' : 'Crear evento' }}
-      </button>
-      <button *ngIf="!(isLoggedIn$ | async)" class="primary" (click)="showLogin = true">Iniciar sesión</button>
-      <button *ngIf="(isLoggedIn$ | async)" class="danger" (click)="logout()">Cerrar sesión</button>
+      @if ((isLoggedIn$ | async)) {
+        <button
+          [ngClass]="showForm ? 'danger' : 'primary'"
+          (click)="toggleForm()"
+          >
+          {{ showForm ? 'Cancelar' : 'Crear evento' }}
+        </button>
+      }
+      @if (!(isLoggedIn$ | async)) {
+        <button class="primary" (click)="showLogin = true">Iniciar sesión</button>
+      }
+      @if ((isLoggedIn$ | async)) {
+        <button class="danger" (click)="logout()">Cerrar sesión</button>
+      }
     </div>
   </div>
 
-  <form class="form" [formGroup]="form" *ngIf="showForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <label>Tipo</label>
-      <select formControlName="type">
-        <option *ngFor="let t of types" [value]="t.value">{{ t.label }}</option>
-      </select>
-    </div>
+  @if (showForm) {
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <label>Tipo</label>
+        <select formControlName="type">
+          @for (t of types; track t) {
+            <option [value]="t.value">{{ t.label }}</option>
+          }
+        </select>
+      </div>
+      <div class="row">
+        <label>Título</label>
+        <input type="text" formControlName="title" placeholder="Nombre del evento" />
+      </div>
+      <div class="row">
+        <label>Fecha</label>
+        <input type="date" formControlName="date" />
+      </div>
+      <div class="row">
+        <label>Descripción</label>
+        <textarea rows="3" formControlName="description" placeholder="Detalles, hora, lugar..."></textarea>
+      </div>
+      <div class="row">
+        <label>URL de imagen/cartel (opcional)</label>
+        <input type="url" formControlName="imageUrl" placeholder="https://... (cartel del evento)" />
+      </div>
+      <div class="row">
+        <label>URL externa (opcional)</label>
+        <input type="url" formControlName="url" placeholder="https://..." />
+      </div>
+      <div class="actions">
+        <button type="submit" class="primary" [disabled]="form.invalid">{{ editingId ? 'Actualizar' : 'Guardar' }}</button>
+        <button type="button" class="danger" (click)="toggleForm()">Cancelar</button>
+      </div>
+    </form>
+  }
 
-    <div class="row">
-      <label>Título</label>
-      <input type="text" formControlName="title" placeholder="Nombre del evento" />
-    </div>
-
-    <div class="row">
-      <label>Fecha</label>
-      <input type="date" formControlName="date" />
-    </div>
-
-    <div class="row">
-      <label>Descripción</label>
-      <textarea rows="3" formControlName="description" placeholder="Detalles, hora, lugar..."></textarea>
-    </div>
-
-    <div class="row">
-      <label>URL de imagen/cartel (opcional)</label>
-      <input type="url" formControlName="imageUrl" placeholder="https://... (cartel del evento)" />
-    </div>
-
-    <div class="row">
-      <label>URL externa (opcional)</label>
-      <input type="url" formControlName="url" placeholder="https://..." />
-    </div>
-
-    <div class="actions">
-      <button type="submit" class="primary" [disabled]="form.invalid">{{ editingId ? 'Actualizar' : 'Guardar' }}</button>
-      <button type="button" class="danger" (click)="toggleForm()">Cancelar</button>
-    </div>
-  </form>
-
-  <div class="list" *ngIf="(events$ | async) as events">
-    <p class="empty" *ngIf="events.length === 0">Aún no hay eventos.</p>
-
-    <!-- Vista de edición -->
-    <div class="card" *ngIf="editingEvent && showForm">
-      <div class="title-row">
-        <div class="title-content">
-          <div class="chip">{{ editingEvent.type | titlecase }}</div>
-          <h3 class="event-title">{{ editingEvent.title }}</h3>
+  @if ((events$ | async); as events) {
+    <div class="list">
+      @if (events.length === 0) {
+        <p class="empty">Aún no hay eventos.</p>
+      }
+      <!-- Vista de edición -->
+      @if (editingEvent && showForm) {
+        <div class="card">
+          <div class="title-row">
+            <div class="title-content">
+              <div class="chip">{{ editingEvent.type | titlecase }}</div>
+              <h3 class="event-title">{{ editingEvent.title }}</h3>
+            </div>
+            <span class="event-date-inline">{{ editingEvent.date | date: 'fullDate' }}</span>
+          </div>
         </div>
-        <span class="event-date-inline">{{ editingEvent.date | date: 'fullDate' }}</span>
-      </div>
-    </div>
-
-    <!-- Lista normal de eventos -->
-    <div
-      class="card"
-      *ngFor="let e of events; trackBy: trackById"
-      [style.display]="(!editingEvent && matchesFilter(e)) ? '' : 'none'"
-    >
-      <div class="title-row">
-        <div class="title-content">
-          <div class="chip">{{ e.type | titlecase }}</div>
-          <h3 class="event-title">{{ e.title }}</h3>
+      }
+      <!-- Lista normal de eventos -->
+      @for (e of events; track trackById($index, e)) {
+        <div
+          class="card"
+          [style.display]="(!editingEvent && matchesFilter(e)) ? '' : 'none'"
+          >
+          <div class="title-row">
+            <div class="title-content">
+              <div class="chip">{{ e.type | titlecase }}</div>
+              <h3 class="event-title">{{ e.title }}</h3>
+            </div>
+            <span class="event-date-inline">{{ e.date | date: 'fullDate' }}</span>
+          </div>
+          @if (e.imageUrl || e.description) {
+            <div class="content-row">
+              @if (e.imageUrl) {
+                <div class="poster">
+                  <img [src]="e.imageUrl" alt="Cartel del evento {{ e.title }}" />
+                </div>
+              }
+              @if (e.description) {
+                <div class="desc"><markdown>{{ e.description }}</markdown></div>
+              }
+            </div>
+          }
+          @if (e.url) {
+            <p class="link">
+              <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>
+            </p>
+          }
+          @if ((isLoggedIn$ | async)) {
+            <div class="card-actions">
+              <button class="primary" (click)="startEdit(e)">Editar</button>
+              <button class="danger" (click)="delete(e.id)">Eliminar</button>
+            </div>
+          }
         </div>
-        <span class="event-date-inline">{{ e.date | date: 'fullDate' }}</span>
-      </div>
-      <div class="content-row" *ngIf="e.imageUrl || e.description">
-        <div class="poster" *ngIf="e.imageUrl">
-          <img [src]="e.imageUrl" alt="Cartel del evento {{ e.title }}" />
-        </div>
-        <div class="desc" *ngIf="e.description"><markdown>{{ e.description }}</markdown></div>
-      </div>
-      <p class="link" *ngIf="e.url">
-        <a [href]="e.url" target="_blank" rel="noopener noreferrer">Más información</a>
-      </p>
-      <div class="card-actions" *ngIf="(isLoggedIn$ | async)">
-        <button class="primary" (click)="startEdit(e)">Editar</button>
-        <button class="danger" (click)="delete(e.id)">Eliminar</button>
-      </div>
+      }
     </div>
-  </div>
+  }
 </section>
 
 <!-- Modal de login -->
-<div class="modal-backdrop" *ngIf="showLogin">
-  <div class="modal">
-    <h3>Acceso requerido</h3>
-    <form [formGroup]="loginForm" (ngSubmit)="attemptLogin()">
-      <div class="row">
-        <label>Usuario</label>
-        <input type="text" formControlName="username" autocomplete="username" />
-      </div>
-      <div class="row">
-        <label>Contraseña</label>
-        <input type="password" formControlName="password" autocomplete="current-password" />
-      </div>
-      <div class="actions">
-        <button type="submit" class="primary">Entrar</button>
-        <button type="button" class="danger" (click)="showLogin = false">Cancelar</button>
-      </div>
-      <p class="error" *ngIf="loginError">{{ loginError }}</p>
-    </form>
+@if (showLogin) {
+  <div class="modal-backdrop">
+    <div class="modal">
+      <h3>Acceso requerido</h3>
+      <form [formGroup]="loginForm" (ngSubmit)="attemptLogin()">
+        <div class="row">
+          <label>Usuario</label>
+          <input type="text" formControlName="username" autocomplete="username" />
+        </div>
+        <div class="row">
+          <label>Contraseña</label>
+          <input type="password" formControlName="password" autocomplete="current-password" />
+        </div>
+        <div class="actions">
+          <button type="submit" class="primary">Entrar</button>
+          <button type="button" class="danger" (click)="showLogin = false">Cancelar</button>
+        </div>
+        @if (loginError) {
+          <p class="error">{{ loginError }}</p>
+        }
+      </form>
+    </div>
   </div>
-  
-</div>
+}
 
 

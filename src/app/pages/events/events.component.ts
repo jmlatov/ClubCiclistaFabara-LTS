@@ -9,11 +9,10 @@ import { Subscription } from 'rxjs';
 import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
-  selector: 'app-events',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, HeaderNavBlackComponent, MarkdownComponent],
-  templateUrl: './events.component.html',
-  styleUrl: './events.component.css',
+    selector: 'app-events',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, HeaderNavBlackComponent, MarkdownComponent],
+    templateUrl: './events.component.html',
+    styleUrl: './events.component.css'
 })
 export class EventsComponent implements OnInit, OnDestroy {
   showForm = false;

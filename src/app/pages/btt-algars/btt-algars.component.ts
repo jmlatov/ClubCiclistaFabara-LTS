@@ -7,15 +7,14 @@ import { MainComponent } from './main/main.component';
 import { SegmentsComponent } from './segments/segments.component';
 
 @Component({
-  selector: 'app-btt-algars',
-  standalone: true,
-  imports: [
-    HeaderNavBlackComponent,
-    MainComponent,
-    SegmentsComponent
-],
-  templateUrl: './btt-algars.component.html',
-  styleUrl: './btt-algars.component.css',
+    selector: 'app-btt-algars',
+    imports: [
+        HeaderNavBlackComponent,
+        MainComponent,
+        SegmentsComponent
+    ],
+    templateUrl: './btt-algars.component.html',
+    styleUrl: './btt-algars.component.css'
 })
 export class BttAlgarsComponent {
   selectedSection: string = 'main';

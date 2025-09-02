@@ -10,16 +10,15 @@ import { CountdownInscripcionComponent } from '../../shared/countdowns/countdown
 import { PrimaryBtnComponent } from '../../shared/ui/buttons/primary-btn/primary-btn.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    HeaderNavComponent,
-    BienvenidaComponent,
-    LocationComponent,
-    AboutComponent
-],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+    selector: 'app-home',
+    imports: [
+        HeaderNavComponent,
+        BienvenidaComponent,
+        LocationComponent,
+        AboutComponent
+    ],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent {
   constructor(private router: Router) {
