@@ -23,7 +23,6 @@
       "ES2022",
       "dom"
     ]
-    "strict":true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
