@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { PrimaryBtnComponent } from '../../../shared/ui/buttons/primary-btn/primary-btn.component';
+// import { PrimaryBtnComponent } from '../../../shared/ui/buttons/primary-btn/primary-btn.component';
 
 @Component({
     selector: 'app-lowsection',
-    imports: [PrimaryBtnComponent],
+    imports: [],
     templateUrl: './lowsection.component.html',
     styleUrl: './lowsection.component.css'
 })
