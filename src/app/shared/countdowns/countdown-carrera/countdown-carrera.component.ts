@@ -8,7 +8,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 
 export class CountdownCarreraComponent implements OnInit, OnDestroy {
-  countDownDate = new Date('April 27, 2025 09:00:00').getTime();
+  countDownDate = new Date('April 26, 2026 09:00:00').getTime();
   constructor() {}
   timer: any;
 
