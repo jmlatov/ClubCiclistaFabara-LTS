@@ -7,7 +7,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
     styleUrl: './countdown-inscripcion.component.css'
 })
 export class CountdownInscripcionComponent implements OnInit, OnDestroy {
-  countDownDate = new Date('April 24, 2025 23:59:59').getTime();
+  countDownDate = new Date('April 23, 2026 23:59:59').getTime();
   constructor() {}
   timer: any;
 
