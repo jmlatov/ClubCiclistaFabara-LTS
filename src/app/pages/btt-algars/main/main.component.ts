@@ -4,15 +4,17 @@ import { GridPatrocinadoresComponent } from '../grid-patrocinadores/grid-patroci
 import { LowsectionComponent } from '../lowsection/lowsection.component';
 import { CountdownCarreraComponent } from '../../../shared/countdowns/countdown-carrera/countdown-carrera.component';
 import { CountdownInscripcionComponent } from '../../../shared/countdowns/countdown-inscripcion/countdown-inscripcion.component';
+import { BannerCountdownComponent } from '../../../core/components/banner-countdown/banner-countdown.component';
 
 @Component({
     selector: 'app-main',
     imports: [
         LowsectionComponent,
         GridPatrocinadoresComponent,
-        // CountdownCarreraComponent,
-        // PrimaryBtnComponent,
-        // CountdownInscripcionComponent,
+        CountdownCarreraComponent,
+        PrimaryBtnComponent,
+        CountdownInscripcionComponent,
+        BannerCountdownComponent,
     ],
     templateUrl: './main.component.html',
     styleUrl: './main.component.css'

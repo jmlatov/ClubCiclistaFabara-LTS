@@ -1,7 +1,7 @@
 app-bienvenida {
   position: sticky;
   top: 0;
-  z-index: -1;
+  z-index: 0;
   animation: blur linear both;
   animation-timeline: scroll();
   animation-range: 10% 100%;

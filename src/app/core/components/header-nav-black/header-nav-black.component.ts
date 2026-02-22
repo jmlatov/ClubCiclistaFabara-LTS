@@ -6,7 +6,7 @@ import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.c
 
 @Component({
     selector: 'app-header-nav-black',
-    imports: [RouterModule, BannerBttComponent],
+    imports: [RouterModule, BannerBttComponent, BannerCountdownComponent],
     templateUrl: './header-nav-black.component.html',
     styleUrl: './header-nav-black.component.css'
 })

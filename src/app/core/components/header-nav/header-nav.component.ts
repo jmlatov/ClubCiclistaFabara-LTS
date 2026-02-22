@@ -2,10 +2,12 @@ import { Component, Output, EventEmitter, HostListener, ElementRef } from '@angu
 import { RouterModule, Router } from '@angular/router';
 import { BannerBttComponent } from '../banner-btt/banner-btt.component';
 import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
+import { CountdownCarreraComponent } from '../../../shared/countdowns/countdown-carrera/countdown-carrera.component';
+import { CountdownInscripcionComponent } from '../../../shared/countdowns/countdown-inscripcion/countdown-inscripcion.component';
 
 @Component({
     selector: 'app-header-nav',
-    imports: [RouterModule],
+    imports: [RouterModule, BannerBttComponent, BannerCountdownComponent, CountdownCarreraComponent, CountdownInscripcionComponent],
     templateUrl: './header-nav.component.html',
     styleUrls: ['./header-nav.component.css']
 })
