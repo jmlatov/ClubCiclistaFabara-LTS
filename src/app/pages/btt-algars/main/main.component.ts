@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { PrimaryBtnComponent } from '../../../shared/ui/buttons/primary-btn/primary-btn.component';
+// import { PrimaryBtnComponent } from '../../../shared/ui/buttons/primary-btn/primary-btn.component';
 import { GridPatrocinadoresComponent } from '../grid-patrocinadores/grid-patrocinadores.component';
 import { LowsectionComponent } from '../lowsection/lowsection.component';
-import { CountdownCarreraComponent } from '../../../shared/countdowns/countdown-carrera/countdown-carrera.component';
-import { CountdownInscripcionComponent } from '../../../shared/countdowns/countdown-inscripcion/countdown-inscripcion.component';
+// import { CountdownCarreraComponent } from '../../../shared/countdowns/countdown-carrera/countdown-carrera.component';
+// import { CountdownInscripcionComponent } from '../../../shared/countdowns/countdown-inscripcion/countdown-inscripcion.component';
 import { BannerCountdownComponent } from '../../../core/components/banner-countdown/banner-countdown.component';
 
 @Component({
@@ -11,9 +11,6 @@ import { BannerCountdownComponent } from '../../../core/components/banner-countd
     imports: [
         LowsectionComponent,
         GridPatrocinadoresComponent,
-        CountdownCarreraComponent,
-        PrimaryBtnComponent,
-        CountdownInscripcionComponent,
         BannerCountdownComponent,
     ],
     templateUrl: './main.component.html',
