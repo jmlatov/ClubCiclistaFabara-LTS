@@ -2,11 +2,11 @@ import { Component, Output, EventEmitter, Input, HostListener, ElementRef } from
 import { RouterModule, Router } from '@angular/router';
 
 import { BannerBttComponent } from '../banner-btt/banner-btt.component';
-import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
+// import { BannerCountdownComponent } from '../banner-countdown/banner-countdown.component';
 
 @Component({
     selector: 'app-header-nav-black',
-    imports: [RouterModule, BannerBttComponent, BannerCountdownComponent],
+    imports: [RouterModule, BannerBttComponent],
     templateUrl: './header-nav-black.component.html',
     styleUrl: './header-nav-black.component.css'
 })
