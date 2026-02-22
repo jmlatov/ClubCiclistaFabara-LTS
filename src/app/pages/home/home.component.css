@@ -7,6 +7,11 @@ app-bienvenida {
   animation-range: 10% 100%;
 }
 
+.home-section {
+  position: relative;
+  z-index: 1;
+}
+
 @keyframes blur {
   to {
     filter: blur(20px);
