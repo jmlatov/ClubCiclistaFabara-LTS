@@ -6,8 +6,8 @@ import { AboutComponent } from './about/about.component';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { HeaderNavComponent } from '../../core/components/header-nav/header-nav.component';
-import { CountdownInscripcionComponent } from '../../shared/countdowns/countdown-inscripcion/countdown-inscripcion.component';
-import { PrimaryBtnComponent } from '../../shared/ui/buttons/primary-btn/primary-btn.component';
+// import { CountdownInscripcionComponent } from '../../shared/countdowns/countdown-inscripcion/countdown-inscripcion.component';
+// import { PrimaryBtnComponent } from '../../shared/ui/buttons/primary-btn/primary-btn.component';
 
 @Component({
     selector: 'app-home',

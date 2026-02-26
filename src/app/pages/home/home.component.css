@@ -12,6 +12,13 @@ app-bienvenida {
   z-index: 1;
 }
 
+/* Fallback para navegadores sin soporte de scroll-linked animations (por ejemplo, Firefox) */
+@supports not (animation-timeline: scroll()) {
+  app-bienvenida {
+    animation: none;
+  }
+}
+
 @keyframes blur {
   to {
     filter: blur(20px);

@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
 .section {
+  /* Fallback base visible también en navegadores sin soporte de backdrop-filter */
+  background-color: #000;
   background-image: url("/assets/img/background.JPG");
-  backdrop-filter: blur(50px);
   background-repeat: no-repeat;
   background-size: cover;
+  backdrop-filter: blur(50px);
   width: auto;
   height: 100vh;
   z-index: 3;
@@ -45,7 +47,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgba(243, 243, 243, 0.1);
+  /* Fondo suficientemente sólido para funcionar sin blur */
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   border-radius: 30px;
   padding: 40px;
