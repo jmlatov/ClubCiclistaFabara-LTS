@@ -226,26 +226,22 @@ export class GpxMap implements AfterViewInit, OnInit {
         let iconPath = 'assets/icons/default.svg'; // por defecto
 
         if (featureType === 'start') {
-          iconPath = 'assets/icons/start.svg';
+          iconPath = 'assets/icons/salida.svg';
         } else if (featureType === 'water') {
           iconPath = 'assets/icons/water.svg';
         } else if (featureType === 'finish') {
-          iconPath = 'assets/icons/finish.svg';
+          iconPath = 'assets/icons/llegada.svg';
         } else if (featureType === 'peak') {
           iconPath = 'assets/icons/peak.svg';
         } else if (featureType === 'viewpoint') {
           iconPath = 'assets/icons/paisaje.svg';
-        } else if (featureType === 'start') {
-          iconPath = 'assets/icons/salida.svg';
-        }else if (featureType === 'salida') {
-          iconPath = 'assets/icons/llegada.svg';
         }
 
         return new Style({
           image: new Icon({
             src: iconPath,
             scale: 0.5,
-            anchor: [1, 1],
+            anchor: [0.5, 0.5],
           }),
         });
       }
