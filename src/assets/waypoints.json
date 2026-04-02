@@ -1,11 +1,11 @@
 [
   {
     "name": "Ayuntamiento de Fabara",
-    "type": "poi",
+    "type": "ayto",
     "lon": 0.16751680685893655,
     "lat": 41.178066466868884,
     "desc": "Ayuntamiento de Fabara en la Plaza de España del pueblo",
-    "image": "assets/images/mirador.jpg",
+    "image": "assets/images/ayto-favara.jpg",
     "info": "Edificio administrativo"
   },
   {
@@ -14,25 +14,34 @@
     "lon": 0.160370,
     "lat": 41.184642,
     "desc": "Monumento Romano del Siglo II",
-    "image": "assets/images/mirador.jpg",
+    "image": "assets/images/maussoleo-favara.jpg",
     "info": "Monumento funerario histórico del s.II donde reposaron los restos de Aemili Lupi"
   },
   {
     "name": "Iglesia San Juan Bautista",
-    "type": "historic",
+    "type": "eglisse",
     "lon": 0.16691349167115557,
     "lat": 41.17856400155952,
     "desc": "Iglesia Románico-Gótica del Siglo XII-XIII",
-    "image": "assets/images/mirador.jpg",
+    "image": "assets/images/missa-favara.jpg",
     "info": "Iglesia en honor de San Juan Bautista, construida sobre el antiguo castillo del pueblo"
   },
   {
     "name": "Roquizal del Rullo",
-    "type": "monument",
+    "type": "viewpoint",
     "lon": 0.207926,
     "lat": 41.155978,
     "desc": "Poblado íbero de la edad del Bronze",
-    "image": "assets/images/ceramicas-rullo.jpg",
+    "image": "assets/images/roquissal-del-rullo.jpg",
     "info": "Lugar a visitar con mucha historia. Pendiente de su recuperación actualmente."
+  },
+  {
+    "name": "Mirador del Rio Algars",
+    "type": "viewpoint",
+    "lon": 0.201830,
+    "lat": 41.136905,
+    "desc": "Mirador con vistas al río Algars",
+    "image": "assets/images/mirador-algars.jpg",
+    "info": "Lugar con vistas al río Algars y punto de interés paisajístco."
   }
 ]

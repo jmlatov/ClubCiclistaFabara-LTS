@@ -1,6 +1,11 @@
+<app-header-nav-black [showBanner]="false"></app-header-nav-black>
+
+<section class="gpx-map-section">
 <div class='track-selector-container'>
-  <p><label>
-      <strong>Selecciona Track: </strong>
+  Selecciona un track para visualizarlo en el mapa. Puedes controlar la reproducción del track y ver su perfil de elevación.
+
+  <label>
+      <strong> - Track: </strong>
 
       <select (change)="onTrackSelect($event)" class="track-selector">
         @for (track of gpxTracks; track track.path) {
@@ -9,35 +14,26 @@
         <option disabled>No tracks found</option>
         }
       </select>
+
     </label>
 
     <label>
-      <strong> Tipo de Mapa: </strong>
+      <strong> - Tipo de Mapa: </strong>
       <select (change)="onBaseLayerChange($event)" class='track-selector'>
         <option value="osm">Mapa de calles (OSM)</option>
         <option value="satellite">Satélite (Esri)</option>
       </select>
     </label>
-  </p>
+  
 </div>
 
 
 <div class="map-wrapper">
   <div id="map" class="map">
 
-    <!-- <div class="playback-controls">
-  <button (click)="togglePlayback()">
-    {{ isPlaying ? '⏸️ Pausar' : '▶️ Reproducir' }}
-  </button>
-
-  <button (click)="setPlaybackSpeed(10)" title="Velocidad 10x">⏩ Avance 10x</button>
-
-  <button (click)="resetPlayback()" title="Reiniciar">🔁 Reiniciar</button>
-</div> -->
-
     <div class="playback-controls">
-      <button (click)="togglePlayback()" [title]="isPlaying ? 'Pausar' : 'Reproducir'">
-        {{ isPlaying ? '⏸️ Pausa' : '▶️ Play' }}
+      <button (click)="togglePlayback()" [title]="isPlaying ? 'Stop' : 'Reproducir'">
+        {{ isPlaying ? '⏸️ Stop' : '▶️ Play' }}
       </button>
 
       <select (change)="onSpeedChange($event)" [value]="playbackSpeed">
@@ -46,10 +42,9 @@
         <option [value]="10" [selected]="playbackSpeed === 10">Velocidad x10</option>
         <option [value]="20" [selected]="playbackSpeed === 20">Velocidad x20</option>
       </select>
+
       <button (click)="resetPlayback()" title="Reiniciar">🔁 Reiniciar</button>
     </div>
-
-
 
     <!-- Leyenda colapsable -->
     <div #legendRef class="ol-legend ol-unselectable ol-control">
@@ -80,21 +75,7 @@
 
       <div id="legend-box" class="ol-attribution-bottom-right"></div>
 
-
-
-
-
     </div>
-
-    <!-- Panel de datos dinámicos -->
-    <!-- <div class="info-panel ol-unselectable ol-control">
-      <h4>Información en el punto del cursor</h4>
-      <div>Elevación: {{ info.elevation }} m</div>
-      <div>Pendiente: {{ info.slope }} %</div>
-      <div>Distancia total: {{ info.totalDistance }} km</div>
-      <div>Recorrido: {{ info.travelled }} km</div>
-      <div>Restante: {{ info.remaining }} km</div>
-    </div> -->
 
     <!-- Popup del mapa -->
     <div id="popup" class="ol-popup">
@@ -105,10 +86,6 @@
     <div id="marker-info" class="marker-info-box">
       <div id="marker-info-content"></div>
     </div>
-
-
-
-
   </div>
 
       <!-- 👇 Gráfico de perfil de elevación debajo del mapa -->
@@ -116,3 +93,4 @@
       <canvas #elevationCanvas id="elevation-chart"></canvas>
     </div>
 </div>
+</section>

@@ -72,7 +72,7 @@ export function drawElevationChart(
               const idx = context.dataIndex;
               const elev = context.parsed.y;
               const slope = slopes[idx] ?? 0;
-              return `Elevación: ${elev.toFixed(1)} m, Pendiente: ${slope.toFixed(1)}%`;
+              return `Elevación: ${(elev ?? 0).toFixed(1)} m, Pendiente: ${slope.toFixed(1)}%`;
             }
           }
         }

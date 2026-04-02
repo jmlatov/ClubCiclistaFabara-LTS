@@ -39,8 +39,13 @@ export class HeaderNavBlackComponent {
   }
 
   selectEventos() {
-    this.router.navigate(['eventos']);
-    this.selected.emit('events');
+      this.router.navigate(['eventos']);
+      this.selected.emit('events');
+  }
+
+  selectGpxTracks() {
+      this.router.navigate(['gpx-tracks']);
+      this.selected.emit('gpx-tracks');
   }
 
   showSidebar() {

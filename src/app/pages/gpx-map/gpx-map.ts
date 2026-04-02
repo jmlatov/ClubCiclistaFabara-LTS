@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import OlMap from 'ol/Map';
 import View from 'ol/View';
@@ -20,6 +21,7 @@ import Chart from 'chart.js/auto';
 import { drawElevationChart, updateChartHighlight } from '../../utils/elevation-chart';
 import { GpxPlayer } from '../../utils/gpx-play';
 import { ResetViewControl, evaluateResetVisibility } from '../../utils/reset-view-control';
+import { HeaderNavBlackComponent } from "../../core/components/header-nav-black/header-nav-black.component";
 
 @Component({
   selector: 'app-gpx-map',
@@ -28,7 +30,8 @@ import { ResetViewControl, evaluateResetVisibility } from '../../utils/reset-vie
   standalone: true,
   imports: [
     CommonModule,
-  ],
+    HeaderNavBlackComponent
+],
 })
 
 export class GpxMap implements AfterViewInit, OnInit {
@@ -37,6 +40,7 @@ export class GpxMap implements AfterViewInit, OnInit {
   private gpxPlayer: GpxPlayer | null = null;
 
   private http = inject(HttpClient);
+  private platformId = inject(PLATFORM_ID);
 
   gpxTracks: { name: string; path: string }[] = [];
 
@@ -174,8 +178,10 @@ export class GpxMap implements AfterViewInit, OnInit {
       let iconPath = 'assets/icons/default.svg';
 
       if (type === 'monument') iconPath = 'assets/icons/monument.svg';
-      else if (type === 'viewpoint') iconPath = 'assets/icons/camera.svg';
+      else if (type === 'viewpoint') iconPath = 'assets/icons/paisaje.svg';
       else if (type === 'water') iconPath = 'assets/icons/water.svg';
+      else if (type === 'eglisse') iconPath = 'assets/icons/eglisse.svg';
+      else if (type === 'ayto') iconPath = 'assets/icons/ayto.svg';
 
       return new Style({
         image: new Icon({
@@ -225,6 +231,8 @@ export class GpxMap implements AfterViewInit, OnInit {
           iconPath = 'assets/icons/finish.svg';
         } else if (featureType === 'peak') {
           iconPath = 'assets/icons/peak.svg';
+        } else if (featureType === 'viewpoint') {
+          iconPath = 'assets/icons/paisaje.svg';
         }
 
         return new Style({
@@ -240,6 +248,10 @@ export class GpxMap implements AfterViewInit, OnInit {
   });
 
   ngAfterViewInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const popupContainer = document.getElementById('popup')!;
     const popupContent = document.getElementById('popup-content')!;
     const popupCloser = document.getElementById('popup-closer')!;
@@ -495,6 +507,10 @@ export class GpxMap implements AfterViewInit, OnInit {
     fetch(path)
       .then((res) => res.text())
       .then((xmlText) => {
+        if (!isPlatformBrowser(this.platformId)) {
+          console.warn('Cannot parse XML on server-side');
+          return;
+        }
         const parser = new DOMParser();
         const xml = parser.parseFromString(xmlText, 'application/xml');
 
@@ -505,7 +521,7 @@ export class GpxMap implements AfterViewInit, OnInit {
           const lon = parseFloat(wpt.getAttribute('lon')!);
           const key = `${lat.toFixed(6)},${lon.toFixed(6)}`;
           const name = wpt.getElementsByTagName('name')[0]?.textContent ?? '';
-          const type = wpt.getElementsByTagName('type')[0]?.textContent ?? '';
+          const type = wpt.getElementsByTagName('type')[0]?.textContent?.trim() ?? '';
           const desc = wpt.getElementsByTagName('desc')[0]?.textContent ?? '';
           const image = wpt.getElementsByTagNameNS('*', 'image')[0]?.textContent ?? '';
           const info = wpt.getElementsByTagNameNS('*', 'info')[0]?.textContent ?? '';

@@ -43,6 +43,11 @@ export class HeaderNavComponent {
     this.selected.emit('events');
   }
 
+    selectGpxTracks() {
+      this.router.navigate(['gpx-tracks']);
+      this.selected.emit('gpx-tracks');
+  }
+
   showSidebar() {
     const sidebar: HTMLElement | null = document.getElementById('sidebar');
     if (sidebar) {
