@@ -182,7 +182,9 @@ export class GpxMap implements AfterViewInit, OnInit {
       else if (type === 'water') iconPath = 'assets/icons/water.svg';
       else if (type === 'eglisse') iconPath = 'assets/icons/eglisse.svg';
       else if (type === 'ayto') iconPath = 'assets/icons/ayto.svg';
-
+      else if (type === 'start') iconPath = 'assets/icons/salida.svg';
+      else if (type === 'finish') iconPath = 'assets/icons/llegada.svg';
+      
       return new Style({
         image: new Icon({
           src: iconPath,
