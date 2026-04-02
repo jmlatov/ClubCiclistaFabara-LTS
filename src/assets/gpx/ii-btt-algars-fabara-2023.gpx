@@ -11,6 +11,7 @@
     <ele>245.4</ele>
     <time>2023-03-26T06:53:04Z</time>
     <name>Salida</name>
+    <type>start</type>
     <cmt></cmt>
     <desc></desc>
   </wpt>
@@ -68,6 +69,7 @@
     <ele>243.7</ele>
     <time>2023-03-26T10:25:17Z</time>
     <name>Meta</name>
+    <type>finish</type>
     <cmt></cmt>
     <desc></desc>
   </wpt>

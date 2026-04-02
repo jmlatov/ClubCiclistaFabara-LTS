@@ -235,6 +235,10 @@ export class GpxMap implements AfterViewInit, OnInit {
           iconPath = 'assets/icons/peak.svg';
         } else if (featureType === 'viewpoint') {
           iconPath = 'assets/icons/paisaje.svg';
+        } else if (featureType === 'start') {
+          iconPath = 'assets/icons/salida.svg';
+        }else if (featureType === 'salida') {
+          iconPath = 'assets/icons/llegada.svg';
         }
 
         return new Style({
