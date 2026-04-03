@@ -26,28 +26,8 @@
 /* ========================
    2. CONTROLES DE MAPA OL
    ======================== */
-
-.ol-full-screen-custom,
-.ol-zoom-custom {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 5px;
-  border-radius: 4px;
-}
-
-.ol-atribution-bottom-right {
-  position-area: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 1000;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 12px;
-}
+/* Los estilos de controles OL están en styles.css (CSS global),
+   ya que Angular no encapsula los elementos que inyecta OpenLayers. */
 
 
 /* ===========================
@@ -314,26 +294,7 @@
 /* ========================
    9. BOTÓN DE RESETEAR VISTA
    ======================== */
-
-.reset-view-control {
-  top: 120px;
-  left: 0.5em;
-  position: absolute;
-}
-
-.reset-view-control button {
-  background-color: white;
-  border: none;
-  padding: 4px 8px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-}
-
-.reset-view-control button:hover {
-  background-color: #eee;
-}
+/* Estilos en styles.css (CSS global). */
 
 
 /* ========================
@@ -358,5 +319,3 @@
   font-size: 12px;
   margin-top: 5px;
 } */
-
-

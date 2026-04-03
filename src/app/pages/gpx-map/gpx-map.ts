@@ -31,7 +31,7 @@ import { HeaderNavBlackComponent } from "../../core/components/header-nav-black/
   imports: [
     CommonModule,
     HeaderNavBlackComponent
-],
+  ],
 })
 
 export class GpxMap implements AfterViewInit, OnInit {
@@ -177,14 +177,18 @@ export class GpxMap implements AfterViewInit, OnInit {
       const type = feature.get('type');
       let iconPath = 'assets/icons/default.svg';
 
-      if (type === 'monument') iconPath = 'assets/icons/monument.svg';
-      else if (type === 'viewpoint') iconPath = 'assets/icons/paisaje.svg';
-      else if (type === 'water') iconPath = 'assets/icons/water.svg';
-      else if (type === 'eglisse') iconPath = 'assets/icons/eglisse.svg';
-      else if (type === 'ayto') iconPath = 'assets/icons/ayto.svg';
-      else if (type === 'start') iconPath = 'assets/icons/salida.svg';
-      else if (type === 'finish') iconPath = 'assets/icons/llegada.svg';
-      
+      const iconMap: Record<string, string> = {
+        monument: 'assets/icons/monument.svg',
+        viewpoint: 'assets/icons/paisaje.svg',
+        water: 'assets/icons/water.svg',
+        eglisse: 'assets/icons/eglisse.svg',
+        ayto: 'assets/icons/ayto.svg',
+        start: 'assets/icons/salida.svg',
+        finish: 'assets/icons/llegada.svg',
+      };
+
+      iconPath = iconMap[type] ?? iconPath;
+
       return new Style({
         image: new Icon({
           src: iconPath,
@@ -225,17 +229,15 @@ export class GpxMap implements AfterViewInit, OnInit {
         const featureType = feature.get('type'); // <<==== este es el tipo que cargaste del GPX
         let iconPath = 'assets/icons/default.svg'; // por defecto
 
-        if (featureType === 'start') {
-          iconPath = 'assets/icons/salida.svg';
-        } else if (featureType === 'water') {
-          iconPath = 'assets/icons/water.svg';
-        } else if (featureType === 'finish') {
-          iconPath = 'assets/icons/llegada.svg';
-        } else if (featureType === 'peak') {
-          iconPath = 'assets/icons/peak.svg';
-        } else if (featureType === 'viewpoint') {
-          iconPath = 'assets/icons/paisaje.svg';
-        }
+        const iconMap: Record<string, string> = {
+          start: 'assets/icons/salida.svg',
+          water: 'assets/icons/water.svg',
+          finish: 'assets/icons/llegada.svg',
+          peak: 'assets/icons/peak.svg',
+          viewpoint: 'assets/icons/paisaje.svg',
+        };
+
+        iconPath = iconMap[featureType] ?? iconPath;
 
         return new Style({
           image: new Icon({
@@ -301,7 +303,8 @@ export class GpxMap implements AfterViewInit, OnInit {
 
     this.map.addControl(new Zoom({
       zoomInLabel: 'Acercar +',
-      zoomOutLabel: 'Alejar -'
+      zoomOutLabel: 'Alejar -',
+      className: 'ol-zoom-custom'
     }));
 
     this.map.addControl(new FullScreen({

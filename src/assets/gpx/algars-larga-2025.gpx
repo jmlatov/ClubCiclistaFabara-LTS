@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1"
+  xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
   <metadata>
     <name>Wikiloc - BTT Algars 2025 (Ruta Larga) - Fabara</name>
     <author>
@@ -8,11 +10,28 @@
         <text>jmlatov on Wikiloc</text>
       </link>
     </author>
-    <link href="https://www.wikiloc.com/mountain-biking-trails/btt-algars-2025-ruta-larga-fabara-202455718">
+    <link
+      href="https://www.wikiloc.com/mountain-biking-trails/btt-algars-2025-ruta-larga-fabara-202455718">
       <text>BTT Algars 2025 (Ruta Larga) - Fabara on Wikiloc</text>
     </link>
     <time>2025-02-17T00:56:13.604Z</time>
   </metadata>
+  <wpt lat="41.174784" lon="0.169515">
+    <ele>243.7</ele>
+    <time>2023-03-26T10:25:17Z</time>
+    <name>Meta</name>
+    <cmt></cmt>
+    <desc></desc>
+    <type>finish</type>
+  </wpt>
+  <wpt lat="41.175733" lon="0.168549">
+    <ele>246.8</ele>
+    <time>2023-03-26T09:33:11Z</time>
+    <name>Salida</name>
+    <cmt></cmt>
+    <desc></desc>
+    <type>start</type>
+  </wpt>
   <trk>
     <name>BTT Algars 2025 (Ruta Larga) - Fabara</name>
     <cmt>Track de la ruta completa de la prueba BTT Algars. 
@@ -38279,4 +38298,5 @@ El segundo sector, que empezará con la primera llegada al pueblo y seguirá con
         <time>2025-02-17T00:56:13.604Z</time>
       </trkpt>
     </trkseg>
-  </trk></gpx>
+  </trk>
+</gpx>

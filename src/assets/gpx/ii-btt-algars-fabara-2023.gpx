@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1"
+  xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
   <metadata>
     <name>Wikiloc - II BTT Algars (Fabara, 2023)</name>
     <link href="https://www.wikiloc.com/mountain-biking-trails/ii-btt-algars-fabara-2023-129461638">
@@ -11,9 +13,9 @@
     <ele>245.4</ele>
     <time>2023-03-26T06:53:04Z</time>
     <name>Salida</name>
-    <type>start</type>
     <cmt></cmt>
     <desc></desc>
+    <type>start</type>
   </wpt>
   <wpt lat="41.155844" lon="0.229640">
     <ele>224.1</ele>
@@ -61,7 +63,6 @@
     <ele>231.8</ele>
     <time>2023-03-26T09:33:11Z</time>
     <name>Flora</name>
-    <type>viewpoint</type>
     <cmt></cmt>
     <desc></desc>
   </wpt>
@@ -69,9 +70,10 @@
     <ele>243.7</ele>
     <time>2023-03-26T10:25:17Z</time>
     <name>Meta</name>
-    <type>finish</type>
     <cmt></cmt>
     <desc></desc>
+    <type>finish</type>
+
   </wpt>
   <trk>
     <name>II BTT Algars (Fabara, 2023)</name>
@@ -1967,4 +1969,5 @@
         <time>2023-03-26T12:25:26Z</time>
       </trkpt>
     </trkseg>
-  </trk></gpx>
+  </trk>
+</gpx>
