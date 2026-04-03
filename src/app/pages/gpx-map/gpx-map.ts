@@ -149,7 +149,8 @@ export class GpxMap implements AfterViewInit, OnInit {
 
   private fullLineString: LineString | null = null;
   private fullCoords: [number, number, number][] = [];
-  legendExpanded = true;
+  legendExpanded = false;
+  trackInfoExpanded = false;
 
   // Añadido para manejar el cambio de capa base
   // Declaro una variable para guardar el extent inicial
@@ -168,6 +169,12 @@ export class GpxMap implements AfterViewInit, OnInit {
 
   toggleLegend(): void {
     this.legendExpanded = !this.legendExpanded;
+    if (this.legendExpanded) this.trackInfoExpanded = false;
+  }
+
+  toggleTrackInfo(): void {
+    this.trackInfoExpanded = !this.trackInfoExpanded;
+    if (this.trackInfoExpanded) this.legendExpanded = false;
   }
 
   // Creo la capa separada para los waypoints fijos

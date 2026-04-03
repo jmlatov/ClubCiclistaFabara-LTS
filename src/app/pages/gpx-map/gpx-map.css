@@ -188,16 +188,48 @@
 }
 
 .ol-legend.ol-control {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  z-index: 1500;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
   font-size: 13px;
-  max-width: 320px;
+  width: 100%;
   padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Wrapper que posiciona y apila ambas cajas en la esquina inferior derecha */
+.info-panels-wrapper {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 200px;
+  transition: width 0.25s ease;
+}
+
+.info-panels-wrapper.expanded {
+  width: 450px;
+}
+
+/* La track-info-box hereda el ancho del wrapper, sin posición propia */
+.track-info-box.ol-legend.ol-control {
+  bottom: auto;
+  top: auto;
+  right: auto;
+  position: static;
+}
+
+.track-info-list {
+  margin: 4px 0 2px 0;
+  padding-left: 18px;
+}
+
+.track-info-list li {
+  margin: 3px 0;
+  font-size: 12px;
 }
 
 .legend-toggle {

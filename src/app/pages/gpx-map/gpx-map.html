@@ -46,34 +46,56 @@
       <button (click)="resetPlayback()" title="Reiniciar">🔁 Reiniciar</button>
     </div>
 
-    <!-- Leyenda colapsable -->
-    <div #legendRef class="ol-legend ol-unselectable ol-control">
-      <button class="legend-toggle" (click)="toggleLegend()" [attr.aria-expanded]="legendExpanded">
-        {{ legendExpanded ? '🔽 Leyenda' : '▶️ Leyenda' }}
-      </button>
-      <div class="legend-content" [class.collapsed]="!legendExpanded">
-        <h4>Pendiente del Track</h4>
-        <p>La pendiente se calcula como la diferencia de altitud entre el inicio y el final del tramo, expresada como un
-          porcentaje.</p>
-        <div class="legend-colors">
-          <span class="color-decrease"></span>
-          <span class="color-neutral"></span>
-          <span class="color-increase"></span>
-        </div>
-        <div class="legend-labels">
-          <span>Descenso</span>
-          <span>Plano</span>
-          <span>Ascenso</span>
-        </div>
-        <div class="legend-gradient"></div>
-        <div class="legend-labels">
-          <span>-20%</span>
-          <span>0%</span>
-          <span>+20%</span>
+    <!-- Contenedor de cajas inferiores derecha -->
+    <div class="info-panels-wrapper" [class.expanded]="legendExpanded || trackInfoExpanded">
+
+      <!-- Caja de información del track -->
+      <div class="ol-legend ol-unselectable ol-control track-info-box">
+        <button class="legend-toggle" (click)="toggleTrackInfo()" [attr.aria-expanded]="trackInfoExpanded">
+          {{ trackInfoExpanded ? '🔽 Información del Track' : '▶️ Información del Track' }}
+        </button>
+        <div class="legend-content" [class.collapsed]="!trackInfoExpanded">
+          <ul class="track-info-list">
+            <li>Senda del Rio</li>
+            <li>Senda del Mirador</li>
+            <li>Senda Mas del Colomí</li>
+            <li>Senda Radere el Calvari</li>
+            <li>Senda Vall de la María</li>
+            <li>Senda de la Cooperativa</li>
+          </ul>
         </div>
       </div>
 
-      <div id="legend-box" class="ol-attribution-bottom-right"></div>
+      <!-- Leyenda colapsable -->
+      <div #legendRef class="ol-legend ol-unselectable ol-control">
+        <button class="legend-toggle" (click)="toggleLegend()" [attr.aria-expanded]="legendExpanded">
+          {{ legendExpanded ? '🔽 Leyenda' : '▶️ Leyenda' }}
+        </button>
+        <div class="legend-content" [class.collapsed]="!legendExpanded">
+          <h4>Pendiente del Track</h4>
+          <p>La pendiente se calcula como la diferencia de altitud entre el inicio y el final del tramo, expresada como un
+            porcentaje.</p>
+          <div class="legend-colors">
+            <span class="color-decrease"></span>
+            <span class="color-neutral"></span>
+            <span class="color-increase"></span>
+          </div>
+          <div class="legend-labels">
+            <span>Descenso</span>
+            <span>Plano</span>
+            <span>Ascenso</span>
+          </div>
+          <div class="legend-gradient"></div>
+          <div class="legend-labels">
+            <span>-20%</span>
+            <span>0%</span>
+            <span>+20%</span>
+          </div>
+        </div>
+
+        <div id="legend-box" class="ol-attribution-bottom-right"></div>
+
+      </div>
 
     </div>
 
