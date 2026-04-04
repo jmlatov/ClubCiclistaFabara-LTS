@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" creator="StravaGPX" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.garmin.com/xmlschemas/PowerExtension/v1 http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpxpx="http://www.garmin.com/xmlschemas/PowerExtension/v1" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2">
+<gpx 
+  creator="StravaGPX" version="1.1" xmlns="http://www.topografix.com/GPX/1/1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd
+                      http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd
+                      http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
+                      http://www.garmin.com/xmlschemas/PowerExtension/v1 http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd
+                      http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd"
+  xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+  xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+  xmlns:gpxpx="http://www.garmin.com/xmlschemas/PowerExtension/v1"
+  xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2">
   <metadata>
     <name>algars-corta-2025</name>
     <author>
       <name>gpx.studio</name>
-      <link href="https://gpx.studio"/>
+      <link href="https://gpx.studio" />
     </author>
   </metadata>
   <wpt lat="41.174784" lon="0.169515">
@@ -18,6 +29,18 @@
     <time>2023-03-26T09:33:11.000Z</time>
     <name>Salida</name>
     <type>start</type>
+  </wpt>
+  <wpt lat="41.144362" lon="0.202063">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda Más del Colomí</name>
+    <sym>Bike Trail</sym>
+    <type>senderveryeasy</type>
+  </wpt>
+  <wpt lat="41.135364" lon="0.205981">
+    <ele>206.65488756089525</ele>
+    <name>Inicio Senda Más del Colomí</name>
+    <sym>Bike Trail</sym>
+    <type>senderveryeasy</type>
   </wpt>
   <trk>
     <name>Bicicleta de montaña matutina</name>
@@ -12398,8 +12421,8 @@
       <trkpt lat="41.13552906058649" lon="0.24915114077541034">
         <ele>315.5727856729949</ele>
       </trkpt>
-      <trkpt lat="41.13588625167379" lon="0.24878847054355932">
-        <ele>308.02862260147504</ele>
+      <trkpt lat="41.135704185799085" lon="0.24876750979962026">
+        <ele>312.1441073151284</ele>
       </trkpt>
       <trkpt lat="41.136006139969595" lon="0.24866674321725668">
         <ele>306.72286516259936</ele>
@@ -12407,11 +12430,29 @@
       <trkpt lat="41.136006139969595" lon="0.24866674321725668">
         <ele>306.72286516259936</ele>
       </trkpt>
-      <trkpt lat="41.13634308342248" lon="0.24827138223939674">
-        <ele>302.6716810478092</ele>
+      <trkpt lat="41.136006139969595" lon="0.24866674321725668">
+        <ele>306.72286516259936</ele>
       </trkpt>
-      <trkpt lat="41.13668002687537" lon="0.24787602126153677">
-        <ele>296.2585456754131</ele>
+      <trkpt lat="41.13631192945277" lon="0.24887276227192956">
+        <ele>304.28656597109915</ele>
+      </trkpt>
+      <trkpt lat="41.13631192945277" lon="0.24887276227192956">
+        <ele>304.28656597109915</ele>
+      </trkpt>
+      <trkpt lat="41.136556346508314" lon="0.2486885704445001">
+        <ele>303.4970198835952</ele>
+      </trkpt>
+      <trkpt lat="41.136556346508314" lon="0.2486885704445001">
+        <ele>303.4970198835952</ele>
+      </trkpt>
+      <trkpt lat="41.13688663838019" lon="0.24833772886930205">
+        <ele>301.37228166028206</ele>
+      </trkpt>
+      <trkpt lat="41.13688663838019" lon="0.24833772886930205">
+        <ele>301.37228166028206</ele>
+      </trkpt>
+      <trkpt lat="41.13702536047052" lon="0.24795180313668652">
+        <ele>300.1512343932857</ele>
       </trkpt>
       <trkpt lat="41.136971513519995" lon="0.24753399815983812">
         <ele>297.36091828589264</ele>
@@ -12419,20 +12460,68 @@
       <trkpt lat="41.136971513519995" lon="0.24753399815983812">
         <ele>297.36091828589264</ele>
       </trkpt>
-      <trkpt lat="41.136953175059865" lon="0.24693744730634737">
-        <ele>292.55016271563653</ele>
+      <trkpt lat="41.136971513519995" lon="0.24753399815983812">
+        <ele>297.36091828589264</ele>
       </trkpt>
-      <trkpt lat="41.13693483659973" lon="0.2463408964528566">
-        <ele>289.16135047879106</ele>
+      <trkpt lat="41.13690273810363" lon="0.247266946302517">
+        <ele>294.3197095699611</ele>
       </trkpt>
-      <trkpt lat="41.1369164981396" lon="0.24574434559936584">
-        <ele>288.9949647665964</ele>
+      <trkpt lat="41.13690273810363" lon="0.247266946302517">
+        <ele>294.3197095699611</ele>
       </trkpt>
-      <trkpt lat="41.13689815967947" lon="0.24514779474587509">
-        <ele>286.7587652389302</ele>
+      <trkpt lat="41.1369877725306" lon="0.24689966281502507">
+        <ele>292.7253759240781</ele>
       </trkpt>
-      <trkpt lat="41.13687982121933" lon="0.2445512438923843">
-        <ele>283.7836760264384</ele>
+      <trkpt lat="41.1369877725306" lon="0.24689966281502507">
+        <ele>292.7253759240781</ele>
+      </trkpt>
+      <trkpt lat="41.13715198437595" lon="0.24660087152707888">
+        <ele>291.17208222480514</ele>
+      </trkpt>
+      <trkpt lat="41.1374470779937" lon="0.2462671929906719">
+        <ele>291.4219132894334</ele>
+      </trkpt>
+      <trkpt lat="41.1374470779937" lon="0.2462671929906719">
+        <ele>291.4219132894334</ele>
+      </trkpt>
+      <trkpt lat="41.1374470779937" lon="0.2462671929906719">
+        <ele>291.4219132894334</ele>
+      </trkpt>
+      <trkpt lat="41.137288827267014" lon="0.24572064854623932">
+        <ele>286.8405056065415</ele>
+      </trkpt>
+      <trkpt lat="41.137288827267014" lon="0.24572064854623932">
+        <ele>286.8405056065415</ele>
+      </trkpt>
+      <trkpt lat="41.13744999741692" lon="0.24532898969641792">
+        <ele>286.27490828690736</ele>
+      </trkpt>
+      <trkpt lat="41.13744999741692" lon="0.24532898969641792">
+        <ele>286.27490828690736</ele>
+      </trkpt>
+      <trkpt lat="41.137568814205565" lon="0.2448031698253601">
+        <ele>282.97860194003374</ele>
+      </trkpt>
+      <trkpt lat="41.137568814205565" lon="0.2448031698253601">
+        <ele>282.97860194003374</ele>
+      </trkpt>
+      <trkpt lat="41.137408356554204" lon="0.24473632950932256">
+        <ele>279.9067553720671</ele>
+      </trkpt>
+      <trkpt lat="41.137408356554204" lon="0.24473632950932256">
+        <ele>279.9067553720671</ele>
+      </trkpt>
+      <trkpt lat="41.13724475227025" lon="0.24478228222659482">
+        <ele>280.22357642772096</ele>
+      </trkpt>
+      <trkpt lat="41.13724475227025" lon="0.24478228222659482">
+        <ele>280.22357642772096</ele>
+      </trkpt>
+      <trkpt lat="41.13712204879002" lon="0.2447029093513322">
+        <ele>280.7830109257254</ele>
+      </trkpt>
+      <trkpt lat="41.13687329186155" lon="0.244338843618209">
+        <ele>284.4792528477499</ele>
       </trkpt>
       <trkpt lat="41.13687329186155" lon="0.244338843618209">
         <ele>284.4792528477499</ele>

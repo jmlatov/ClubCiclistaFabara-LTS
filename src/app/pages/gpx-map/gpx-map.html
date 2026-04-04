@@ -1,10 +1,11 @@
 <app-header-nav-black [showBanner]="false"></app-header-nav-black>
 
 <section class="gpx-map-section">
-<div class='track-selector-container'>
-  Selecciona un track para visualizarlo en el mapa. Puedes controlar la reproducción del track y ver su perfil de elevación.
+  <div class='track-selector-container'>
+    Selecciona un track para visualizarlo en el mapa. Puedes controlar la reproducción del track y ver su perfil de
+    elevación.
 
-  <label>
+    <label>
       <strong> - Track: </strong>
 
       <select (change)="onTrackSelect($event)" class="track-selector">
@@ -24,95 +25,99 @@
         <option value="satellite">Satélite (Esri)</option>
       </select>
     </label>
-  
-</div>
 
-
-<div class="map-wrapper">
-  <div id="map" class="map">
-
-    <div class="playback-controls">
-      <button (click)="togglePlayback()" [title]="isPlaying ? 'Stop' : 'Reproducir'">
-        {{ isPlaying ? '⏸️ Stop' : '▶️ Play' }}
-      </button>
-
-      <select (change)="onSpeedChange($event)" [value]="playbackSpeed">
-        <option [value]="1" [selected]="playbackSpeed === 1">Velocidad x1</option>
-        <option [value]="5" [selected]="playbackSpeed === 5">Velocidad x5</option>
-        <option [value]="10" [selected]="playbackSpeed === 10">Velocidad x10</option>
-        <option [value]="20" [selected]="playbackSpeed === 20">Velocidad x20</option>
-      </select>
-
-      <button (click)="resetPlayback()" title="Reiniciar">🔁 Reiniciar</button>
-    </div>
-
-    <!-- Contenedor de cajas inferiores derecha -->
-    <div class="info-panels-wrapper" [class.expanded]="legendExpanded || trackInfoExpanded">
-
-      <!-- Caja de información del track -->
-      <div class="ol-legend ol-unselectable ol-control track-info-box">
-        <button class="legend-toggle" (click)="toggleTrackInfo()" [attr.aria-expanded]="trackInfoExpanded">
-          {{ trackInfoExpanded ? '🔽 Información del Track' : '▶️ Información del Track' }}
-        </button>
-        <div class="legend-content" [class.collapsed]="!trackInfoExpanded">
-          <ul class="track-info-list">
-            <li>Senda del Rio</li>
-            <li>Senda del Mirador</li>
-            <li>Senda Mas del Colomí</li>
-            <li>Senda Radere el Calvari</li>
-            <li>Senda Vall de la María</li>
-            <li>Senda de la Cooperativa</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Leyenda colapsable -->
-      <div #legendRef class="ol-legend ol-unselectable ol-control">
-        <button class="legend-toggle" (click)="toggleLegend()" [attr.aria-expanded]="legendExpanded">
-          {{ legendExpanded ? '🔽 Leyenda' : '▶️ Leyenda' }}
-        </button>
-        <div class="legend-content" [class.collapsed]="!legendExpanded">
-          <h4>Pendiente del Track</h4>
-          <p>La pendiente se calcula como la diferencia de altitud entre el inicio y el final del tramo, expresada como un
-            porcentaje.</p>
-          <div class="legend-colors">
-            <span class="color-decrease"></span>
-            <span class="color-neutral"></span>
-            <span class="color-increase"></span>
-          </div>
-          <div class="legend-labels">
-            <span>Descenso</span>
-            <span>Plano</span>
-            <span>Ascenso</span>
-          </div>
-          <div class="legend-gradient"></div>
-          <div class="legend-labels">
-            <span>-20%</span>
-            <span>0%</span>
-            <span>+20%</span>
-          </div>
-        </div>
-
-        <div id="legend-box" class="ol-attribution-bottom-right"></div>
-
-      </div>
-
-    </div>
-
-    <!-- Popup del mapa -->
-    <div id="popup" class="ol-popup">
-      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-      <div id="popup-content"></div>
-    </div>
-
-    <div id="marker-info" class="marker-info-box">
-      <div id="marker-info-content"></div>
-    </div>
   </div>
 
-      <!-- 👇 Gráfico de perfil de elevación debajo del mapa -->
+
+  <div class="map-wrapper">
+    <div id="map" class="map">
+
+      <div class="playback-controls">
+        <button (click)="togglePlayback()" [title]="isPlaying ? 'Stop' : 'Reproducir'">
+          {{ isPlaying ? '⏸️ Stop' : '▶️ Play' }}
+        </button>
+
+        <select (change)="onSpeedChange($event)" [value]="playbackSpeed">
+          <option [value]="1" [selected]="playbackSpeed === 1">Velocidad x1</option>
+          <option [value]="5" [selected]="playbackSpeed === 5">Velocidad x5</option>
+          <option [value]="10" [selected]="playbackSpeed === 10">Velocidad x10</option>
+          <option [value]="20" [selected]="playbackSpeed === 20">Velocidad x20</option>
+        </select>
+
+        <button (click)="resetPlayback()" title="Reiniciar">🔁 Reiniciar</button>
+      </div>
+
+      <!-- Contenedor de cajas inferiores derecha -->
+      <div class="info-panels-wrapper" [class.expanded]="legendExpanded || trackInfoExpanded">
+
+        <!-- Caja de información del track -->
+        <div class="ol-legend ol-unselectable ol-control track-info-box">
+          <button class="legend-toggle" (click)="toggleTrackInfo()" [attr.aria-expanded]="trackInfoExpanded">
+            {{ trackInfoExpanded ? '🔽 Información del Track' : '▶️ Información del Track' }}
+          </button>
+          <div class="legend-content" [class.collapsed]="!trackInfoExpanded">
+            <ul class="track-info-list">
+              <li style="display: flex; align-items: center; gap: 8px;">
+                <img src="assets/icons/sender-veryeasy.svg" alt="Senda muy fácil" style="height: 1em; width: auto;">
+                <span>Senda del Más del Colomí-Muy fácil</span>
+              </li>
+              <li>Senda del Mirador</li>
+              <li>Senda Mas del Colomí</li>
+              <li>Senda Radere el Calvari</li>
+              <li>Senda Vall de la María</li>
+              <li>Senda de la Cooperativa</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Leyenda colapsable -->
+        <div #legendRef class="ol-legend ol-unselectable ol-control">
+          <button class="legend-toggle" (click)="toggleLegend()" [attr.aria-expanded]="legendExpanded">
+            {{ legendExpanded ? '🔽 Leyenda' : '▶️ Leyenda' }}
+          </button>
+          <div class="legend-content" [class.collapsed]="!legendExpanded">
+            <h4>Pendiente del Track</h4>
+            <p>La pendiente se calcula como la diferencia de altitud entre el inicio y el final del tramo, expresada
+              como un
+              porcentaje.</p>
+            <div class="legend-colors">
+              <span class="color-decrease"></span>
+              <span class="color-neutral"></span>
+              <span class="color-increase"></span>
+            </div>
+            <div class="legend-labels">
+              <span>Descenso</span>
+              <span>Plano</span>
+              <span>Ascenso</span>
+            </div>
+            <div class="legend-gradient"></div>
+            <div class="legend-labels">
+              <span>-20%</span>
+              <span>0%</span>
+              <span>+20%</span>
+            </div>
+          </div>
+
+          <div id="legend-box" class="ol-attribution-bottom-right"></div>
+
+        </div>
+
+      </div>
+
+      <!-- Popup del mapa -->
+      <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+      </div>
+
+      <div id="marker-info" class="marker-info-box">
+        <div id="marker-info-content"></div>
+      </div>
+    </div>
+
+    <!-- 👇 Gráfico de perfil de elevación debajo del mapa -->
     <div class="elevation-container">
       <canvas #elevationCanvas id="elevation-chart"></canvas>
     </div>
-</div>
+  </div>
 </section>

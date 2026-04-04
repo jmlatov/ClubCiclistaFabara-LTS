@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1" schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd http://www.garmin.com/xmlschemas/PowerExtension/v1 http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd" xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1" xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3" xmlns:gpxpx="http://www.garmin.com/xmlschemas/PowerExtension/v1" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2">
+<gpx creator="Wikiloc - https://www.wikiloc.com" version="1.1"
+  xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd
+                      http://www.garmin.com/xmlschemas/GpxExtensions/v3 http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd
+                      http://www.garmin.com/xmlschemas/TrackPointExtension/v1 http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
+                      http://www.garmin.com/xmlschemas/PowerExtension/v1 http://www.garmin.com/xmlschemas/PowerExtensionv1.xsd
+                      http://www.topografix.com/GPX/gpx_style/0/2 http://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd"
+  xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1"
+  xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+  xmlns:gpxpx="http://www.garmin.com/xmlschemas/PowerExtension/v1"
+  xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2">
   <metadata>
     <name>Wikiloc - BTT Algars 2025 (Ruta Larga) - Fabara</name>
     <author>
       <name>gpx.studio</name>
-      <link href="https://gpx.studio"/>
+      <link href="https://gpx.studio" />
     </author>
-    <link href="https://www.wikiloc.com/mountain-biking-trails/btt-algars-2025-ruta-larga-fabara-202455718">
+    <link
+      href="https://www.wikiloc.com/mountain-biking-trails/btt-algars-2025-ruta-larga-fabara-202455718">
       <text>BTT Algars 2025 (Ruta Larga) - Fabara on Wikiloc</text>
     </link>
     <time>2025-02-17T00:56:13.604Z</time>
   </metadata>
+  <wpt lat="41.135364" lon="0.205981">
+    <ele>206.65488756089525</ele>
+    <name>Inicio Senda Más del Colomí</name>
+    <cmt>Senda muy fácil</cmt>
+    <desc>Senda de unos 2Kms con vistas al río Algars, muy sencilla y apta para todos los públicos</desc>
+    <sym>Bike Trail</sym>
+    <type>senderveryeasy</type>
+  </wpt>
+  <wpt lat="41.144362" lon="0.202063">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda Más del Colomí</name>
+    <cmt>Senda muy fácil</cmt>
+    <desc>Fin de la senda y prepara el desarrollo para una subida corta, pero explosiva.</desc>
+    <sym>Bike Trail</sym>
+    <type>senderveryeasy</type>
+  </wpt>
+
   <wpt lat="41.174784" lon="0.169515">
     <ele>243.7</ele>
     <time>2023-03-26T10:25:17.000Z</time>

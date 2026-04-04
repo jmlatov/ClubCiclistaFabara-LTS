@@ -242,6 +242,7 @@ export class GpxMap implements AfterViewInit, OnInit {
           finish: 'assets/icons/llegada.svg',
           peak: 'assets/icons/peak.svg',
           viewpoint: 'assets/icons/paisaje.svg',
+          senderveryeasy: 'assets/icons/sender-veryeasy.svg',
         };
 
         iconPath = iconMap[featureType] ?? iconPath;
