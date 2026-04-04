@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
 h2 {
   font-family: "Oswald", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
@@ -8,10 +9,13 @@ h2 {
 .main {
   background: linear-gradient(transparent 35%, rgba(255, 254, 254, 0.1) 80%);
   text-wrap: wrap;
-  min-width: 80vw;
+  width: 100%;                /* [CORREGIDO 2026-04-04 / 13:00] antes: min-width: 80vw — forzaba ancho mínimo que desbordaba en móvil */
+  max-width: 100%;            /* [AÑADIDO 2026-04-04 / 13:00] garantiza que nunca desborde su contenedor */
+  box-sizing: border-box;     /* [AÑADIDO 2026-04-04 / 13:00] padding no suma al ancho */
   margin: 0 auto;
   padding-bottom: 10rem;
 }
+
 .section {
   display: flex;
   flex-direction: column;
@@ -19,6 +23,7 @@ h2 {
   align-items: center;
   color: white;
 }
+
 .panel {
   margin-top: 5rem;
   width: 80vw;
@@ -27,7 +32,9 @@ h2 {
   backdrop-filter: blur(20px);
   border-radius: 30px;
   box-shadow: 1px 2px 20px 6px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;     /* [AÑADIDO 2026-04-04 / 13:00] padding no desborda el panel */
 }
+
 .grid {
   width: 100%;
   display: grid;
@@ -35,24 +42,37 @@ h2 {
   grid-template-rows: 1fr;
   grid-gap: 0;
 }
+
+/* [CORREGIDO 2026-04-04 / 13:00] — El selector genérico "img" fijaba width: 490px y height: 500px
+   a TODAS las imágenes del componente (incluidos logos de patrocinadores), impidiendo
+   que el CSS responsivo pudiera sobreescribirlos. Se eliminan los valores fijos y
+   cada grupo de imágenes tiene ahora sus propias reglas específicas. */
 img {
-  height: 500px;
-  width: 490px;
   border-radius: 30px;
   box-shadow: 1px 2px 10px 5px rgba(127, 126, 126, 0.4);
+  /* width y height eliminados — se definen en .img img y .patrocinadores img por separado */
 }
+
 .img {
   padding-top: 30px;
+  padding-left: 1.4rem;       /* [CORREGIDO 2026-04-04 / 13:00] antes: margin-left en el img hijo */
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  min-width: 0;               /* [AÑADIDO 2026-04-04 / 13:00] evita que el grid desborde por contenido grande */
+  box-sizing: border-box;
 }
 
+/* [CORREGIDO 2026-04-04 / 13:00] — La imagen principal ahora es completamente fluida:
+   width: 100% se adapta a la columna del grid, max-width evita que crezca demasiado,
+   height: auto mantiene proporciones. object-fit: cover para que se vea bien recortada. */
 .img img {
   width: 100%;
-  height: 100%;
-  object-fit: contain; /* Mantiene las proporciones sin recortar */
-  margin-left: 1.4rem;
+  max-width: 490px;
+  height: auto;               /* [CORREGIDO 2026-04-04 / 13:00] antes: height: 100% — causaba que ignorase proporciones */
+  object-fit: cover;
+  margin-left: 0;             /* [CORREGIDO 2026-04-04 / 13:00] movido el padding al contenedor .img */
+  box-shadow: 1px 2px 10px 5px rgba(127, 126, 126, 0.4);
 }
 
 h1 {
@@ -77,6 +97,8 @@ h3 {
   justify-content: center;
   align-items: flex-start;
   line-height: 10px;
+  min-width: 0;               /* [AÑADIDO 2026-04-04 / 13:00] evita desbordamiento en grid */
+  box-sizing: border-box;
 }
 
 h2 {
@@ -93,6 +115,7 @@ button {
   cursor: pointer;
   border-radius: 10px;
 }
+
 button:hover {
   box-sizing: border-box;
   border: 2px solid gray;
@@ -108,23 +131,31 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;            /* [AÑADIDO 2026-04-04 / 13:00] logos se reorganizan en múltiples filas si no caben */
   gap: 40px;
 }
+
 .boxpatro {
   margin: 2.5rem;
 }
+
+/* [CORREGIDO 2026-04-04 / 13:00] — Los logos de patrocinadores tenían sus propiedades
+   sobreescritas por el selector genérico "img". Ahora son independientes y fluidos. */
 .patrocinadores img {
   width: auto;
+  max-width: 100%;            /* [AÑADIDO 2026-04-04 / 13:00] nunca desbordan su celda */
   height: 5.5dvh;
   padding: 10px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
   box-shadow: 1px 2px 10px 2px rgba(127, 126, 126, 0.4);
+  border-radius: 0;           /* [AÑADIDO 2026-04-04 / 13:00] los logos no deben heredar el border-radius del img genérico */
 }
 
 .patrocinadores img:hover {
   transform: scale(0.9);
 }
+
 .info-prueba {
   margin-bottom: 30px;
 }
@@ -151,15 +182,20 @@ a .mediterraneo {
   padding: 10px;
 }
 
+/* =============================================
+   BREAKPOINT ≤ 1400px
+   ============================================= */
 @media (max-width: 1400px) {
   .main {
-    width: 100vw;
+    width: 100%;
     height: auto;
     padding-bottom: 0;
   }
+
   .section {
-    min-width: none;
+    min-width: unset;         /* [CORREGIDO 2026-04-04 / 13:00] antes: min-width: none (valor inválido) */
   }
+
   .panel {
     box-shadow: none;
     height: auto;
@@ -168,25 +204,44 @@ a .mediterraneo {
     padding-bottom: 2vh;
     border-radius: 0;
   }
+
   .grid {
     justify-self: center;
     grid-template-columns: 1fr;
   }
+
+  /* [CORREGIDO 2026-04-04 / 13:00] — En una columna, la imagen ocupa todo el ancho
+     disponible del panel en lugar de quedar fija a 490px. */
+  .img {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .img img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
   .info {
     justify-self: center;
   }
+
   .trj-info {
     display: grid;
     grid-template-columns: 1fr 1fr;
     font-size: 0.8rem;
     line-height: 1rem;
   }
+
   .btn {
     margin-top: 2vh;
   }
+
   .patrocinadores {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
   }
 
   .patrocinadores img {
@@ -196,47 +251,70 @@ a .mediterraneo {
   a .mediterraneo {
     width: 11vw;
   }
+
   .info-prueba {
     padding: 2rem;
   }
+
   .info-inscripcion {
     padding: 2rem;
   }
 }
 
+/* =============================================
+   BREAKPOINT ≤ 710px
+   ============================================= */
 @media (max-width: 710px) {
   .main {
-    width: auto;
+    width: 100%;
     padding-bottom: 0;
   }
+
+  .img {
+    padding: 1rem;            /* [CORREGIDO 2026-04-04 / 13:00] padding uniforme en móvil */
+  }
+
+  /* [CORREGIDO 2026-04-04 / 13:00] — antes: width: 80vw hardcodeado ignoraba el padding
+     del contenedor y podía desbordar. Ahora usa width: 100% dentro del padding del .img. */
+  .img img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
   .trj-info {
     grid-template-columns: 1fr;
   }
+
   .info-prueba {
     padding-bottom: 0;
   }
+
   .info-inscripcion {
     padding-top: 0;
   }
-  .img img {
-    width: 80vw;
-    height: auto;
-  }
+
   .patrocinadores {
     gap: 0.5rem;
   }
+
   .patrocinadores img {
     height: 3.3vh;
   }
+
   a .mediterraneo {
     height: 4vh;
     width: 16vw;
   }
+
   h2 {
     font-size: 1.2rem;
   }
 }
 
+/* =============================================
+   PANTALLAS MUY ANCHAS ≥ 1600px
+   ============================================= */
 @media (min-width: 1600px) {
   .panel {
     max-width: 60%;

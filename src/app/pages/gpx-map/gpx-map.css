@@ -2,6 +2,12 @@
    1. ESTRUCTURA GENERAL
    ====================== */
 
+/* [NOTA 2026-04-04 / 12:00] — Las variables de color (:root con modo claro/oscuro)
+   se han movido a styles.css (CSS global), que es donde deben estar para que
+   OpenLayers y los elementos fuera del encapsulado de Angular puedan usarlas.
+   Los estilos de .ol-legend.ol-control y .playback-controls también se han movido
+   a styles.css por el mismo motivo. Este fichero las consume pero no las define. */
+
 .map-wrapper {
   width: 100%;
   max-width: 100%;
@@ -40,20 +46,22 @@
   /* top: 10px;
   left: 10px; */
   z-index: 10;
-  background: white;
+  background: var(--bg-surface); /* [MODIFICADO 2026-04-04 / 10:30] antes: background: white */
+  color: var(--text-primary);    /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
   padding: 10px 15px;
   font-size: 12px;
   border-radius: 4px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px var(--shadow); /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(0,0,0,0.3) */
 }
 
 .track-selector {
-  width: 10%;
+  width: clamp(120px, 30%, 220px); /* [MODIFICADO 2026-04-04 / 10:30] antes: width: 10% — se adapta a móvil */
   padding: 5px;
   font-size: 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #f9f9f9;
+  border: 1px solid var(--border-color); /* [MODIFICADO 2026-04-04 / 10:30] antes: #ccc */
+  background-color: var(--input-bg);     /* [MODIFICADO 2026-04-04 / 10:30] antes: #f9f9f9 */
+  color: var(--text-primary);            /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -64,11 +72,12 @@
 
 .ol-popup {
   position: absolute;
-  background-color: white;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-surface); /* [MODIFICADO 2026-04-04 / 10:30] antes: white */
+  color: var(--text-primary);          /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
+  box-shadow: 0 1px 4px var(--shadow); /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(0,0,0,0.2) */
   padding: 15px;
   border-radius: 10px;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--border-color); /* [MODIFICADO 2026-04-04 / 10:30] antes: #cccccc */
   bottom: 12px;
   left: -50px;
   min-width: 200px;
@@ -99,11 +108,12 @@
 }
 
 #popup {
-  background-color: rgb(174, 251, 219);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background-color: var(--popup-bg);      /* [MODIFICADO 2026-04-04 / 10:30] antes: rgb(174,251,219) */
+  color: var(--text-primary);             /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
+  box-shadow: 0 1px 4px var(--shadow);    /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(0,0,0,0.2) */
   padding: 15px;
   border-radius: 10px;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--border-color);  /* [MODIFICADO 2026-04-04 / 10:30] antes: #cccccc */
   bottom: 12px;
   left: -50px;
   min-width: 200px;
@@ -123,11 +133,12 @@
 }
 
 .marker-info-box {
-  background-color: white;
+  background-color: var(--bg-surface); /* [MODIFICADO 2026-04-04 / 10:30] antes: white */
+  color: var(--text-primary);          /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
   border-radius: 8px;
   padding: 6px 10px;
   font-size: 13px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 4px var(--shadow); /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(0,0,0,0.3) */
   position: absolute;
   white-space: nowrap;
   transform: translate(-50%, -120%);
@@ -143,11 +154,12 @@
   position: absolute;
   bottom: 10px;
   left: 10px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--bg-surface-alpha); /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(255,255,255,0.6) */
+  color: var(--text-primary);          /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
   padding: 10px;
   border-radius: 8px;
   font-size: 13px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 5px var(--shadow); /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(0,0,0,0.3) */
   z-index: 1000;
   min-width: 180px;
 }
@@ -180,22 +192,16 @@
   right: 20px;
   width: 320px;
   font-size: 12px;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--bg-surface-semi); /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(255,255,255,0.5) */
+  color: var(--text-primary);         /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
   border-radius: 8px;
   padding: 8px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 4px var(--shadow);  /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(0,0,0,0.3) */
   z-index: 1000;
 }
 
-.ol-legend.ol-control {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  font-size: 13px;
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
+/* [NOTA 2026-04-04 / 12:00] — .ol-legend.ol-control movido a styles.css (CSS global)
+   para que OpenLayers pueda aplicarlo fuera del encapsulado de Angular. */
 
 /* Wrapper que posiciona y apila ambas cajas en la esquina inferior derecha */
 .info-panels-wrapper {
@@ -235,7 +241,7 @@
 .legend-toggle {
   background: none;
   border: none;
-  color: #007acc;
+  color: var(--button-color); /* [MODIFICADO 2026-04-04 / 10:30] antes: #007acc */
   cursor: pointer;
   font-weight: bold;
   font-size: 14px;
@@ -287,7 +293,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  color: #333;
+  color: var(--text-primary); /* [MODIFICADO 2026-04-04 / 10:30] antes: #333 */
   font-family: sans-serif;
 }
 
@@ -306,21 +312,8 @@
   align-items: center;
 }
 
-.playback-controls button {
-  background: white;
-  border: 1px solid #aaa;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 12px;
-}
-
-.playback-controls select {
-  background: white;
-  border: 1px solid #aaa;
-  padding: 6px 8px;
-  border-radius: 5px;
-  font-size: 12px;
-}
+/* [NOTA 2026-04-04 / 12:00] — .playback-controls movido a styles.css (CSS global)
+   para garantizar el fondo visible independientemente del encapsulado de Angular. */
 
 
 /* ========================
@@ -351,3 +344,43 @@
   font-size: 12px;
   margin-top: 5px;
 } */
+
+
+/* ========================
+   12. RESPONSIVE MÓVIL
+   [AÑADIDO 2026-04-04 / 10:30] — Media query para pantallas pequeñas (≤600px).
+   Corrige selectores demasiado pequeños, controles apilados y paneles desbordados.
+   ======================== */
+@media (max-width: 600px) {
+  .track-selector-container {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .track-selector {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .playback-controls {
+    flex-wrap: wrap;   /* evita que los botones se salgan de pantalla */
+    top: 5px;
+    right: 5px;
+    gap: 5px;
+  }
+
+  .info-panels-wrapper {
+    width: 160px;
+    font-size: 11px;
+  }
+
+  .info-panels-wrapper.expanded {
+    width: calc(100vw - 20px); /* ocupa casi todo el ancho sin desbordar */
+  }
+
+  .legend {
+    width: calc(100vw - 40px);
+    right: 10px;
+  }
+}
+/* [FIN AÑADIDO 2026-04-04 / 10:30] */
