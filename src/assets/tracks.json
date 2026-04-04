@@ -1,5 +1,22 @@
 [
-  { "name": "Algars 2026 - Corta", "path": "assets/gpx/algars-corta-2025.gpx" },
-  { "name": "Algars 2026 - Larga", "path": "assets/gpx/algars-larga-2025.gpx" },  
-  { "name": "Algars 2023", "path": "assets/gpx/ii-btt-algars-fabara-2023.gpx" }
+  {
+    "name": "Algars 2026 - Larga",
+    "path": "assets/gpx/algars-larga-2026.gpx"
+  },
+  {
+    "name": "Algars 2026 - Corta",
+    "path": "assets/gpx/algars-corta-2026.gpx"
+  },
+  {
+    "name": "Algars 2025 - Larga",
+    "path": "assets/gpx/algars-larga-2025.gpx"
+  },
+  {
+    "name": "Algars 2025 - Corta",
+    "path": "assets/gpx/algars-corta-2025.gpx"
+  },
+  {
+    "name": "Algars 2023",
+    "path": "assets/gpx/ii-btt-algars-fabara-2023.gpx"
+  }
 ]
