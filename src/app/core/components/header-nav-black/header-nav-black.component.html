@@ -36,10 +36,10 @@
                   d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
               </svg></a>
             <a class="underline" (click)="selectHome(); hideSidebar()">INICIO</a>
-            <a class="underline" (click)="selectBtt(); hideSidebar()">BTT ALGARS 2025</a>
-            <a class="underline" style="margin-left: 16px" (click)="selectGaleria(); hideSidebar()">└ Galería</a>
+            <a class="underline" (click)="selectBtt(); hideSidebar()">BTT ALGARS 2026</a><!-- [CORREGIDO 2026-04-04] 2025 → 2026 -->
+            <a class="underline" style="display: none; margin-left: 16px" (click)="selectGaleria(); hideSidebar()">└ Galería</a><!-- [CORREGIDO 2026-04-04] añadido display:none para ocultar Galería del sidebar -->
             <a class="underline" (click)="selectEventos(); hideSidebar()">EVENTOS</a>
-            <a class="underline" (click)="selectEventos(); hideSidebar()">TRACKS GPX</a>
+            <a class="underline" (click)="selectGpxTracks(); hideSidebar()">TRACKS GPX</a><!-- [CORREGIDO 2026-04-04] antes llamaba a selectEventos() -->
             <a class="underline" (click)="selectGaleria(); hideSidebar()" style="display: none">GALERIA</a>
           </div>
         </div>
