@@ -91,7 +91,7 @@
     <type>medium</type>
   </wpt>
 
- <wpt lat="41.167760" lon="0.213438">
+  <wpt lat="41.167774" lon="0.213457">
     <ele>205.15721013615516</ele>
     <name>Inicio Senda del Riu Algars</name>
     <cmt>Senda difícil</cmt>
@@ -99,7 +99,7 @@
     <sym>Bike Trail</sym>
     <type>hard</type>
   </wpt>
-  <wpt lat="41.160561" lon="0.209481">
+  <wpt lat="41.160281" lon="0.209619">
     <ele>205.15721013615516</ele>
     <name>Fin Senda del Riu Algars</name>
     <cmt>Senda difícil</cmt>
