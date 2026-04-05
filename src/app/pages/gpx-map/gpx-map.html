@@ -8,7 +8,7 @@
     <label>
       <strong> - Track: </strong>
 
-      <select (change)="onTrackSelect($event)" class="track-selector">
+      <select (change)="onTrackSelect($event); clearHighlight()" class="track-selector">
         @for (track of gpxTracks; track track.path) {
         <option [value]="track.path">{{ track.name }}</option>
         } @empty {
@@ -20,7 +20,7 @@
 
     <label>
       <strong> - Tipo de Mapa: </strong>
-      <select (change)="onBaseLayerChange($event)" class='track-selector'>
+      <select (change)="onBaseLayerChange($event); clearHighlight()" class='track-selector'>
         <option value="osm">Mapa de calles (OSM)</option>
         <option value="satellite">Satélite (Esri)</option>
       </select>
@@ -33,18 +33,18 @@
     <div id="map" class="map">
 
       <div class="playback-controls">
-        <button (click)="togglePlayback()" [title]="isPlaying ? 'Stop' : 'Reproducir'">
+        <button (click)="togglePlayback(); clearHighlight()" [title]="isPlaying ? 'Stop' : 'Reproducir'">
           {{ isPlaying ? '⏸️ Stop' : '▶️ Play' }}
         </button>
 
-        <select (change)="onSpeedChange($event)" [value]="playbackSpeed">
+        <select (change)="onSpeedChange($event); clearHighlight()" [value]="playbackSpeed">
           <option [value]="1" [selected]="playbackSpeed === 1">Velocidad x1</option>
           <option [value]="5" [selected]="playbackSpeed === 5">Velocidad x5</option>
           <option [value]="10" [selected]="playbackSpeed === 10">Velocidad x10</option>
           <option [value]="20" [selected]="playbackSpeed === 20">Velocidad x20</option>
         </select>
 
-        <button (click)="resetPlayback()" title="Reiniciar">🔁 Reiniciar</button>
+        <button (click)="resetPlayback(); clearHighlight()" title="Reiniciar">🔁 Reiniciar</button>
       </div>
 
       <!-- Contenedor de cajas inferiores derecha -->
@@ -52,32 +52,32 @@
 
         <!-- Caja de información del track -->
         <div class="ol-legend ol-unselectable ol-control track-info-box">
-          <button class="legend-toggle" (click)="toggleTrackInfo()" [attr.aria-expanded]="trackInfoExpanded">
+          <button class="legend-toggle" (click)="toggleTrackInfo(); clearHighlight()" [attr.aria-expanded]="trackInfoExpanded">
             {{ trackInfoExpanded ? '🔽 Información del Track' : '▶️ Información del Track' }}
           </button>
           <div class="legend-content" [class.collapsed]="!trackInfoExpanded">
             <ul class="track-info-list">
-              <li style="display: flex; align-items: center; gap: 8px;">
+              <li (click)="zoomToSegment('Senda Más del Colomí'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-veryeasy.svg" alt="Senda muy fácil" style="height: 1em; width: auto;">
-                <span>Senda del Más del Colomí (1,2Kms)-Muy fácil</span>
+                <span>Senda del Más del Colomí-Muy fácil</span>
               </li>
-              <li style="display: flex; align-items: center; gap: 8px;">
+              <li (click)="zoomToSegment('Senda del Mirador'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-hard.svg" alt="Senda difícil" style="height: 1em; width: auto;">
                 <span>Senda del Mirador-Difícil</span>
               </li>
-              <li style="display: flex; align-items: center; gap: 8px;">
+              <li (click)="zoomToSegment('Senda del riu Algars'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-hard.svg" alt="Senda difícil" style="height: 1em; width: auto;">
                 <span>Senda del riu Algars-Difícil</span>
               </li>
-              <li style="display: flex; align-items: center; gap: 8px;">
+              <li (click)="zoomToSegment('Senda Radere lo Calvari'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-medium.svg" alt="Senda de dificultad media" style="height: 1em; width: auto;">
                 <span>Senda de Radere lo Calvarí-Dificultad media</span>
               </li>
-              <li style="display: flex; align-items: center; gap: 8px;">
+              <li (click)="zoomToSegment('Senda Vall de la María'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-veryhard.svg" alt="Senda muy difícil" style="height: 1em; width: auto;">
                 <span>Senda Vall de la María-Muy difícil</span>
               </li>
-              <li style="display: flex; align-items: center; gap: 8px;">
+              <li (click)="zoomToSegment('Senda de la Cooperativa'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-veryhard.svg" alt="Senda muy difícil" style="height: 1em; width: auto;">
                 <span>Senda de la Cooperativa-Muy difícil</span>
               </li>
@@ -87,7 +87,7 @@
 
         <!-- Leyenda colapsable -->
         <div #legendRef class="ol-legend ol-unselectable ol-control">
-          <button class="legend-toggle" (click)="toggleLegend()" [attr.aria-expanded]="legendExpanded">
+          <button class="legend-toggle" (click)="toggleLegend(); clearHighlight()" [attr.aria-expanded]="legendExpanded">
             {{ legendExpanded ? '🔽 Leyenda' : '▶️ Leyenda' }}
           </button>
           <div class="legend-content" [class.collapsed]="!legendExpanded">

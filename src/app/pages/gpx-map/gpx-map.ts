@@ -120,7 +120,25 @@ export class GpxMap implements AfterViewInit, OnInit {
 
   //Añado este VectorSource para manejar los tracks y sus waypoints
   private source = new VectorSource();
+  // Capa dedicada exclusivamente al resaltado del tramo seleccionado
+  private highlightSource = new VectorSource();
+  private highlightLayer = new VectorLayer({
+    source: this.highlightSource,
+    style: (feature) => new Style({
+      stroke: new Stroke({
+        color: feature.get('highlightColor') ?? '#22c55e',
+        width: 7,
+      }),
+    }),
+    zIndex: 10, // siempre por encima del track
+  });
   private waypointData: Map<string, { name: string; desc?: string; image?: string; info?: string; type?: string }> = new Map();
+  // Mapa: nombre de senda → coordenadas de inicio y fin para hacer zoom y color de resaltado
+  private segmentBounds: Map<string, {
+    start?: [number, number];
+    end?: [number, number];
+    color?: string;
+  }> = new Map();
   private elevationChart: Chart | null = null;
   private markerFeature = new Feature(new Point([0, 0]));
 
@@ -216,7 +234,7 @@ export class GpxMap implements AfterViewInit, OnInit {
       const type = geometry.getType();
 
       if (type === 'LineString' || type === 'MultiLineString') {
-        const color = feature.get('slopeColor') || '#999999';
+        const color = feature.get('slopeColor') ?? '#999999';
         return new Style({
           stroke: new Stroke({ color, width: 5 }),
         });
@@ -287,8 +305,9 @@ export class GpxMap implements AfterViewInit, OnInit {
       layers: [
         this.osmLayer,
         this.satelliteLayer,
-        this.fixedWaypointLayer, // 👈 Añádelo antes que vectorLayer
-        this.vectorLayer],
+        this.fixedWaypointLayer,
+        this.vectorLayer,
+        this.highlightLayer],  // 👈 siempre encima del track
       overlays: [overlay],
       view: new View({
         center: fromLonLat([0, 0]),
@@ -358,6 +377,7 @@ export class GpxMap implements AfterViewInit, OnInit {
     this.map.addOverlay(this.markerOverlay);
 
     this.map.on('click', (evt) => {
+      this.highlightSource.clear();
       const feature = this.map.forEachFeatureAtPixel(evt.pixel, (feat) => {
         const geometry = feat.getGeometry?.();
         if (geometry instanceof Point) return feat;
@@ -519,6 +539,8 @@ export class GpxMap implements AfterViewInit, OnInit {
 
     this.source.clear();
     this.waypointData.clear();
+    this.segmentBounds.clear();
+    this.highlightSource.clear();
 
     fetch(path)
       .then((res) => res.text())
@@ -536,18 +558,40 @@ export class GpxMap implements AfterViewInit, OnInit {
           const lat = parseFloat(wpt.getAttribute('lat')!);
           const lon = parseFloat(wpt.getAttribute('lon')!);
           const key = `${lat.toFixed(6)},${lon.toFixed(6)}`;
-          const name = wpt.getElementsByTagName('name')[0]?.textContent ?? '';
+          const name = wpt.getElementsByTagName('name')[0]?.textContent
+                    ?? wpt.getElementsByTagName('n')[0]?.textContent
+                    ?? '';
           const type = wpt.getElementsByTagName('type')[0]?.textContent?.trim() ?? '';
           const desc = wpt.getElementsByTagName('desc')[0]?.textContent ?? '';
           const image = wpt.getElementsByTagNameNS('*', 'image')[0]?.textContent ?? '';
           const info = wpt.getElementsByTagNameNS('*', 'info')[0]?.textContent ?? '';
 
           this.waypointData.set(key, { name, type, desc, image, info });
+
+          // Agrupar inicio/fin de cada senda para permitir zoom desde la lista
+          const nameNormalized = name.replace(/^(Inicio|Fin)\s+/i, '').trim();
+          const existing = this.segmentBounds.get(nameNormalized) ?? {};
+          const coords = fromLonLat([lon, lat]) as [number, number];
+
+          // Color del icono según el tipo de senda
+          const segmentColorMap: Record<string, string> = {
+            senderveryeasy: '#22c55e', // verde
+            medium:         '#f97316', // naranja
+            hard:           '#ef4444', // rojo
+            veryhard:       '#7c3aed', // morado
+          };
+          const segmentColor = segmentColorMap[type] ?? '#999999';
+
+          if (name.toLowerCase().startsWith('inicio')) {
+            this.segmentBounds.set(nameNormalized, { ...existing, start: coords, color: segmentColor });
+          } else if (name.toLowerCase().startsWith('fin')) {
+            this.segmentBounds.set(nameNormalized, { ...existing, end: coords, color: segmentColor });
+          }
           //console.log(`Waypoint: ${name} (${lat}, ${lon}) - Type: ${type}`);
 
           // ➕ Añadir como Feature de tipo Point
-          const coords = fromLonLat([lon, lat]);
-          const point = new Point(coords);
+          const pointCoords = fromLonLat([lon, lat]);
+          const point = new Point(pointCoords);
           const feature = new Feature(point);
           feature.set('name', name); // por si lo necesitas después
           feature.set('type', type);
@@ -741,6 +785,57 @@ export class GpxMap implements AfterViewInit, OnInit {
         easing: (t) => t, // lineal para seguimiento suave
       });
     }
+  }
+
+  clearHighlight(): void {
+    this.highlightSource.clear();
+  }
+
+  zoomToSegment(segmentName: string): void {
+    const bounds = this.segmentBounds.get(segmentName);
+    if (!bounds?.start || !bounds?.end) {
+      console.warn(`No se encontraron bounds para: ${segmentName}`);
+      return;
+    }
+
+    // Calcular índices más cercanos sobre fullCoords en el momento del click
+    const findClosestIdx = (target: [number, number]): number => {
+      let minDist = Infinity, idx = 0;
+      for (let i = 0; i < this.fullCoords.length; i++) {
+        const dx = this.fullCoords[i][0] - target[0];
+        const dy = this.fullCoords[i][1] - target[1];
+        const d = dx * dx + dy * dy;
+        if (d < minDist) { minDist = d; idx = i; }
+      }
+      return idx;
+    };
+
+    const startIdx = findClosestIdx(bounds.start);
+    const endIdx   = findClosestIdx(bounds.end);
+    const idxMin   = Math.min(startIdx, endIdx);
+    const idxMax   = Math.max(startIdx, endIdx);
+    const color    = bounds.color ?? '#16a34a';
+
+    // Limpiar resaltado anterior y construir nuevas features en la capa dedicada
+    this.highlightSource.clear();
+    for (let i = idxMin; i < idxMax; i++) {
+      const [x1, y1] = this.fullCoords[i];
+      const [x2, y2] = this.fullCoords[i + 1];
+      const line = new LineString([[x1, y1], [x2, y2]]);
+      const feature = new Feature({ geometry: line });
+      feature.set('highlightColor', color);
+      this.highlightSource.addFeature(feature);
+    }
+
+    // Hacer zoom al tramo
+    const minX = Math.min(bounds.start[0], bounds.end[0]);
+    const minY = Math.min(bounds.start[1], bounds.end[1]);
+    const maxX = Math.max(bounds.start[0], bounds.end[0]);
+    const maxY = Math.max(bounds.start[1], bounds.end[1]);
+    this.map.getView().fit(
+      [minX, minY, maxX, maxY],
+      { padding: [60, 60, 60, 60], duration: 800, maxZoom: 16 }
+    );
   }
 
   resetPlayback(): void {

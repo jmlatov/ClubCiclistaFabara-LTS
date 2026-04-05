@@ -30,20 +30,22 @@
     <name>Salida</name>
     <type>start</type>
   </wpt>
-  <wpt lat="41.144362" lon="0.202063">
-    <ele>205.15721013615516</ele>
-    <name>Fin Senda Más del Colomí</name>
-    <sym>Bike Trail</sym>
-    <type>senderveryeasy</type>
-  </wpt>
+
   <wpt lat="41.135364" lon="0.205981">
     <ele>206.65488756089525</ele>
     <name>Inicio Senda Más del Colomí</name>
     <sym>Bike Trail</sym>
     <type>senderveryeasy</type>
   </wpt>
+  <wpt lat="41.144362" lon="0.202063">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda Más del Colomí</name>
+    <sym>Bike Trail</sym>
+    <type>senderveryeasy</type>
+  </wpt>
+
   <trk>
-    <name>Bicicleta de montaña matutina</name>
+    <name>BTT Algars 2026 (Ruta Corta) - Fabara</name>
     <type>cycling</type>
     <trkseg>
       <trkpt lat="41.175733" lon="0.168549">

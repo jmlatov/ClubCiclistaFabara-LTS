@@ -22,6 +22,7 @@
     </link>
     <time>2025-02-17T00:56:13.604Z</time>
   </metadata>
+
   <wpt lat="41.135364" lon="0.205981">
     <ele>206.65488756089525</ele>
     <name>Inicio Senda Más del Colomí</name>
@@ -38,6 +39,7 @@
     <sym>Bike Trail</sym>
     <type>senderveryeasy</type>
   </wpt>
+
   <wpt lat="41.136912" lon="0.201719">
     <ele>205.15721013615516</ele>
     <name>Inicio Senda del Mirador</name>
@@ -54,6 +56,7 @@
     <sym>Bike Trail</sym>
     <type>hard</type>
   </wpt>
+
   <wpt lat="41.152413" lon="0.164838">
     <ele>205.15721013615516</ele>
     <name>Inicio Senda Vall de la María</name>
@@ -88,6 +91,40 @@
     <type>medium</type>
   </wpt>
 
+ <wpt lat="41.167760" lon="0.213438">
+    <ele>205.15721013615516</ele>
+    <name>Inicio Senda del Riu Algars</name>
+    <cmt>Senda difícil</cmt>
+    <desc>Inicio de la senda del Riu Algars de 1,5Kms aprox. Senda que atraviesa algún campo y repecho entre pinos y algunos tramos técnicos para afrontarlos con decisión.</desc>
+    <sym>Bike Trail</sym>
+    <type>hard</type>
+  </wpt>
+  <wpt lat="41.160561" lon="0.209481">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda del Riu Algars</name>
+    <cmt>Senda difícil</cmt>
+    <desc>Fin Senda del Riu Algars</desc>
+    <sym>Bike Trail</sym>
+    <type>hard</type>
+  </wpt>
+
+ <wpt lat="41.166415" lon="0.172928">
+    <ele>205.15721013615516</ele>
+    <name>Inicio Senda de la Cooperativa</name>
+    <cmt>Senda muy difícil</cmt>
+    <desc>Inicio de la senda de la Cooperativa, de unos 600mts. Senda relativamente corta pero muy técnica en algúna bajada un tanto peligrosa. Hay que tener precaución en ella.</desc>
+    <sym>Bike Trail</sym>
+    <type>veryhard</type>
+  </wpt>
+  <wpt lat="41.168400" lon="0.167691">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda de la Cooperativa</name>
+    <cmt>Senda muy difícil</cmt>
+    <desc>Fin Senda de la Cooperativa</desc>
+    <sym>Bike Trail</sym>
+    <type>veryhard</type>
+  </wpt>
+
   <wpt lat="41.174784" lon="0.169515">
     <ele>243.7</ele>
     <time>2023-03-26T10:25:17.000Z</time>
@@ -100,8 +137,9 @@
     <name>Salida</name>
     <type>start</type>
   </wpt>
+
   <trk>
-    <name>BTT Algars 2025 (Ruta Larga) - Fabara</name>
+    <name>BTT Algars 2026 (Ruta Larga) - Fabara</name>
     <cmt>Track de la ruta completa de la prueba BTT Algars. 
  
 Consta de dos sectores claramente diferenciado. 
