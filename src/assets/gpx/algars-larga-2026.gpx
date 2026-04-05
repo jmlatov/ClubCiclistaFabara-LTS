@@ -40,7 +40,7 @@
     <type>senderveryeasy</type>
   </wpt>
 
-  <wpt lat="41.136912" lon="0.201719">
+  <wpt lat="41.136975" lon="0.201679">
     <ele>205.15721013615516</ele>
     <name>Inicio Senda del Mirador</name>
     <cmt>Senda difícil</cmt>
@@ -48,7 +48,7 @@
     <sym>Bike Trail</sym>
     <type>hard</type>
   </wpt>
-  <wpt lat="41.143666" lon="0.192895">
+  <wpt lat="41.143609" lon="0.192949">
     <ele>205.15721013615516</ele>
     <name>Fin Senda del Mirador</name>
     <cmt>Senda difícil</cmt>
