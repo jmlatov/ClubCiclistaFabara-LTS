@@ -243,6 +243,9 @@ export class GpxMap implements AfterViewInit, OnInit {
           peak: 'assets/icons/peak.svg',
           viewpoint: 'assets/icons/paisaje.svg',
           senderveryeasy: 'assets/icons/sender-veryeasy.svg',
+          medium: 'assets/icons/sender-medium.svg',
+          hard: 'assets/icons/sender-hard.svg',
+          veryhard: 'assets/icons/sender-veryhard.svg',
         };
 
         iconPath = iconMap[featureType] ?? iconPath;
@@ -699,6 +702,45 @@ export class GpxMap implements AfterViewInit, OnInit {
     <!-- Recorrido: ${travelled.toFixed(2)} km<br> -->
     <!-- Restante: ${remaining.toFixed(2)} km --> 
   `;
+
+    // Auto-pan: si el marcador sale del viewport visible, desplazar el mapa suavemente
+    if (this.isPlaying) {
+      this.panToMarkerIfOutOfView(coord);
+    }
+  }
+
+  /**
+   * Comprueba si la coordenada del marcador está dentro del extent visible del mapa.
+   * Si no lo está (o está cerca del borde), hace un pan animado para centrarlo.
+   */
+  private panToMarkerIfOutOfView(coord: [number, number]): void {
+    const view = this.map.getView();
+    const size = this.map.getSize();
+    if (!size) return;
+
+    // Calculamos el extent visible actual
+    const extent = view.calculateExtent(size);
+    const [minX, minY, maxX, maxY] = extent;
+
+    // Margen de seguridad: 15% del ancho/alto del extent para anticipar la salida
+    const marginX = (maxX - minX) * 0.15;
+    const marginY = (maxY - minY) * 0.15;
+
+    const [markerX, markerY] = coord;
+
+    const isOutOfView =
+      markerX < minX + marginX ||
+      markerX > maxX - marginX ||
+      markerY < minY + marginY ||
+      markerY > maxY - marginY;
+
+    if (isOutOfView) {
+      view.animate({
+        center: coord,
+        duration: 400,
+        easing: (t) => t, // lineal para seguimiento suave
+      });
+    }
   }
 
   resetPlayback(): void {

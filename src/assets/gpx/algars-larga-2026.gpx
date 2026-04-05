@@ -38,6 +38,55 @@
     <sym>Bike Trail</sym>
     <type>senderveryeasy</type>
   </wpt>
+  <wpt lat="41.136912" lon="0.201719">
+    <ele>205.15721013615516</ele>
+    <name>Inicio Senda del Mirador</name>
+    <cmt>Senda difícil</cmt>
+    <desc>Inicio de la senda del Mirador de 1,5Kms aprox. Senda con cierta dificultad y algunos repechos dónde tendrás que darlo todo.</desc>
+    <sym>Bike Trail</sym>
+    <type>hard</type>
+  </wpt>
+  <wpt lat="41.143666" lon="0.192895">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda del Mirador</name>
+    <cmt>Senda difícil</cmt>
+    <desc>Fin de la senda del Mirador.</desc>
+    <sym>Bike Trail</sym>
+    <type>hard</type>
+  </wpt>
+  <wpt lat="41.152413" lon="0.164838">
+    <ele>205.15721013615516</ele>
+    <name>Inicio Senda Vall de la María</name>
+    <cmt>Senda muy difícil</cmt>
+    <desc>Inicio de la senda de Vall de la María de 3Kms aprox. Senda estrella de la ruta, dónde te enfrentarás a algunos de los tramos más técnicos y duros.</desc>
+    <sym>Bike Trail</sym>
+    <type>veryhard</type>
+  </wpt>
+  <wpt lat="41.145238" lon="0.193776">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda Vall de la María</name>
+    <cmt>Senda muy difícil</cmt>
+    <desc>Fin de la senda de Vall de la María</desc>
+    <sym>Bike Trail</sym>
+    <type>veryhard</type>
+  </wpt>
+
+  <wpt lat="41.178298" lon="0.178448">
+    <ele>205.15721013615516</ele>
+    <name>Inicio Senda Radere lo Calvari</name>
+    <cmt>Senda de dificultad media</cmt>
+    <desc>Inicio de la senda de Radere lo Calvari de 2,1Kms aprox. Senda con cierta dificultad y algunos tramos técnicos para afrontarlos con decisión.</desc>
+    <sym>Bike Trail</sym>
+    <type>medium</type>
+  </wpt>
+  <wpt lat="41.174461" lon="0.199440">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda Radere lo Calvari</name>
+    <cmt>Senda de dificultad media</cmt>
+    <desc>Fin de la senda de Radere lo Calvari</desc>
+    <sym>Bike Trail</sym>
+    <type>medium</type>
+  </wpt>
 
   <wpt lat="41.174784" lon="0.169515">
     <ele>243.7</ele>
