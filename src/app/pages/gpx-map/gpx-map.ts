@@ -139,6 +139,8 @@ export class GpxMap implements AfterViewInit, OnInit {
     end?: [number, number];
     color?: string;
   }> = new Map();
+  /** Coordenadas en proyección del mapa, en el orden en que aparecen en el GPX */
+  private avituallamientoCoords: [number, number][] = [];
   private elevationChart: Chart | null = null;
   private markerFeature = new Feature(new Point([0, 0]));
 
@@ -169,6 +171,21 @@ export class GpxMap implements AfterViewInit, OnInit {
   private fullCoords: [number, number, number][] = [];
   legendExpanded = false;
   trackInfoExpanded = false;
+  refreshmentExpanded = false;
+
+  /** Waypoints con nombre exacto "Avituallamiento" en el GPX (p. ej. 2 en corta 2026, 3 en larga 2026). */
+  get avituallamientoCount(): number {
+    return this.avituallamientoCoords.length;
+  }
+
+  /** Coincide con `path` en assets/tracks.json para "Algars 2026 - Corta". */
+  private readonly algarsCorta2026GpxPath = 'assets/gpx/algars-corta-2026.gpx';
+  /** GPX cargado o seleccionado (se actualiza al iniciar `loadTrack`). */
+  selectedTrackPath = '';
+
+  get isAlgars2026CortaTrack(): boolean {
+    return this.selectedTrackPath === this.algarsCorta2026GpxPath;
+  }
 
   // Añadido para manejar el cambio de capa base
   // Declaro una variable para guardar el extent inicial
@@ -187,12 +204,26 @@ export class GpxMap implements AfterViewInit, OnInit {
 
   toggleLegend(): void {
     this.legendExpanded = !this.legendExpanded;
-    if (this.legendExpanded) this.trackInfoExpanded = false;
+    if (this.legendExpanded) {
+      this.trackInfoExpanded = false;
+      this.refreshmentExpanded = false;
+    }
   }
 
   toggleTrackInfo(): void {
     this.trackInfoExpanded = !this.trackInfoExpanded;
-    if (this.trackInfoExpanded) this.legendExpanded = false;
+    if (this.trackInfoExpanded) {
+      this.legendExpanded = false;
+      this.refreshmentExpanded = false;
+    }
+  }
+
+  toggleRefreshmentInfo(): void {
+    this.refreshmentExpanded = !this.refreshmentExpanded;
+    if (this.refreshmentExpanded) {
+      this.legendExpanded = false;
+      this.trackInfoExpanded = false;
+    }
   }
 
   // Creo la capa separada para los waypoints fijos
@@ -262,6 +293,8 @@ export class GpxMap implements AfterViewInit, OnInit {
           peak: 'assets/icons/peak.svg',
           viewpoint: 'assets/icons/paisaje.svg',
           senderveryeasy: 'assets/icons/sender-veryeasy.svg',
+          sendereasy: 'assets/icons/sender-easy.svg',
+          easy: 'assets/icons/sender-easy.svg',
           medium: 'assets/icons/sender-medium.svg',
           hard: 'assets/icons/sender-hard.svg',
           veryhard: 'assets/icons/sender-veryhard.svg',
@@ -540,9 +573,12 @@ export class GpxMap implements AfterViewInit, OnInit {
     // Diganósticando el código para ver si se está llamando correctamente
     //console.log('Cargando track desde:', path);
 
+    this.selectedTrackPath = path;
+
     this.source.clear();
     this.waypointData.clear();
     this.segmentBounds.clear();
+    this.avituallamientoCoords = [];
     this.highlightSource.clear();
 
     fetch(path)
@@ -576,9 +612,15 @@ export class GpxMap implements AfterViewInit, OnInit {
           const existing = this.segmentBounds.get(nameNormalized) ?? {};
           const coords = fromLonLat([lon, lat]) as [number, number];
 
+          if (name.trim().toLowerCase() === 'avituallamiento') {
+            this.avituallamientoCoords.push(coords);
+          }
+
           // Color del icono según el tipo de senda
           const segmentColorMap: Record<string, string> = {
             senderveryeasy: '#22c55e', // verde
+            sendereasy:     '#4ade80', // verde claro (senda fácil)
+            easy:           '#4ade80', // verde claro (senda fácil)
             medium:         '#f97316', // naranja
             hard:           '#ef4444', // rojo
             veryhard:       '#7c3aed', // morado
@@ -792,6 +834,22 @@ export class GpxMap implements AfterViewInit, OnInit {
 
   clearHighlight(): void {
     this.highlightSource.clear();
+  }
+
+  zoomToAvituallamiento(index: number): void {
+    const coord = this.avituallamientoCoords[index];
+    if (!coord) {
+      console.warn(`No hay avituallamiento ${index + 1} en el track cargado`);
+      return;
+    }
+    this.clearHighlight();
+    const view = this.map.getView();
+    const z = view.getZoom() ?? 14;
+    view.animate({
+      center: coord,
+      zoom: Math.min(16, Math.max(z, 15)),
+      duration: 800,
+    });
   }
 
   zoomToSegment(segmentName: string): void {

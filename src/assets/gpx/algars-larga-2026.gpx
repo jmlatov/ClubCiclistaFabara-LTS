@@ -13,7 +13,7 @@
   </metadata>
   <wpt lat="41.135364" lon="0.205981">
     <ele>206.65488756089525</ele>
-    <name>Inicio Senda Más del Colomí</name>
+    <name>Inicio Senda Mas del Colomí</name>
     <cmt>Senda muy fácil</cmt>
     <desc>Senda de 1,2Kms con vistas al río Algars, muy sencilla y apta para todos los públicos</desc>
     <sym>Bike Trail</sym>
@@ -21,12 +21,30 @@
   </wpt>
   <wpt lat="41.144362" lon="0.202063">
     <ele>205.15721013615516</ele>
-    <name>Fin Senda Más del Colomí</name>
+    <name>Fin Senda Mas del Colomí</name>
     <cmt>Senda muy fácil</cmt>
-    <desc>Fin de la senda y prepara el desarrollo para una subida corta, pero explosiva.</desc>
+    <desc>Fin de la senda.</desc>
     <sym>Bike Trail</sym>
     <type>senderveryeasy</type>
   </wpt>
+
+  <wpt lat="41.135665" lon="0.251062">
+    <ele>206.65488756089525</ele>
+    <name>Inicio Senda Bosc de la Princesa</name>
+    <cmt>Senda fácil</cmt>
+    <desc>Senda de unos 300ms. entre pinos y romeros.</desc>
+    <sym>Bike Trail</sym>
+    <type>sendereasy</type>
+  </wpt>
+  <wpt lat="41.139691" lon="0.240978">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda Bosc de la Princesa</name>
+    <cmt>Senda fácil</cmt>
+    <desc>Fin de la senda.</desc>
+    <sym>Bike Trail</sym>
+    <type>sendereasy</type>
+  </wpt>
+
   <wpt lat="41.136975" lon="0.201679">
     <ele>205.15721013615516</ele>
     <name>Inicio Senda del Mirador</name>
@@ -79,22 +97,22 @@
 <wpt lat="41.174581" lon="0.174849">
     <ele>255.65488756089525</ele>
     <name>Inicio hacia XCO</name>
-    <cmt>Senda muy fácil</cmt>
-    <desc>Senda de 1,2Kms con vistas al río Algars, muy sencilla y apta para todos los públicos</desc>
+    <cmt>Subida Enduro</cmt>
+    <desc>Subida de unos 400mts. seguido de un tramo de unos 800mts de piedras y tierra para finalizar en bajada y repecho fuertes.</desc>
     <sym>Bike Trail</sym>
-    <type>medium</type>
+    <type>hard</type>
   </wpt>
   <wpt lat="41.177978" lon="0.175764">
     <ele>297.15721013615516</ele>
-    <name>Fin XCO</name>
-    <cmt>Subida Enduro de unos 2Kms.</cmt>
-    <desc>Subida hacia el campo de fútbol con tramos de piedras, enduro con final en bajada y repecho fuertes.</desc>
+    <name>Fin hacia XCO</name>
+    <cmt>Subida Enduro</cmt>
+    <desc>Fin del tramo XCO</desc>
     <sym>Bike Trail</sym>
-    <type>medium</type>
+    <type>hard</type>
   </wpt>
   <wpt lat="41.167774" lon="0.213457">
     <ele>205.15721013615516</ele>
-    <name>Inicio Senda Más del Curito</name>
+    <name>Inicio Senda Mas del Curito</name>
     <cmt>Senda difícil</cmt>
     <desc>Inicio de la senda del Riu Algars de 1,5Kms aprox. Senda que atraviesa algún campo y repecho entre pinos y algunos tramos técnicos para afrontarlos con decisión.</desc>
     <sym>Bike Trail</sym>
@@ -102,9 +120,9 @@
   </wpt>
   <wpt lat="41.160281" lon="0.209619">
     <ele>205.15721013615516</ele>
-    <name>Fin Mas del Curito</name>
+    <name>Fin Senda Mas del Curito</name>
     <cmt>Senda difícil</cmt>
-    <desc>Fin Senda del Riu Algars</desc>
+    <desc>Fin Senda Mas del Curito</desc>
     <sym>Bike Trail</sym>
     <type>easy</type>
   </wpt>

@@ -40,6 +40,34 @@
     <name>Inicio Senda Más del Colomí</name>
     <sym>Bike Trail</sym>
   </wpt>
+   <wpt lat="41.135665" lon="0.251062">
+    <ele>206.65488756089525</ele>
+    <name>Inicio Senda Bosc de la Princesa</name>
+    <cmt>Senda fácil</cmt>
+    <desc>Senda de unos 300ms. entre pinos y romeros.</desc>
+    <sym>Bike Trail</sym>
+    <type>sendereasy</type>
+  </wpt>
+  <wpt lat="41.139691" lon="0.240978">
+    <ele>205.15721013615516</ele>
+    <name>Fin Senda Bosc de la Princesa</name>
+    <cmt>Senda fácil</cmt>
+    <desc>Fin de la senda.</desc>
+    <sym>Bike Trail</sym>
+    <type>sendereasy</type>
+  </wpt>
+  <wpt lat="41.135342" lon="0.251505">
+    <ele>246.8</ele>
+    <time>2023-03-26T09:33:11.000Z</time>
+    <name>Avituallamiento</name>
+    <type>seeding</type>
+  </wpt>
+  <wpt lat="41.160449" lon="0.209509">
+    <ele>246.8</ele>
+    <time>2023-03-26T09:33:11.000Z</time>
+    <name>Avituallamiento</name>
+    <type>seeding</type>
+  </wpt>
   <trk>
     <name>Bicicleta de montaña matutina</name>
     <type>cycling</type>

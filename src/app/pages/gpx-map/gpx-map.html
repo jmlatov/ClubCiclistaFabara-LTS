@@ -48,30 +48,61 @@
       </div>
 
       <!-- Contenedor de cajas inferiores derecha -->
-      <div class="info-panels-wrapper" [class.expanded]="legendExpanded || trackInfoExpanded">
+      <div class="info-panels-wrapper" [class.expanded]="legendExpanded || trackInfoExpanded || refreshmentExpanded">
 
-        <!-- Caja de información del track -->
+        <!-- Puntos de avituallamiento (encima de tramos especiales) -->
+        <div class="ol-legend ol-unselectable ol-control refreshment-info-box">
+          <button class="legend-toggle" (click)="toggleRefreshmentInfo(); clearHighlight()" [attr.aria-expanded]="refreshmentExpanded">
+            {{ refreshmentExpanded ? '🔽 Cerrar' : '▶️ Avituallamientos' }}
+          </button>
+          <div class="legend-content" [class.collapsed]="!refreshmentExpanded">
+            <ul class="track-info-list">
+              <li (click)="zoomToAvituallamiento(0); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <span>1er. Avituallamiento - Km 22 aprox.</span>
+              </li>
+              <li (click)="zoomToAvituallamiento(1); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <span>2do. Avituallamiento - Kms 34(corta) y 48 (larga) aprox.</span>
+              </li>
+              @if (avituallamientoCount > 2) {
+              <li (click)="zoomToAvituallamiento(2); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <span>3er. Avituallamiento - Km 59 aprox.</span>
+              </li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        <!-- Caja de información de tramos especiales -->
         <div class="ol-legend ol-unselectable ol-control track-info-box">
           <button class="legend-toggle" (click)="toggleTrackInfo(); clearHighlight()" [attr.aria-expanded]="trackInfoExpanded">
-            {{ trackInfoExpanded ? '🔽 Información del Track' : '▶️ Información del Track' }}
+            {{ trackInfoExpanded ? '🔽 Cerrar' : '▶️ Tramos especiales' }}
           </button>
           <div class="legend-content" [class.collapsed]="!trackInfoExpanded">
             <ul class="track-info-list">
-              <li (click)="zoomToSegment('Senda Más del Colomí'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <li (click)="zoomToSegment('Senda Mas del Colomí'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-veryeasy.svg" alt="Senda muy fácil" style="height: 1em; width: auto;">
-                <span>Senda del Más del Colomí-Muy fácil</span>
+                <span>Senda del Mas del Colomí-Muy fácil</span>
               </li>
-              <li (click)="zoomToSegment('Senda del Mirador'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                <img src="assets/icons/sender-hard.svg" alt="Senda difícil" style="height: 1em; width: auto;">
-                <span>Senda del Mirador-Difícil</span>
-              </li>
-              <li (click)="zoomToSegment('Senda Más del Curito'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+              <li (click)="zoomToSegment('Senda Bosc de la Princesa'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-easy.svg" alt="Senda fácil" style="height: 1em; width: auto;">
-                <span>Senda Más del Curito-Fácil</span>
+                <span>Senda del Bosc de la Princesa-Fácil</span>
+              </li>
+              @if (!isAlgars2026CortaTrack) {
+              <li (click)="zoomToSegment('hacia XCO'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <img src="assets/icons/sender-hard.svg" alt="Senda Enduro" style="height: 1em; width: auto;">
+                <span>Senda hacia XCO-Tipo Enduro</span>
               </li>
               <li (click)="zoomToSegment('Senda Radere lo Calvari'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-medium.svg" alt="Senda de dificultad media" style="height: 1em; width: auto;">
                 <span>Senda de Radere lo Calvarí-Dificultad media</span>
+              </li>
+              <li (click)="zoomToSegment('Senda Mas del Curito'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <img src="assets/icons/sender-easy.svg" alt="Senda fácil" style="height: 1em; width: auto;">
+                <span>Senda Mas del Curito-Fácil</span>
+              </li>
+              <li (click)="zoomToSegment('Senda del Mirador'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <img src="assets/icons/sender-hard.svg" alt="Senda difícil" style="height: 1em; width: auto;">
+                <span>Senda del Mirador-Difícil</span>
               </li>
               <li (click)="zoomToSegment('Senda Vall de la María'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-veryhard.svg" alt="Senda muy difícil" style="height: 1em; width: auto;">
@@ -81,10 +112,7 @@
                 <img src="assets/icons/sender-veryhard.svg" alt="Senda muy difícil" style="height: 1em; width: auto;">
                 <span>Senda de la Cooperativa-Muy difícil</span>
               </li>
-              <li (click)="zoomToSegment('Inicio hacia XCO'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                <img src="assets/icons/sender-veryhard.svg" alt="Senda Enduro" style="height: 1em; width: auto;">
-                <span>Senda hacia XCO-Tipo Enduro</span>
-              </li>
+              }
             </ul>
           </div>
         </div>
@@ -92,7 +120,7 @@
         <!-- Leyenda colapsable -->
         <div #legendRef class="ol-legend ol-unselectable ol-control">
           <button class="legend-toggle" (click)="toggleLegend(); clearHighlight()" [attr.aria-expanded]="legendExpanded">
-            {{ legendExpanded ? '🔽 Leyenda' : '▶️ Leyenda' }}
+            {{ legendExpanded ? '🔽 Cerrar' : '▶️ Leyenda' }}
           </button>
           <div class="legend-content" [class.collapsed]="!legendExpanded">
             <h4>Pendiente del Track</h4>
