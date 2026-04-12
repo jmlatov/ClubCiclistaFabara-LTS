@@ -30,15 +30,17 @@
     <name>Salida</name>
     <type>start</type>
   </wpt>
+    <wpt lat="41.135364" lon="0.205981">
+    <ele>206.65488756089525</ele>
+    <name>Inicio Senda Más del Colomí</name>
+        <desc>Senda de 1,2Kms con vistas al río Algars, muy sencilla y apta para todos los públicos</desc>
+    <sym>Bike Trail</sym>
+    <type>senderveryeasy</type>
   <wpt lat="41.144362" lon="0.202063">
     <ele>205.15721013615516</ele>
     <name>Fin Senda Más del Colomí</name>
     <sym>Bike Trail</sym>
-  </wpt>
-  <wpt lat="41.135364" lon="0.205981">
-    <ele>206.65488756089525</ele>
-    <name>Inicio Senda Más del Colomí</name>
-    <sym>Bike Trail</sym>
+        <type>senderveryeasy</type>
   </wpt>
    <wpt lat="41.135665" lon="0.251062">
     <ele>206.65488756089525</ele>
