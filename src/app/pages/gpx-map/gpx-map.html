@@ -50,6 +50,7 @@
       <!-- Contenedor de cajas inferiores derecha -->
       <div class="info-panels-wrapper" [class.expanded]="legendExpanded || trackInfoExpanded || refreshmentExpanded">
 
+        @if (showAvituallamientoAndSegmentsPanels) {
         <!-- Puntos de avituallamiento (encima de tramos especiales) -->
         <div class="ol-legend ol-unselectable ol-control refreshment-info-box">
           <button class="legend-toggle" (click)="toggleRefreshmentInfo(); clearHighlight()" [attr.aria-expanded]="refreshmentExpanded">
@@ -116,6 +117,7 @@
             </ul>
           </div>
         </div>
+        }
 
         <!-- Leyenda colapsable -->
         <div #legendRef class="ol-legend ol-unselectable ol-control">

@@ -180,11 +180,21 @@ export class GpxMap implements AfterViewInit, OnInit {
 
   /** Coincide con `path` en assets/tracks.json para "Algars 2026 - Corta". */
   private readonly algarsCorta2026GpxPath = 'assets/gpx/algars-corta-2026.gpx';
+  /** Coincide con `path` en assets/tracks.json para "Algars 2026 - Larga". */
+  private readonly algarsLarga2026GpxPath = 'assets/gpx/algars-larga-2026.gpx';
   /** GPX cargado o seleccionado (se actualiza al iniciar `loadTrack`). */
   selectedTrackPath = '';
 
   get isAlgars2026CortaTrack(): boolean {
     return this.selectedTrackPath === this.algarsCorta2026GpxPath;
+  }
+
+  /** Avituallamientos y tramos especiales solo aplican a las rutas Algars 2026. */
+  get showAvituallamientoAndSegmentsPanels(): boolean {
+    return (
+      this.selectedTrackPath === this.algarsLarga2026GpxPath ||
+      this.selectedTrackPath === this.algarsCorta2026GpxPath
+    );
   }
 
   // Añadido para manejar el cambio de capa base
@@ -575,6 +585,11 @@ export class GpxMap implements AfterViewInit, OnInit {
 
     this.selectedTrackPath = path;
 
+    if (!this.showAvituallamientoAndSegmentsPanels) {
+      this.trackInfoExpanded = false;
+      this.refreshmentExpanded = false;
+    }
+
     this.source.clear();
     this.waypointData.clear();
     this.segmentBounds.clear();
@@ -607,8 +622,8 @@ export class GpxMap implements AfterViewInit, OnInit {
 
           this.waypointData.set(key, { name, type, desc, image, info });
 
-          // Agrupar inicio/fin de cada senda para permitir zoom desde la lista
-          const nameNormalized = name.replace(/^(Inicio|Fin)\s+/i, '').trim();
+          // Agrupar inicio/fin de cada senda (clave sin acentos: corta usa "Más", larga "Mas")
+          const nameNormalized = this.canonicalSegmentKey(name);
           const existing = this.segmentBounds.get(nameNormalized) ?? {};
           const coords = fromLonLat([lon, lat]) as [number, number];
 
@@ -852,10 +867,22 @@ export class GpxMap implements AfterViewInit, OnInit {
     });
   }
 
+  /**
+   * Misma clave que al cargar waypoints del GPX: quita Inicio/Fin y unifica acentos.
+   */
+  private canonicalSegmentKey(name: string): string {
+    return name
+      .replace(/^(Inicio|Fin)\s+/i, '')
+      .trim()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
   zoomToSegment(segmentName: string): void {
-    const bounds = this.segmentBounds.get(segmentName);
+    const key = this.canonicalSegmentKey(segmentName);
+    const bounds = this.segmentBounds.get(key);
     if (!bounds?.start || !bounds?.end) {
-      console.warn(`No se encontraron bounds para: ${segmentName}`);
+      console.warn(`No se encontraron bounds para: ${segmentName} (clave: ${key})`);
       return;
     }
 
