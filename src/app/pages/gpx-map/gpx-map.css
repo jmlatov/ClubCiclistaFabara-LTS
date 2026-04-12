@@ -24,7 +24,7 @@
 }
 
 .gpx-map-section {
-  padding-top: 80px; /* ajusta al alto real de tu app-header-nav-black */
+  padding-top: 90px; /* ajusta al alto real de tu app-header-nav-black */
   display: flex;
   flex-direction: column;
 }

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- 1. Fondo Blanco -->
+  <rect x="0" y="0" width="48" height="48" fill="#FFFFFF"/>
+  
+  <!-- 2. Icono de la montaña (escalado para dejar espacio al borde) -->
+  <path d="M28,8H32L40,11.5L32,15V20.5L40,40H8L18,26L24,34L30,21V8Z" 
+        fill="#11DE2F" 
+        stroke="#0B2107" 
+        stroke-width="1.2" 
+        stroke-linejoin="round" />
+        
+  <!-- 3. BORDE EXTERIOR (Marco verde oscuro que rodea todo el icono) -->
+  <rect x="1" y="1" width="46" height="46" fill="none" stroke="#0B2107" stroke-width="2.5"/>
+</svg>

@@ -210,6 +210,7 @@ export class GpxMap implements AfterViewInit, OnInit {
         ayto: 'assets/icons/ayto.svg',
         start: 'assets/icons/salida.svg',
         finish: 'assets/icons/llegada.svg',
+        seeding: 'assets/icons/avituallar.svg',
       };
 
       iconPath = iconMap[type] ?? iconPath;
@@ -264,6 +265,8 @@ export class GpxMap implements AfterViewInit, OnInit {
           medium: 'assets/icons/sender-medium.svg',
           hard: 'assets/icons/sender-hard.svg',
           veryhard: 'assets/icons/sender-veryhard.svg',
+          seeding: 'assets/icons/avituallar.svg',
+          alto: 'assets/icons/alto.svg',
         };
 
         iconPath = iconMap[featureType] ?? iconPath;

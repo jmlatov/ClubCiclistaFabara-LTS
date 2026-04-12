@@ -2,7 +2,7 @@
 
 <section class="gpx-map-section">
   <div class='track-selector-container'>
-    Selecciona un track para visualizarlo en el mapa. Puedes controlar la reproducción del track y ver su perfil de
+    <strong>Selecciona</strong> un track para visualizarlo en el mapa. Puedes controlar la reproducción del track y ver su perfil de
     elevación.
 
     <label>
@@ -65,9 +65,9 @@
                 <img src="assets/icons/sender-hard.svg" alt="Senda difícil" style="height: 1em; width: auto;">
                 <span>Senda del Mirador-Difícil</span>
               </li>
-              <li (click)="zoomToSegment('Senda del Riu Algars'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                <img src="assets/icons/sender-hard.svg" alt="Senda difícil" style="height: 1em; width: auto;">
-                <span>Senda del Riu Algars-Difícil</span>
+              <li (click)="zoomToSegment('Senda Más del Curito'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <img src="assets/icons/sender-easy.svg" alt="Senda fácil" style="height: 1em; width: auto;">
+                <span>Senda Más del Curito-Fácil</span>
               </li>
               <li (click)="zoomToSegment('Senda Radere lo Calvari'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-medium.svg" alt="Senda de dificultad media" style="height: 1em; width: auto;">
@@ -80,6 +80,10 @@
               <li (click)="zoomToSegment('Senda de la Cooperativa'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                 <img src="assets/icons/sender-veryhard.svg" alt="Senda muy difícil" style="height: 1em; width: auto;">
                 <span>Senda de la Cooperativa-Muy difícil</span>
+              </li>
+              <li (click)="zoomToSegment('Inicio hacia XCO'); $event.stopPropagation()" style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                <img src="assets/icons/sender-veryhard.svg" alt="Senda Enduro" style="height: 1em; width: auto;">
+                <span>Senda hacia XCO-Tipo Enduro</span>
               </li>
             </ul>
           </div>

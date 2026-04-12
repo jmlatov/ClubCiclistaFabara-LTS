@@ -15,7 +15,7 @@
     <name>algars-corta-2025</name>
     <author>
       <name>gpx.studio</name>
-      <link href="https://gpx.studio" />
+      <link href="https://gpx.studio"/>
     </author>
   </metadata>
   <wpt lat="41.174784" lon="0.169515">
@@ -30,22 +30,18 @@
     <name>Salida</name>
     <type>start</type>
   </wpt>
-
-  <wpt lat="41.135364" lon="0.205981">
-    <ele>206.65488756089525</ele>
-    <name>Inicio Senda Más del Colomí</name>
-    <sym>Bike Trail</sym>
-    <type>senderveryeasy</type>
-  </wpt>
   <wpt lat="41.144362" lon="0.202063">
     <ele>205.15721013615516</ele>
     <name>Fin Senda Más del Colomí</name>
     <sym>Bike Trail</sym>
-    <type>senderveryeasy</type>
   </wpt>
-
+  <wpt lat="41.135364" lon="0.205981">
+    <ele>206.65488756089525</ele>
+    <name>Inicio Senda Más del Colomí</name>
+    <sym>Bike Trail</sym>
+  </wpt>
   <trk>
-    <name>BTT Algars 2026 (Ruta Corta) - Fabara</name>
+    <name>Bicicleta de montaña matutina</name>
     <type>cycling</type>
     <trkseg>
       <trkpt lat="41.175733" lon="0.168549">
@@ -12411,11 +12407,20 @@
       <trkpt lat="41.13566376570466" lon="0.25086516290127747">
         <ele>327.31420308516647</ele>
       </trkpt>
-      <trkpt lat="41.1356170980243" lon="0.25027135148712315">
-        <ele>322.3511554285766</ele>
+      <trkpt lat="41.13555237477826" lon="0.2505170639423113">
+        <ele>323.1439140350275</ele>
       </trkpt>
-      <trkpt lat="41.135570430343925" lon="0.24967754007296883">
-        <ele>316.78273127631127</ele>
+      <trkpt lat="41.13555237477826" lon="0.2505170639423113">
+        <ele>323.1439140350275</ele>
+      </trkpt>
+      <trkpt lat="41.13538795568263" lon="0.25028258632954703">
+        <ele>321.1080555421663</ele>
+      </trkpt>
+      <trkpt lat="41.135461412814585" lon="0.24969357246045704">
+        <ele>318.8177483417516</ele>
+      </trkpt>
+      <trkpt lat="41.13552906058649" lon="0.24915114077541034">
+        <ele>315.5727856729949</ele>
       </trkpt>
       <trkpt lat="41.13552906058649" lon="0.24915114077541034">
         <ele>315.5727856729949</ele>
