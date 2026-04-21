@@ -317,7 +317,8 @@ a .mediterraneo {
    ============================================= */
 @media (min-width: 1600px) {
   .panel {
-    max-width: 60%;
+    /* [CORREGIDO 2026-04-21] — Removido max-width: 60% que limitaba la sección
+       a ~800px en pantallas grandes. Ahora mantiene width: 80vw sin restricción adicional */
     padding: 2rem;
   }
 }
