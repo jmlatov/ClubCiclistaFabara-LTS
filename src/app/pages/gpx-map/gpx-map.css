@@ -24,7 +24,7 @@
 }
 
 .gpx-map-section {
-  padding-top: 90px; /* ajusta al alto real de tu app-header-nav-black */
+  padding-top: 100px; /* [CORREGIDO 2026-04-21] restaurado padding-top para reservar espacio del header fijo */
   display: flex;
   flex-direction: column;
 }
@@ -41,16 +41,16 @@
    =========================== */
 
 .track-selector-container {
-  position: relative;
+  position: sticky; /* [CORREGIDO 2026-04-21] de relative a sticky para pegarse al header dinámicamente */
+  top: 100px; /* [CORREGIDO 2026-04-21] se pega debajo del header fijo, no en top: 0 */
   width: 100%;
-  /* top: 10px;
-  left: 10px; */
-  z-index: 10;
+  z-index: 98; /* [CORREGIDO 2026-04-21] aumentado de 10 a 98 para estar sobre el mapa pero bajo el header (99) */
   background: var(--bg-surface); /* [MODIFICADO 2026-04-04 / 10:30] antes: background: white */
   color: var(--text-primary);    /* [AÑADIDO 2026-04-04 / 10:30] evita texto invisible en modo oscuro */
+  margin-top: 15px; /* [CORREGIDO 2026-04-21] añadido margen superior para separación */
   padding: 10px 15px;
   font-size: 12px;
-  border-radius: 4px;
+  border-radius: 0; /* [CORREGIDO 2026-04-21] quitado border-radius para mejor integración con header */
   box-shadow: 0 1px 4px var(--shadow); /* [MODIFICADO 2026-04-04 / 10:30] antes: rgba(0,0,0,0.3) */
 }
 
